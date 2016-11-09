@@ -1,0 +1,114 @@
+set nocompatible              " be iMproved, required
+filetype off                  " required
+
+" set the runtime path to include Vundle and initialize
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
+" alternatively, pass a path where Vundle should install plugins
+"call vundle#begin('~/some/path/here')
+
+" let Vundle manage Vundle, required
+Plugin 'gmarik/Vundle.vim'
+
+" The following are examples of different formats supported.
+" Keep Plugin commands between vundle#begin/end.
+" plugin on GitHub repo
+Plugin 'tpope/vim-fugitive'
+" plugin from http://vim-scripts.org/vim/scripts.html
+Plugin 'L9'
+" Git plugin not hosted on GitHub
+Plugin 'git://git.wincent.com/command-t.git'
+" git repos on your local machine (i.e. when working on your own plugin)
+Plugin 'fatih/vim-go'
+" The sparkup vim script is in a subdirectory of this repo called vim.
+" Pass the path to set the runtimepath properly.
+Plugin 'rstacruz/sparkup', {'rtp': 'vim/'}
+" Avoid a name conflict with L9
+
+Plugin 'rust-lang/rust.vim'
+
+Plugin 'Valloric/YouCompleteMe', { 'do': './install.sh' }
+
+Plugin 'rhysd/vim-go-impl' 
+
+Plugin 'xolox/vim-misc'
+
+Plugin 'xolox/vim-notes' 
+
+Bundle 'scrooloose/nerdtree'
+
+Bundle 'Xuyuanp/nerdtree-git-plugin'
+
+Bundle 'pangloss/vim-javascript'
+
+Plugin 'mxw/vim-jsx'
+
+Plugin 'leafgarland/typescript-vim'
+
+Plugin 'MarcWeber/vim-addon-mw-utils'
+Plugin 'tomtom/tlib_vim'
+Plugin 'garbas/vim-snipmate'
+Plugin 'isRuslan/vim-es6'
+
+" All of your Plugins must be added before the following line
+call vundle#end()            " required
+filetype plugin indent on    " required
+" To ignore plugin indent changes, instead use:
+"filetype plugin on
+"
+" Brief help
+" :PluginList       - lists configured plugins
+" :PluginInstall    - installs plugins; append `!` to update or just :PluginUpdate
+" :PluginSearch foo - searches for foo; append `!` to refresh local cache
+" :PluginClean      - confirms removal of unused plugins; append `!` to auto-approve removal
+"
+" see :h vundle for more details or wiki for FAQ
+" Put your non-Plugin stuff after this line
+
+execute pathogen#infect()
+
+filetype plugin indent on
+set tabstop=4
+set shiftwidth=4
+set expandtab
+colorscheme dante
+set number
+
+if has('vim_starting')
+    set nocompatible
+    set runtimepath+=~/.vim/bundle/dart-vim-plugin
+endif
+filetype plugin indent on
+
+" ==================== Vim-go ====================
+let g:go_fmt_fail_silently = 0
+let g:go_fmt_command = "goimports"
+let g:go_autodetect_gopath = 1
+
+let g:go_highlight_space_tab_error = 0
+let g:go_highlight_array_whitespace_error = 0
+let g:go_highlight_trailing_whitespace_error = 0
+let g:go_highlight_extra_types = 0
+let g:go_highlight_operators = 0
+
+au FileType go nmap <Leader>s <Plug>(go-def-split)
+au FileType go nmap <Leader>v <Plug>(go-def-vertical)
+au FileType go nmap <Leader>in <Plug>(go-info)
+au FileType go nmap <Leader>ii <Plug>(go-implements)
+
+au FileType go nmap <leader>r  <Plug>(go-run)
+au FileType go nmap <leader>b  <Plug>(go-build)
+au FileType go nmap <leader>g  <Plug>(go-gbbuild)
+au FileType go nmap <leader>t  <Plug>(go-test-compile)
+au FileType go nmap <Leader>d <Plug>(go-doc)
+au FileType go nmap <Leader>f :GoImports<CR>
+
+" ==================== YouCompleteMe ====================
+let g:ycm_autoclose_preview_window_after_completion = 1
+let g:ycm_min_num_of_chars_for_completion = 1
+
+" ==================== Notes ======================
+:let g:notes_directories = ['/home/dante/.vim/bundle/vim-notes/misc/notes/user/', '/home/dante/Documents/QCon/NY2016/Day1/','/home/dante/Documents/QCon/NY2016/Day2/','/home/dante/Documents/QCon/NY2016/Day3/']
+
+
+" ==================== nerdtree-git-plugin ======================
