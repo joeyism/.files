@@ -112,3 +112,50 @@ let g:ycm_min_num_of_chars_for_completion = 1
 
 
 " ==================== nerdtree-git-plugin ======================
+
+
+
+
+" My shit
+function! MergeTabs()
+  if tabpagenr() == 1
+    return
+  endif
+  let bufferName = bufname("%")
+  if tabpagenr("$") == tabpagenr()
+    close!
+  else
+    close!
+    tabprev
+  endif
+  split
+  execute "buffer " . bufferName
+endfunction
+
+nmap <C-W>u :call MergeTabs()<CR>
+
+" leader
+let mapleader = " "
+" show vimrc
+map <Leader>rc  :tabe ~/.vimrc<CR>      
+" reload vimrc
+map <Leader>rerc  :so $MYVIMRC<CR>      
+" open directory here
+map <Leader>..  :tabe .<CR>             
+" move tab to first
+map <Leader>m0  :tabm0<CR>              
+" set make to python
+map <Leader>mapy  :set makeprg=python\ %<CR>    
+" set make to go
+map <Leader>mago  :set makegrg=go\ run\ %<CR>
+" run/make
+map <Leader>make  :make<CR>
+" run last make
+map <Leader>mala  :make<Up><CR>
+" last
+map <Leader>la  :<Up><CR>               
+" exit insert mode with Ctrl-p instead of Ctrl-[
+imap <C-p>  <Esc>                       
+" complete bracket and insert in the middle
+imap <C-]>  {}<Left><CR><CR><Up><Tab>
+"{<CR><CR>}<Esc><Up>i<Tab>
