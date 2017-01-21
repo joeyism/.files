@@ -138,7 +138,8 @@ nmap <C-W>u :call MergeTabs()<CR>
 "
 " leader
 " 
-command LeaderHelp echo "Commands for \<Leader\>\n" "rc\tshow vimrc\n" "rerc\treload vimrc after changes\n" "..\topen directory here\n" "m0\tmove tab to first\n" "mapy\tset make to python\n" "mago\tset make to golang\n" "make\tmake\n" "mala\trun last make\n" "la\trun last command"
+command LeaderHelp echo "Commands for \<Leader\>\n" "rc\tshow vimrc\n" "rerc\treload vimrc after changes\n" "..\topen directory here\n" "m0\tmove tab to first\n" "mapy\tset make to python\n" "mago\tset make to golang\n" "make\tmake\n" "mala\trun last make\n" "la\trun last command" "fo\tfold this area"
+
 let mapleader = " "
 
 " show vimrc
@@ -159,10 +160,11 @@ map <Leader>make  :make<CR>
 map <Leader>mala  :make<Up><CR>
 " last
 map <Leader>la  :<Up><CR>               
+" fold one
+map <Leader>fo  $zf%j
 
 " exit insert mode with Ctrl-p instead of Ctrl-[
 imap <C-p>  <Esc>                       
 " complete bracket and insert in the middle
 imap <C-]>  {}<Left><CR><CR><Up><Tab>
 "{<CR><CR>}<Esc><Up>i<Tab>
-
