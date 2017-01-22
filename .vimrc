@@ -166,5 +166,5 @@ map <Leader>fo  $zf%j
 " exit insert mode with Ctrl-p instead of Ctrl-[
 imap <C-p>  <Esc>                       
 " complete bracket and insert in the middle
-imap <C-]>  {}<Left><CR><CR><Up><Tab>
+imap <C-]><C-]>  {}<Left><CR><CR><Up><Tab>
 "{<CR><CR>}<Esc><Up>i<Tab>
