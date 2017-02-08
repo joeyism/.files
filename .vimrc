@@ -105,8 +105,8 @@ au FileType go nmap <Leader>d <Plug>(go-doc)
 au FileType go nmap <Leader>f :GoImports<CR>
 
 " ==================== YouCompleteMe ====================
-let g:ycm_autoclose_preview_window_after_completion = 1
-let g:ycm_min_num_of_chars_for_completion = 1
+"let g:ycm_autoclose_preview_window_after_completion = 1
+"let g:ycm_min_num_of_chars_for_completion = 1
 
 " ==================== Notes ======================
 :let g:notes_directories = ['/home/dante/.vim/bundle/vim-notes/misc/notes/user/', '/home/dante/Documents/QCon/NY2016/Day1/','/home/dante/Documents/QCon/NY2016/Day2/','/home/dante/Documents/QCon/NY2016/Day3/']
@@ -162,7 +162,8 @@ map <Leader>mala  :make<Up><CR>
 map <Leader>la  :<Up><CR>               
 " fold one
 map <Leader>fo  $zf%j
-
+" add new line
+map <Leader><CR>  o<Esc>
 " exit insert mode with Ctrl-p instead of Ctrl-[
 imap <C-p>  <Esc>                       
 " complete bracket and insert in the middle
