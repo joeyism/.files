@@ -169,3 +169,5 @@ imap <C-p>  <Esc>
 " complete bracket and insert in the middle
 imap <C-]><C-]>  {}<Left><CR><CR><Up><Tab>
 "{<CR><CR>}<Esc><Up>i<Tab>
+" complete the inline
+imap <C-)>  <Esc>A)<Esc>
