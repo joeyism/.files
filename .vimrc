@@ -1,6 +1,13 @@
 set nocompatible              " be iMproved, required
 filetype off                  " required
 syntax on
+set path+=**
+set wildmenu
+
+" - ^x^n for JUST this file
+" - ^x^f for filenames (works with our path trick!)
+" - ^x^] for tags only
+" - ^n for anything specified by the 'complete' option
 
 " set the runtime path to include Vundle and initialize
 set rtp+=~/.vim/bundle/Vundle.vim
