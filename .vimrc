@@ -1,6 +1,7 @@
 set nocompatible              " be iMproved, required
 filetype off                  " required
 syntax on
+colorscheme dante
 set path+=**
 set wildmenu
 
@@ -57,6 +58,10 @@ Plugin 'MarcWeber/vim-addon-mw-utils'
 Plugin 'tomtom/tlib_vim'
 Plugin 'garbas/vim-snipmate'
 Plugin 'isRuslan/vim-es6'
+
+Plugin 'nanotech/jellybeans.vim'
+
+Plugin 'chrisbra/csv.vim'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
