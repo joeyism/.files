@@ -16,6 +16,11 @@ sudo apt-get install -y libatlas-base-dev numpy gfortran
 sudo apt-get install -y python3.5-dev
 sudo apt-get -y install python3-pip
 pip3 install --user ipython
+
+# use python3 instead of 2
+sudo rm /usr/bin/python
+ln -s python3 /usr/bin/python
+
 virtualenv cv
 cd cv
 source bin/activate
