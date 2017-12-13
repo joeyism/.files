@@ -14,6 +14,8 @@ sudo apt-get install -y libxvidcore-dev libx264-dev libgtk-3-dev
 sudo apt-get install -y libjpeg8-dev libtiff5-dev libjasper-dev libpng12-dev
 sudo apt-get install -y libatlas-base-dev numpy gfortran
 sudo apt-get install -y python3.5-dev
+sudo apt-get -y install python3-pip
+pip3 install --user ipython
 virtualenv cv
 cd cv
 source bin/activate
