@@ -17,7 +17,7 @@ sudo apt-get install -y python3.5-dev
 virtualenv cv
 cd cv
 source bin/activate
-cd ~/opencv-3.2.0/
+cd ~/opencv-2.4.0/
 mkdir build
 cd build
 cmake -D CMAKE_BUILD_TYPE=RELEASE \
@@ -38,6 +38,6 @@ cmake -D CMAKE_BUILD_TYPE=RELEASE \
 sudo make -j4
 sudo make install
 sudo ldconfig
-sudo mv /usr/local/lib/python3.5/site-packages/cv2.cpython-35m-x86_64-linux-gnu.so /usr/local/lib/python3.5/site-packages/cv2.so
+sudo cp /usr/local/lib/python3.5/site-packages/cv2.cpython-35m-x86_64-linux-gnu.so /usr/local/lib/python3.5/site-packages/cv2.so
 cd ~/.virtualenvs/cv/lib/python3.5/site-packages/
 ln -s /usr/local/lib/python3.5/site-packages/cv2.so cv2.so
