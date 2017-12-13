@@ -17,7 +17,21 @@ source bin/activate
 cd ~/opencv-3.2.0/
 mkdir build
 cd build
-sudo cmake -DWITH_QT=ON -DWITH_OPENGL=ON -DFORCE_VTK=ON -DWITH_TBB=ON -DWITH_GDAL=ON -DWITH_XINE=ON -DBUILD_EXAMPLES=ON -DENABLE_PRECOMPILED_HEADERS=OFF ..
+cmake -D CMAKE_BUILD_TYPE=RELEASE \
+-D CMAKE_INSTALL_PREFIX=/home/$USER/opencv-3.2.0 \
+-D INSTALL_C_EXAMPLES=OFF \
+-D INSTALL_PYTHON_EXAMPLES=OFF \
+-D OPENCV_EXTRA_MODULES_PATH=/home/$USER/opencv_contrib-3.2.0/modules \
+-D BUILD_EXAMPLES=OFF \
+-D BUILD_opencv_python2=OFF \
+-D WITH_FFMPEG=1 \
+-D WITH_CUDA=0 \
+-D PYTHON3_EXECUTABLE=/home/$USER/miniconda3/bin/python \
+-D PYTHON_INCLUDE_DIR=/home/$USER/miniconda3/include/python3.5m \
+-D PYTHON_INCLUDE_DIR2=/home/$USER/miniconda3/include/python3.5m \
+-D PYTHON_LIBRARY=/home/$USER/miniconda3/lib/libpython3.5m.so \
+-D PYTHON3_PACKAGES_PATH=/home/$USER/miniconda3/lib/python3.5 \
+-D PYTHON3_NUMPY_INCLUDE_DIRS=/home/$USER/miniconda3/lib/python3.5/site-packages/numpy/core/include ..
 sudo make -j4
 sudo make install
 sudo ldconfig
