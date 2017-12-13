@@ -5,9 +5,9 @@ wget https://github.com/opencv/opencv/archive/2.4.13.4.zip
 unzip 2.4.13.4.zip
 wget -O opencv_contrib.zip https://github.com/Itseez/opencv_contrib/archive/3.2.0.zip
 unzip opencv_contrib.zip
-sudo apt-get update
-sudo apt-get upgrade
-sudo apt-get dist-upgrade
+sudo apt-get update -y
+sudo apt-get upgrade -y
+sudo apt-get dist-upgrade -y
 sudo apt-get install -y build-essential cmake pkg-config virtualenv
 sudo apt-get install -y libavcodec-dev libavformat-dev libswscale-dev libv4l-dev
 sudo apt-get install -y libxvidcore-dev libx264-dev libgtk-3-dev
