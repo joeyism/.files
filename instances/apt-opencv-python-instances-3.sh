@@ -1,8 +1,8 @@
 wget -O - https://raw.githubusercontent.com/joeyism/.files/master/run.sh | bash
 sudo apt install unzip
 
-wget https://github.com/opencv/opencv/archive/2.4.13.4.zip
-unzip 2.4.13.4.zip
+wget https://github.com/opencv/opencv/archive/3.2.0.zip
+unzip 3.2.0.zip
 wget -O opencv_contrib.zip https://github.com/Itseez/opencv_contrib/archive/3.2.0.zip
 unzip opencv_contrib.zip
 sudo apt-get update -y
@@ -17,7 +17,7 @@ sudo apt-get install -y python3.5-dev
 virtualenv cv
 cd cv
 source bin/activate
-cd ~/opencv-2.4.0/
+cd ~/opencv-3.2.0/
 mkdir build
 cd build
 cmake -D CMAKE_BUILD_TYPE=RELEASE \
@@ -29,12 +29,12 @@ cmake -D CMAKE_BUILD_TYPE=RELEASE \
 -D BUILD_opencv_python2=OFF \
 -D WITH_FFMPEG=1 \
 -D WITH_CUDA=0 \
--D PYTHON3_EXECUTABLE=/home/$USER/miniconda3/bin/python \
--D PYTHON_INCLUDE_DIR=/home/$USER/miniconda3/include/python3.5m \
--D PYTHON_INCLUDE_DIR2=/home/$USER/miniconda3/include/python3.5m \
--D PYTHON_LIBRARY=/home/$USER/miniconda3/lib/libpython3.5m.so \
--D PYTHON3_PACKAGES_PATH=/home/$USER/miniconda3/lib/python3.5 \
--D PYTHON3_NUMPY_INCLUDE_DIRS=/home/$USER/miniconda3/lib/python3.5/site-packages/numpy/core/include ..
+-D PYTHON3_EXECUTABLE=/home/$USER/cv/bin/python \
+-D PYTHON_INCLUDE_DIR=/home/$USER/cv/include/python3.5m \
+-D PYTHON_INCLUDE_DIR2=/home/$USER/cv/include/python3.5m \
+-D PYTHON_LIBRARY=/home/$USER/cv/lib/libpython3.5m.so \
+-D PYTHON3_PACKAGES_PATH=/home/$USER/cv/lib/python3.5 \
+-D PYTHON3_NUMPY_INCLUDE_DIRS=/home/$USER/cv/lib/python3.5/site-packages/numpy/core/include ..
 sudo make -j4
 sudo make install
 sudo ldconfig
