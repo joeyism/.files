@@ -12,10 +12,10 @@ sudo apt-get install -y build-essential cmake pkg-config virtualenv
 sudo apt-get install -y libavcodec-dev libavformat-dev libswscale-dev libv4l-dev
 sudo apt-get install -y libxvidcore-dev libx264-dev libgtk-3-dev
 sudo apt-get install -y libjpeg8-dev libtiff5-dev libjasper-dev libpng12-dev
-sudo apt-get install -y libatlas-base-dev numpy gfortran
+sudo apt-get install -y libatlas-base-dev numpy gfortran qt5-default htop
 sudo apt-get install -y python3.5-dev
 sudo apt-get -y install python3-pip
-pip3 install --user ipython
+pip3 install --user ipython numpy
 
 virtualenv cv
 cd cv
