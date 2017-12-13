@@ -27,6 +27,10 @@ cd ffmpeg
 make
 sudo make install
 
+cd ~/opencv_contrib-3.2.0/modules/freetype
+sed -i '22s/freetype2_LIBRARIES/FREETYPE2_LIBRARIES/' CMakeLists.txt
+sed -i '23s/harfbuzz_LIBRARIES/HARFBUZZ_LIBRARIES/' CMakeLists.txt
+
 cd ~/opencv-3.2.0/
 mkdir build
 cd build
