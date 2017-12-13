@@ -5,16 +5,16 @@ unzip opencv_contrib.zip
 sudo apt-get update
 sudo apt-get upgrade
 sudo apt-get dist-upgrade
-sudo apt-get install build-essential cmake pkg-config virtualenv
-sudo apt-get install libavcodec-dev libavformat-dev libswscale-dev libv4l-dev
-sudo apt-get install libxvidcore-dev libx264-dev libgtk-3-dev
-sudo apt-get install libjpeg8-dev libtiff5-dev libjasper-dev libpng12-dev
-sudo apt-get install libatlas-base-dev numpy gfortran
-sudo apt-get install python3.5-dev
+sudo apt-get install -y build-essential cmake pkg-config virtualenv
+sudo apt-get install -y libavcodec-dev libavformat-dev libswscale-dev libv4l-dev
+sudo apt-get install -y libxvidcore-dev libx264-dev libgtk-3-dev
+sudo apt-get install -y libjpeg8-dev libtiff5-dev libjasper-dev libpng12-dev
+sudo apt-get install -y libatlas-base-dev numpy gfortran
+sudo apt-get install -y python3.5-dev
 virtualenv cv
 cd cv
 source bin/activate
-cd ~/3.2.0/
+cd ~/opencv-3.2.0/
 mkdir build
 cd build
 cmake -D CMAKE_BUILD_TYPE=RELEASE \
