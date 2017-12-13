@@ -20,27 +20,32 @@ pip3 install --user ipython
 virtualenv cv
 cd cv
 source bin/activate
+
+git clone git://source.ffmpeg.org/ffmpeg.git ffmpeg
+cd ffmpeg
+./configure --enable-nonfree --enable-pic --enable-shared
+make
+sudo make install
+
 cd ~/opencv-3.2.0/
 mkdir build
 cd build
 cmake -D CMAKE_BUILD_TYPE=RELEASE \
--D CMAKE_INSTALL_PREFIX=/home/$USER/opencv-3.2.0 \
--D INSTALL_C_EXAMPLES=OFF \
--D INSTALL_PYTHON_EXAMPLES=OFF \
+-D CMAKE_INSTALL_PREFIX=/usr/local \
+-D WITH_TBB=ON \
+-D BUILD_NEW_PYTHON_SUPPORT=ON \
+-D WITH_V4L=ON \
+-D INSTALL_C_EXAMPLES=ON \
+-D INSTALL_PYTHON_EXAMPLES=ON \
+-D BUILD_EXAMPLES=ON \
+-D WITH_QT=ON \
+-D WITH_OPENGL=ON \
 -D OPENCV_EXTRA_MODULES_PATH=/home/$USER/opencv_contrib-3.2.0/modules \
--D BUILD_EXAMPLES=OFF \
 -D BUILD_opencv_python2=OFF \
 -D WITH_FFMPEG=1 \
 -D WITH_CUDA=0 \
--D PYTHON3_EXECUTABLE=/home/$USER/cv/bin/python \
--D PYTHON_INCLUDE_DIR=/home/$USER/cv/include/python3.5m \
--D PYTHON_INCLUDE_DIR2=/home/$USER/cv/include/python3.5m \
--D PYTHON_LIBRARY=/home/$USER/cv/lib/libpython3.5m.so \
--D PYTHON3_PACKAGES_PATH=/home/$USER/cv/lib/python3.5 \
--D PYTHON3_NUMPY_INCLUDE_DIRS=/home/$USER/cv/lib/python3.5/site-packages/numpy/core/include ..
-sudo make -j8
+-D PYTHON3_EXECUTABLE=python3 ..
+sudo make -j $(nproc --all)
 sudo make install
 sudo ldconfig
-sudo cp /usr/local/lib/python3.5/site-packages/cv2.cpython-35m-x86_64-linux-gnu.so /usr/local/lib/python3.5/site-packages/cv2.so
-cd ~/.virtualenvs/cv/lib/python3.5/site-packages/
-ln -s /usr/local/lib/python3.5/site-packages/cv2.so cv2.so
+sudo cp lib/python3/cv2.so /usr/local/lib/python3.5/dist-packages/
