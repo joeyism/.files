@@ -35,7 +35,7 @@ cmake -D CMAKE_BUILD_TYPE=RELEASE \
 -D PYTHON_LIBRARY=/home/$USER/cv/lib/libpython3.5m.so \
 -D PYTHON3_PACKAGES_PATH=/home/$USER/cv/lib/python3.5 \
 -D PYTHON3_NUMPY_INCLUDE_DIRS=/home/$USER/cv/lib/python3.5/site-packages/numpy/core/include ..
-sudo make -j4
+sudo make -j8
 sudo make install
 sudo ldconfig
 sudo cp /usr/local/lib/python3.5/site-packages/cv2.cpython-35m-x86_64-linux-gnu.so /usr/local/lib/python3.5/site-packages/cv2.so
