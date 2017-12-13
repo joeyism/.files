@@ -3,8 +3,13 @@ sudo apt install -y unzip
 
 wget https://github.com/opencv/opencv/archive/3.2.0.zip
 unzip 3.2.0.zip
+
 wget -O opencv_contrib.zip https://github.com/Itseez/opencv_contrib/archive/3.2.0.zip
 unzip opencv_contrib.zip
+
+rm 3.2.0.zip
+rm opencv_contrib.zip
+
 sudo apt-get update -y
 sudo apt-get upgrade -y
 sudo apt-get dist-upgrade -y
