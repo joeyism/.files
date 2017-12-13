@@ -1,5 +1,5 @@
 wget -O - https://raw.githubusercontent.com/joeyism/.files/master/run.sh | bash
-sudo apt install unzip
+sudo apt install -y unzip
 
 wget https://github.com/opencv/opencv/archive/3.2.0.zip
 unzip 3.2.0.zip
