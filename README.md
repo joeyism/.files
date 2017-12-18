@@ -1,13 +1,13 @@
 # .files
 My dot files
 
-`configure_*` can be run in new yum-based instances, to configure it to my liking.
+`configure.sh` apt installs git, then customizes to my liking
 
-`configure.sh` is without tmux
-
-`configure_general.sh` is with tmux
+`configure_general.sh` apt installs tmux and git, then customizes to my liking
 
 `run.sh` adds the dot-files and configures vim, but doesn't install anything via yum nor apt
+
+`add-swapfiles.sh` adds a swapfile for using, based on code from [here](https://www.cyberciti.biz/faq/linux-add-a-swap-file-howto/)
 
 ## Instances
 These are scripts to run depending on what instances are spun up
