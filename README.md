@@ -1,9 +1,9 @@
 # .files
 My dot files
 
-`configure.sh` apt installs git, then customizes to my liking
+`configure.sh` yum installs git, then customizes to my liking
 
-`configure_general.sh` apt installs tmux and git, then customizes to my liking
+`configure_general.sh` yum installs tmux and git, then customizes to my liking
 
 `run.sh` adds the dot-files and configures vim, but doesn't install anything via yum nor apt
 
