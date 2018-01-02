@@ -5,4 +5,4 @@ tar xf Python-3.*
 cd Python-3.*
 ./configure
 make
-make install
+sudo make install
