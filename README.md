@@ -17,6 +17,12 @@ These are scripts to run depending on what instances are spun up
 * installs python35 and necessary tools
 * sets up tmux and vim
 
+[**instances/apt-python-instances.sh**](https://raw.githubusercontent.com/joeyism/.files/master/instances/apt-python-instances.sh)
+* For instances that installs with apt (debian-based, ubuntu)
+* Tested on Ubuntu 16.04 on AWS EC2
+* Installs python35 and additional tools (pip, ipython, numpy, etc.)
+* sets up tmux and vim
+
 [**instances/apt-opencv-python-instances-3.sh**](https://raw.githubusercontent.com/joeyism/.files/master/instances/apt-opencv-python-instances-3.sh)
 * For instances that installs with apt (debian-based, ubuntu)
 * Tested on Ubuntu 16.04 on AWS EC2
@@ -25,8 +31,9 @@ These are scripts to run depending on what instances are spun up
 * sets up OpenCV
 * Sets up ffmpeg
 
-[**instances/apt-python-instances.sh**](https://raw.githubusercontent.com/joeyism/.files/master/instances/apt-python-instances.sh)
+[**instances/apt-python-chrome-instances.sh**](https://raw.githubusercontent.com/joeyism/.files/master/instances/apt-python-chrome-instances.sh)
 * For instances that installs with apt (debian-based, ubuntu)
 * Tested on Ubuntu 16.04 on AWS EC2
 * Installs python35 and additional tools (pip, ipython, numpy, etc.)
 * sets up tmux and vim
+* sets up Chrome for selenium
