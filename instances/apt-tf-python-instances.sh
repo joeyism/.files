@@ -12,7 +12,7 @@ sudo apt-get install -y libatlas-base-dev numpy gfortran qt5-default htop
 sudo apt-get install -y python3.5-dev
 sudo apt-get -y install python3-pip
 pip3 install --user ipython numpy
-pip3 install --ignore-installed --upgrade "https://github.com/lakshayg/tensorflow-build/raw/master/tensorflow-1.4.0rc1-cp36-cp36m-linux_x86_64.whl"
+pip3 install --ignore-installed --upgrade "https://github.com/lakshayg/tensorflow-build/raw/master/tensorflow-1.4.0-cp35-cp35m-linux_x86_64.whl"
 
 virtualenv cv
 cd cv
