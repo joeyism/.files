@@ -14,9 +14,11 @@ sudo apt-get -y install python3-pip
 pip3 install --user ipython numpy cython h5py keras imageio
 pip3 install --ignore-installed --upgrade "https://github.com/lakshayg/tensorflow-build/raw/master/tensorflow-1.4.0-cp35-cp35m-linux_x86_64.whl"
 
-virtualenv cv
-cd cv
-source bin/activate
+git clone https://github.com/waleedka/coco.git
+cd coco/PythonAPI
+make
+sudo make install
+cd -
 
 python3 -c "import imageio; imageio.plugins.ffmpeg.download()"
 #git clone git://source.ffmpeg.org/ffmpeg.git ffmpeg
