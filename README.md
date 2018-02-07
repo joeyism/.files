@@ -43,6 +43,7 @@ These are scripts to run depending on what instances are spun up
 * Tested on Ubuntu 16.04 on AWS EC2
 * Installs python35 and additional tools (pip, ipython, numpy, etc.)
 * sets up tmux and vim
+* sets up [coco](https://github.com/waleedka/coco.git)
 * sets up ffmpeg
 * sets up TensorFlow
 
