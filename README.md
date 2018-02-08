@@ -5,7 +5,7 @@ My dot files
 
 `configure_general.sh` yum installs tmux and git, then customizes to my liking
 
-`run.sh` adds the dot-files and configures vim, but doesn't install anything via yum nor apt
+[`run.sh`](https://raw.githubusercontent.com/joeyism/.files/master/run.sh) adds the dot-files and configures vim, but doesn't install anything via yum nor apt
 
 `add-swapfiles.sh` adds a swapfile for using, based on code from [here](https://www.cyberciti.biz/faq/linux-add-a-swap-file-howto/)
 
