@@ -19,7 +19,7 @@ sudo ln -s /usr/bin/python3 /usr/bin/python
 git clone https://github.com/waleedka/coco.git
 cd coco/PythonAPI
 make
-sudo make install
+make install
 cd -
 
 python3 -c "import imageio; imageio.plugins.ffmpeg.download()"
