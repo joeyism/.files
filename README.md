@@ -45,6 +45,13 @@ These are scripts to run depending on what instances are spun up
 * sets up tmux and vim
 * sets up [coco](https://github.com/waleedka/coco.git)
 * sets up ffmpeg
-* sets up TensorFlow
+* sets up TensorFlow CPU
 
-
+[**instances/apt-tf-gpu-python-instances.sh**](https://raw.githubusercontent.com/joeyism/.files/master/instances/apt-tf-gpu-python-instances.sh)
+* For instances that installs with apt (debian-based, ubuntu)
+* Tested on Ubuntu 16.04 on AWS EC2
+* Installs python35 tools, assuming python35 is already installed (pip, ipython, numpy, etc.)
+* sets up tmux and vim
+* sets up [coco](https://github.com/waleedka/coco.git)
+* sets up ffmpeg
+* sets up TensorFlow GPU CUDA9 without MKL
