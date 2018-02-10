@@ -10,7 +10,7 @@ sudo apt-get install -y libxvidcore-dev libx264-dev libgtk-3-dev
 sudo apt-get install -y libjpeg8-dev libtiff5-dev libjasper-dev libpng12-dev
 sudo apt-get install -y libatlas-base-dev numpy gfortran qt5-default htop
 pip3 install --user ipython numpy cython h5py keras imageio
-pip3 install --ignore-installed --upgrade "https://github.com/mind/wheels/releases/download/tf1.4-gpu-cuda9-nomkl/tensorflow-1.4.0-cp36-cp36m-linux_x86_64.whl"
+pip3 install --ignore-installed --upgrade "https://github.com/mind/wheels/releases/download/tf1.5-gpu-nomkl/tensorflow-1.5.0-cp36-cp36m-linux_x86_64.whl"
 
 # set python to python3 so coco will run
 sudo rm /usr/bin/python
