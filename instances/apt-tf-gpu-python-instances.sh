@@ -6,6 +6,7 @@ if [ $AMI_ID == "ami-eb596e8e" ]
   then
     head -n -2 ~/.bashrc > ~/.bashrc
 fi
+source ~/.bashrc
 
 sudo apt-get -y update
 sudo apt-get upgrade -y
