@@ -4,7 +4,7 @@
 AMI_ID=$(curl http://169.254.169.254/latest/meta-data/ami-id)
 if [ $AMI_ID == "ami-eb596e8e" ]
   then
-    head -n -2 ~/.bashrc > ~/.bashrc
+    head -n -1 ~/.bashrc > ~/.bashrc
 fi
 source ~/.bashrc
 
