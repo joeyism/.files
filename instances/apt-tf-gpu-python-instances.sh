@@ -42,3 +42,5 @@ python3 -c "import imageio; imageio.plugins.ffmpeg.download()"
 wget https://raw.githubusercontent.com/joeyism/.files/master/run.sh
 bash run.sh
 rm run.sh
+
+mv anaconda3 anaconda3_bu
