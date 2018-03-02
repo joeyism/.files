@@ -1,12 +1,12 @@
 #!/bin/bash
 
 # IF GPU, remove anaconda part
-AMI_ID=$(curl http://169.254.169.254/latest/meta-data/ami-id)
-if [ $AMI_ID == "ami-eb596e8e" ]
-  then
-    head -n -1 ~/.bashrc > ~/.bashrc
-fi
-source ~/.bashrc
+#AMI_ID=$(curl http://169.254.169.254/latest/meta-data/ami-id)
+#if [ $AMI_ID == "ami-eb596e8e" ]
+#then
+#    head -n -1 ~/.bashrc > ~/.bashrc
+#fi
+#source ~/.bashrc
 
 sudo apt-get -y update
 sudo apt-get upgrade -y
