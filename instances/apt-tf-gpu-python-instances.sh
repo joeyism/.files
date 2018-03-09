@@ -25,11 +25,7 @@ pip3 install --ignore-installed --upgrade --user "https://github.com/mind/wheels
 sudo rm /usr/bin/python
 sudo ln -s /usr/bin/python3.5 /usr/bin/python
 
-git clone https://github.com/waleedka/coco.git
-cd coco/PythonAPI
-make
-sudo make install
-cd -
+pip3 install --no-cache-dir --user git+https://github.com/waleedka/coco.git#subdirectory=PythonAPI
 
 python3 -c "import imageio; imageio.plugins.ffmpeg.download()"
 #git clone git://source.ffmpeg.org/ffmpeg.git ffmpeg
