@@ -55,3 +55,7 @@ These are scripts to run depending on what instances are spun up
 * sets up [coco](https://github.com/waleedka/coco.git)
 * sets up ffmpeg
 * sets up TensorFlow GPU CUDA9 without MKL
+
+[**instances/apt-docker-instance.sh**](https://raw.githubusercontent.com/joeyism/.files/master/instances/apt-docker-instance.sh)
+* For instances that installs with apt (debian-based, ubuntu)
+* Installs docker
