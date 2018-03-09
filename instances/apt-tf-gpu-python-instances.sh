@@ -24,10 +24,11 @@ pip3 install --ignore-installed --upgrade --user "https://github.com/mind/wheels
 # set python to python3 so coco will run
 sudo rm /usr/bin/python
 sudo ln -s /usr/bin/python3.5 /usr/bin/python
+sudo ln -s /usr/bin/python3.5 /usr/bin/python3
 
 pip3 install --no-cache-dir --user git+https://github.com/waleedka/coco.git#subdirectory=PythonAPI
 
-python3 -c "import imageio; imageio.plugins.ffmpeg.download()"
+python -c "import imageio; imageio.plugins.ffmpeg.download()"
 #git clone git://source.ffmpeg.org/ffmpeg.git ffmpeg
 #cd ffmpeg
 #./configure --enable-nonfree --enable-pic --enable-shared
