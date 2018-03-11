@@ -15,3 +15,5 @@ sudo add-apt-repository \
 sudo apt-get update
 
 sudo apt-get install -y docker-ce
+
+wget -O - https://raw.githubusercontent.com/joeyism/.files/master/run.sh | bash
