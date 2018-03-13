@@ -15,9 +15,9 @@ pip3 install --user ipython
 
 # Spark
 cd /opt
-wget http://www-eu.apache.org/dist/spark/spark-2.2.1/spark-2.2.1-bin-hadoop2.7.tgz
-tar -xzf spark-2.2.1-bin-hadoop2.7.tgz
-ln -s /opt/spark-2.2.1-bin-hadoop2.7 /opt/spark
+sudo wget http://www-eu.apache.org/dist/spark/spark-2.2.1/spark-2.2.1-bin-hadoop2.7.tgz
+sudo tar -xzf spark-2.2.1-bin-hadoop2.7.tgz
+sudo ln -s /opt/spark-2.2.1-bin-hadoop2.7 /opt/spark
 
 export PYSPARK_PYTHON=python3 
 export PYSPARK_DRIVER_PYTHON=ipython 
