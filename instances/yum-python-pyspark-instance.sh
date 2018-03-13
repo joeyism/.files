@@ -1,4 +1,4 @@
-sudo yum update
+sudo yum update -y
 
 sudo systemclt stop firewall-cmd
 sudo setenforce 0
