@@ -36,4 +36,4 @@ cd ~
 wget https://raw.githubusercontent.com/joeyism/.files/master/configure_general.sh
 bash configure_general.sh
 rm configure_general.sh
-printf '\nexport SPARK_HOME=/opt/spark\nexport PATH=$SPARK_HOME/bin:$PATHPYSPARK_PYTHON=python3\nPYSPARK_DRIVER_PYTHON=ipython\n' >> ~/.bash_rc
+printf '\nexport SPARK_HOME=/opt/spark\nexport PATH=$SPARK_HOME/bin:$PATH\nPYSPARK_PYTHON=python3\nPYSPARK_DRIVER_PYTHON=ipython\n' >> ~/.bashrc
