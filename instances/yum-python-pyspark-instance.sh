@@ -32,6 +32,7 @@ export PATH=$SPARK_HOME/bin:$PATH
 
 
 # Customize
+cd ~
 wget https://raw.githubusercontent.com/joeyism/.files/master/configure_general.sh
 bash configure_general.sh
 rm configure_general.sh
