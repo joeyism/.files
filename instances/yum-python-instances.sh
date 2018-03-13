@@ -1,6 +1,8 @@
 sudo yum install -y gcc
-sudo yum install -y python35
+sudo yum install -y python35 htop
 sudo yum install -y python35-setuptools
+sudo yum install python35-devel
+
 sudo easy_install-3.5 pip
 sudo cp /usr/local/bin/pip3 /usr/sbin/
 pip3 install --user ipython
