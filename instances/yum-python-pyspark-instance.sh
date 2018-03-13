@@ -11,7 +11,7 @@ sudo yum install -y python35-devel
 
 sudo easy_install-3.5 pip
 sudo cp /usr/local/bin/pip3 /usr/sbin/
-pip3 install --user ipython
+sudo pip3 install ipython
 
 # Java8
 sudo yum install -y java-1.8.0-openjdk
