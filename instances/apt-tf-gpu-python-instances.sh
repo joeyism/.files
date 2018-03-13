@@ -39,4 +39,6 @@ wget https://raw.githubusercontent.com/joeyism/.files/master/run.sh
 bash run.sh
 rm run.sh
 
+python -m "import tensorflow as tf"
+
 mv anaconda3 anaconda3_bu
