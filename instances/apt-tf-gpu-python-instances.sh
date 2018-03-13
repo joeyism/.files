@@ -17,7 +17,7 @@ sudo apt-get install -y build-essential cmake pkg-config virtualenv
 sudo apt-get install -y libavcodec-dev libavformat-dev libswscale-dev libv4l-dev
 sudo apt-get install -y libxvidcore-dev libx264-dev libgtk-3-dev
 sudo apt-get install -y libjpeg8-dev libtiff5-dev libjasper-dev libpng12-dev
-sudo apt-get install -y libatlas-base-dev numpy gfortran qt5-default htop
+sudo apt-get install -y libatlas-base-dev numpy gfortran qt5-default htop python3-tk
 pip3 install --user ipython numpy cython h5py keras imageio gpustat
 pip3 install --ignore-installed --upgrade --user "https://github.com/mind/wheels/releases/download/tf1.5-gpu-nomkl/tensorflow-1.5.0-cp35-cp35m-linux_x86_64.whl"
 
