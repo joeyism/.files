@@ -35,6 +35,8 @@ python -c "import imageio; imageio.plugins.ffmpeg.download()"
 #make
 #sudo make install
 
+sudo apt install -y python3-tk
+
 wget https://raw.githubusercontent.com/joeyism/.files/master/run.sh
 bash run.sh
 rm run.sh
