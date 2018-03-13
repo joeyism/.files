@@ -27,6 +27,7 @@ export PYSPARK_PYTHON=python3
 export PYSPARK_DRIVER_PYTHON=ipython 
 export SPARK_HOME=/opt/spark
 export PATH=$SPARK_HOME/bin:$PATH
+alias pyspark=pyspark --packages com.amazonaws:aws-java-sdk:1.7.4,org.apache.hadoop:hadoop-aws:2.7.2
 sudo chmod 777 /tmp/hive
 
 
