@@ -1,0 +1,61 @@
+#!/bin/bash
+alias :q=exit
+alias pipr="pip3 install --user -r requirements.txt"
+alias port="sudo netstat -tulpn"
+alias sa="source ~/.aliases"
+alias ea="vim ~/.aliases"
+alias gcil="google compute instances list"
+
+
+check_no_args(){
+    if [ $# -eq 0 ]
+        then
+            echo "No arguments supplied"
+            return 1
+        else
+            return 0
+    fi
+}
+
+sample_use_check_no_args(){
+    check_no_args $@
+    if [ $? == 0 ]
+    then
+        echo $?
+        echo "after"
+    fi
+}
+
+proc_origin(){
+    sudo readlink -f /proc/$1/exe
+}
+
+port_exec(){
+    port | grep $1 | awk '{print $7}' | sed -e 's/.*\///g'
+}
+
+port_proc(){
+    port | grep $1 | awk '{print $7}' | sed -e 's/\/.*//g'
+}
+
+port_origin(){
+    proc_origin $(port_proc $1)
+}
+
+pwdf(){
+    echo $(pwd)/$1
+}
+
+here(){
+    HERE=$(pwd)
+}
+
+pw(){
+    if [ $1 == list ]
+    then
+        ls ~/.ssh/pw
+    else
+        cat ~/.ssh/pw/$1 | tr -d '\n' | xclip -selection clipboard
+    fi
+
+}
