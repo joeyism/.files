@@ -6,6 +6,12 @@ alias sa="source ~/.aliases"
 alias ea="vim ~/.aliases"
 alias gcil="google compute instances list"
 alias gl='git log --oneline --abbrev-commit --all --graph --decorate --color'
+alias watchc="watch --color"
+alias gail="gcloud app instances list"
+alias gavl="gcloud app versions list"
+alias p="push"
+alias got="go test -v -cover"
+alias gor="go build && ./${PWD##*/}"
 
 
 check_no_args(){
@@ -60,8 +66,63 @@ pw(){
     fi
 
 }
+complete -W "$(ls ~/.ssh/pw)" pw
 
-remove_gcloud_service(){
+remove_gcloud_app_by_id(){
+    check_no_args $@
+    if [ $? != 0 ]
+    then
+        return $?
+    fi
+
+    gcloud app instances list | sed 1d | \
+        while read i
+        do
+            if [ $1 == $(awk '{print $3}' <<< $i) ]
+            then
+                echo "gcloud app instances delete $(awk '{print $3}' <<< $i) --service=$(awk '{print $1}' <<< $i) --version=$(awk '{print $2}' <<< $i) --quiet"
+                gcloud app instances delete $(awk '{print $3}' <<< $i) --service=$(awk '{print $1}' <<< $i) --version=$(awk '{print $2}' <<< $i) --quiet
+            fi
+        done
+}
+
+remove_gcloud_app_version_by_status(){
+    check_no_args $@
+    if [ $? != 0 ]
+    then
+        return $?
+    fi
+
+    gavl | sed 1d | \
+        while read i
+        do
+            if [ $1 == $(awk '{print $5}' <<< $i) ]
+            then
+                echo "gcloud app versions delete $(awk '{print $2}' <<< $i) --quiet"
+                gcloud app versions delete $(awk '{print $2}' <<< $i) --quiet
+            fi
+        done
+}
+
+remove_gcloud_app_version_by_service(){
+    check_no_args $@
+    if [ $? != 0 ]
+    then
+        return $?
+    fi
+
+    gavl | sed 1d | \
+        while read i
+        do
+            if [ $1 == $(awk '{print $1}' <<< $i) ]
+            then
+                echo "gcloud app versions delete $(awk '{print $2}' <<< $i) --quiet"
+                gcloud app versions delete $(awk '{print $2}' <<< $i) --quiet
+            fi
+        done
+}
+
+remove_gcloud_app_by_service(){
     check_no_args $@
     if [ $? != 0 ]
     then
@@ -81,4 +142,8 @@ remove_gcloud_service(){
 
 grep_code(){
     grep -rnw . -e $1 --exclude-dir=node_modules
+}
+
+ecslog(){
+    ecs-cli logs --task-id $1 --region us-east-1 --aws-profile hubbabd --task-def $2
 }
