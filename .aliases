@@ -12,6 +12,10 @@ alias gavl="gcloud app versions list"
 alias p="push"
 alias got="go test -v -cover"
 alias gor="go build && ./${PWD##*/}"
+alias gohere="cd $HERE"
+alias ll="ls -lrth"
+alias gcsp="gcloud config set project"
+alias cdll="cd $(ll | awk '{print $9}' | tail -n 1)"
 
 
 check_no_args(){
@@ -144,6 +148,10 @@ grep_code(){
     grep -rnw . -e $1 --exclude-dir=node_modules
 }
 
+ecslog_once(){
+    ecs-cli logs --task-id $1 --region us-east-1 --aws-profile hubbabd --task-def $(aws ecs describe-tasks --cluster production-ecs --tasks $1 --profile hubbabd | jq -r '.tasks[0].taskDefinitionArn' | cut -d '/' -f2)
+}
+
 ecslog(){
-    ecs-cli logs --task-id $1 --region us-east-1 --aws-profile hubbabd --task-def $2
+    watch --color ecs-cli logs --task-id $1 --region us-east-1 --aws-profile hubbabd --task-def $(aws ecs describe-tasks --cluster production-ecs --tasks $1 --profile hubbabd | jq -r '.tasks[0].taskDefinitionArn' | cut -d '/' -f2)
 }
