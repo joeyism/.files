@@ -63,3 +63,6 @@ These are scripts to run depending on what instances are spun up
 [**instances/yum-python-pyspark-instance.sh**](https://raw.githubusercontent.com/joeyism/.files/master/instances/yum-python-pyspark-instance.sh)
 * For instances that installs with yum (centos, rhel, ami, etc.)
 * Installs python35, java8, and pyspark
+
+[**instances/apt-snippet-golang.sh**](https://raw.githubusercontent.com/joeyism/.files/master/instances/apt-snippet-golang.sh)
+* Installs latest golang with apt
