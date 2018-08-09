@@ -2,8 +2,8 @@
 alias :q=exit
 alias pipr="pip3 install --user -r requirements.txt"
 alias port="sudo netstat -tulpn"
-alias sa="source ~/.aliases"
-alias ea="vim ~/.aliases"
+alias sa="source ~/.bash_aliases"
+alias ea="vim ~/.bash_aliases"
 alias gcil="google compute instances list"
 alias gl='git log --oneline --abbrev-commit --all --graph --decorate --color'
 alias watchc="watch --color"
