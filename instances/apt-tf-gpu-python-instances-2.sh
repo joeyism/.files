@@ -10,7 +10,7 @@ sudo apt -y install gcc-6 make python3-pip build-essential libelf-dev
 
 # Let gcc to be gcc-6
 sudo ln -s /usr/bin/gcc-6 /usr/bin/gcc
-sudo ln -s /usr/bin/gcc-ar6 /usr/bin/gcc-ar
+sudo ln -s /usr/bin/gcc-ar-6 /usr/bin/gcc-ar
 sudo ln -s /usr/bin/gcc-nm-6 /usr/bin/gcc-nm
 sudo ln -s /usr/bin/gcc-ranlib-6 /usr/bin/gcc-ranlib
 
