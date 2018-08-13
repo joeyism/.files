@@ -23,3 +23,11 @@ wget https://developer.nvidia.com/compute/cuda/9.0/Prod/local_installers/cuda_9.
 sudo sh cuda_9.0.176_384.81_linux-run --override --extract=$HOME
 sudo bash cuda-linux.9.0.176-22781540.run
 sudo pip3 install https://github.com/mind/wheels/releases/download/tf1.7-gpu-nomkl/tensorflow-1.7.0-cp${python_version}-cp${python_version}m-linux_x86_64.whl
+
+# Add path stuff
+echo 'export PATH="$PATH:/usr/local/cuda-9.0/bin"' >> ~/.bashrc
+echo 'export LD_LIBRARY_PATH="/usr/local/cuda-9.0/lib64"' >> ~/.bashc
+source ~/.bashrc
+
+# Clean up
+rm -f cuda_9.0.176_384.81_linux-run cuda-samples.9.0.176-22781540-linux.run cuda-linux.9.0.176-22781540.run NVIDIA-Linux-x86_64-384.81.run
