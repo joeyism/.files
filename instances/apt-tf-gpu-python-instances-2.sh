@@ -25,6 +25,7 @@ sudo bash cuda-linux.9.0.176-22781540.run
 sudo pip3 install https://github.com/mind/wheels/releases/download/tf1.7-gpu-nomkl/tensorflow-1.7.0-cp${python_version}-cp${python_version}m-linux_x86_64.whl
 
 # Add path stuff
+echo 'export CUDA_HOME=/usr/local/cuda-9.0' >> ~/.bashrc
 echo 'export PATH="$PATH:/usr/local/cuda-9.0/bin"' >> ~/.bashrc
 echo 'export LD_LIBRARY_PATH="/usr/local/cuda-9.0/lib64"' >> ~/.bashc
 source ~/.bashrc
