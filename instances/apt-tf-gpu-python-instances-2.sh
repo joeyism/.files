@@ -6,13 +6,14 @@ rm run_apt.sh
 
 sudo add-apt-repository -y ppa:ubuntu-toolchain-r/test
 
-sudo apt -y install gcc-6 make python3-pip build-essential libelf-dev
+sudo apt -y install gcc-6 make python3-pip build-essential libelf-dev g++-6
 
 # Let gcc to be gcc-6
 sudo ln -s /usr/bin/gcc-6 /usr/bin/gcc
 sudo ln -s /usr/bin/gcc-ar-6 /usr/bin/gcc-ar
 sudo ln -s /usr/bin/gcc-nm-6 /usr/bin/gcc-nm
 sudo ln -s /usr/bin/gcc-ranlib-6 /usr/bin/gcc-ranlib
+sudo ln -s /usr/bin/g++-6 /usr/bin/g++
 
 wget https://developer.nvidia.com/compute/cuda/9.0/Prod/local_installers/cuda_9.0.176_384.81_linux-run
 sudo sh cuda_9.0.176_384.81_linux-run --override
