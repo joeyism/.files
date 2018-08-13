@@ -1,5 +1,4 @@
-python_version=35
-
+export python_version=35
 sudo apt -y install gcc make python3-pip
 wget https://developer.nvidia.com/compute/cuda/9.0/Prod/local_installers/cuda_9.0.176_384.81_linux-run
 sudo sh cuda_9.0.176_384.81_linux-run --override
