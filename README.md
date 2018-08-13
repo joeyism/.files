@@ -7,6 +7,8 @@ My dot files
 
 [`run.sh`](https://raw.githubusercontent.com/joeyism/.files/master/run.sh) adds the dot-files and configures vim, but doesn't install anything via yum nor apt
 
+[`run_apt.sh`](https://raw.githubusercontent.com/joeyism/.files/master/run_apt.sh) like `run.sh` above, but apt installs some stuff
+
 `add-swapfiles.sh` adds a swapfile for using, based on code from [here](https://www.cyberciti.biz/faq/linux-add-a-swap-file-howto/)
 
 ## Instances
