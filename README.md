@@ -67,7 +67,9 @@ These are scripts to run depending on what instances are spun up
 [**instances/apt-tf-gpu-python-instances-2.sh**](https://raw.githubusercontent.com/joeyism/.files/master/instances/apt-tf-gpu-python-instances-2.sh)
 * For instances that installs with apt (debian-based, ubuntu)
 * Tested on Ubuntu 16.04 on Google Cloud
-* Installs gcc, make, etc.
+* Installs gcc-6, make, etc.
+* sets up my tmux and vim environment
+* sets up TensorFlow GPU CUDA9 without MKL
 
 [**instances/apt-docker-instance.sh**](https://raw.githubusercontent.com/joeyism/.files/master/instances/apt-docker-instance.sh)
 * For instances that installs with apt (debian-based, ubuntu)
