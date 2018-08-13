@@ -34,4 +34,4 @@ source ~/.bashrc
 rm -f cuda_9.0.176_384.81_linux-run cuda-samples.9.0.176-22781540-linux.run cuda-linux.9.0.176-22781540.run NVIDIA-Linux-x86_64-384.81.run
 
 # Remind to install cudnn
-echo "Go to https://developer.nvidia.com/cudnn and download cudnn"
+echo "Go to https://developer.nvidia.com/cudnn and download and install cuDNN v7.0.5 (Dec 5, 2017), for CUDA 9.0"
