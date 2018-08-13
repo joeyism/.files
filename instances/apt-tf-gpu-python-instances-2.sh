@@ -9,6 +9,7 @@ sudo add-apt-repository -y ppa:ubuntu-toolchain-r/test
 sudo apt -y install gcc-6 make python3-pip build-essential libelf-dev g++-6
 
 # Let gcc to be gcc-6
+sudo rm /usr/bin/gcc /usr/bin/gcc-ar /usr/bin/gcc-nm /usr/bin/gcc-ranlib
 sudo ln -s /usr/bin/gcc-6 /usr/bin/gcc
 sudo ln -s /usr/bin/gcc-ar-6 /usr/bin/gcc-ar
 sudo ln -s /usr/bin/gcc-nm-6 /usr/bin/gcc-nm
