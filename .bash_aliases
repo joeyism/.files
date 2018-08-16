@@ -4,7 +4,6 @@ alias pipr="pip3 install --user -r requirements.txt"
 alias port="sudo netstat -tulpn"
 alias sa="source ~/.bash_aliases"
 alias ea="vim ~/.bash_aliases"
-alias gcil="google compute instances list"
 alias gl='git log --oneline --abbrev-commit --all --graph --decorate --color'
 alias watchc="watch --color"
 alias gail="gcloud app instances list"
@@ -17,6 +16,10 @@ alias ll="ls -lrth"
 alias gcsp="gcloud config set project"
 alias cdll="cd $(ll | awk '{print $9}' | tail -n 1)"
 alias realias="wget -q https://raw.githubusercontent.com/joeyism/.files/master/.bash_aliases -O ~/.bash_aliases"
+
+alias gcl="gcloud config list"
+alias gcps="gcloud config project set"
+alias gcil="gcloud compute instances list"
 
 
 check_no_args(){
