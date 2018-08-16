@@ -16,6 +16,7 @@ alias gohere="cd $HERE"
 alias ll="ls -lrth"
 alias gcsp="gcloud config set project"
 alias cdll="cd $(ll | awk '{print $9}' | tail -n 1)"
+alias realias="wget -q https://raw.githubusercontent.com/joeyism/.files/master/.bash_aliases -O ~/.bash_aliases"
 
 
 check_no_args(){
