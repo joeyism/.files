@@ -13,7 +13,7 @@ alias got="go test -v -cover"
 alias gor="go build && ./${PWD##*/}"
 alias gohere="cd $HERE"
 alias ll="ls -lrth"
-alias gcsp="gcloud config project set"
+alias gcsp="gcloud config set project"
 alias cdll="cd $(ll | awk '{print $9}' | tail -n 1)"
 alias realias="curl -X GET https://raw.githubusercontent.com/joeyism/.files/master/.bash_aliases > ~/.bash_aliases && source ~/.bash_aliases"
 
