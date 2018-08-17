@@ -19,7 +19,7 @@ alias realias="curl -X GET https://raw.githubusercontent.com/joeyism/.files/mast
 alias ha="head ~/.bash_aliases"
 
 alias gcl="gcloud config list"
-alias gcps="gcloud config project set"
+alias gcsp="gcloud config set project"
 alias gcil="gcloud compute instances list"
 alias gcs="gcloud compute ssh"
 
