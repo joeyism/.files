@@ -16,6 +16,7 @@ alias ll="ls -lrth"
 alias gcsp="gcloud config set project"
 alias cdll="cd $(ll | awk '{print $9}' | tail -n 1)"
 alias realias="curl -X GET https://raw.githubusercontent.com/joeyism/.files/master/.bash_aliases > ~/.bash_aliases && source ~/.bash_aliases"
+alias ha="head ~/.bash_aliases"
 
 alias gcl="gcloud config list"
 alias gcps="gcloud config project set"
