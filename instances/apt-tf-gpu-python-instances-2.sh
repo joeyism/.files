@@ -8,7 +8,7 @@ rm run_apt.sh
 # Install dependencies (gcc-6, g++-6, etc.)
 sudo add-apt-repository -y ppa:ubuntu-toolchain-r/test
 sudo apt -y update
-sudo apt -y install gcc-6 make python3-pip build-essential libelf-dev g++-6 nvidia-384 nvidia-modprobe
+sudo apt -y install gcc-6 make python3-pip build-essential libelf-dev g++-6 nvidia-384 nvidia-modprobe libxext-dev libx11-dev x11proto-gl-dev
 
 
 # Let gcc to be gcc-6
