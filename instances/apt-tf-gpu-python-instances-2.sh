@@ -9,7 +9,7 @@ rm run_apt.sh
 sudo add-apt-repository -y ppa:ubuntu-toolchain-r/test
 sudo apt -y update
 sudo apt -y upgrade
-sudo apt -y install gcc-6 make python3-pip build-essential dkms libelf-dev g++-6 nvidia-384 nvidia-modprobe libxext-dev libx11-dev x11proto-gl-dev
+sudo apt -y install gcc-6 make python3-pip build-essential gcc-multilib dkms libelf-dev g++-6 nvidia-384 nvidia-modprobe libxext-dev libx11-dev x11proto-gl-dev
 
 
 # Let gcc to be gcc-6
