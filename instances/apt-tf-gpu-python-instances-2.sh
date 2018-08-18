@@ -27,6 +27,7 @@ sudo bash cuda_9.0.176_384.81_linux-run --override --extract=$HOME
 sudo bash cuda-linux.9.0.176-22781540.run
 sudo bash NVIDIA-Linux-x86_64-384.81.run
 sudo pip3 install --upgrade https://github.com/mind/wheels/releases/download/tf1.7-gpu-nomkl/tensorflow-1.7.0-cp${python_version}-cp${python_version}m-linux_x86_64.whl
+sudo pip3 install gpustat
 
 # Add path stuff
 echo 'export CUDA_HOME=/usr/local/cuda-9.0' >> ~/.bashrc
