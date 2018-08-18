@@ -21,7 +21,8 @@ sudo ln -s /usr/bin/g++-6 /usr/bin/g++
 
 # Install CUDA
 wget https://developer.nvidia.com/compute/cuda/9.0/Prod/local_installers/cuda_9.0.176_384.81_linux-run
-sudo sh cuda_9.0.176_384.81_linux-run --override --extract=$HOME
+sudo bash cuda_9.0.176_384.81_linux-run
+sudo bash cuda_9.0.176_384.81_linux-run --override --extract=$HOME
 sudo bash cuda-linux.9.0.176-22781540.run
 sudo bash NVIDIA-Linux-x86_64-384.81.run
 sudo pip3 install https://github.com/mind/wheels/releases/download/tf1.7-gpu-nomkl/tensorflow-1.7.0-cp${python_version}-cp${python_version}m-linux_x86_64.whl
