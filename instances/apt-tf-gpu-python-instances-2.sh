@@ -31,7 +31,7 @@ sudo pip3 install --upgrade https://github.com/mind/wheels/releases/download/tf1
 # Add path stuff
 echo 'export CUDA_HOME=/usr/local/cuda-9.0' >> ~/.bashrc
 echo 'export PATH="$PATH:/usr/local/cuda-9.0/bin"' >> ~/.bashrc
-echo 'export LD_LIBRARY_PATH="/usr/local/cuda-9.0/lib64"' >> ~/.bashc
+echo 'export LD_LIBRARY_PATH="$LD_LIBRARY_PATH:/usr/local/cuda-9.0/lib64"' >> ~/.bashc
 source ~/.bashrc
 
 # Clean up
