@@ -1,16 +1,11 @@
 #!/bin/bash
 alias :q=exit
-alias pipr="pip3 install --user -r requirements.txt"
 alias port="sudo netstat -tulpn"
 alias sa="source ~/.bash_aliases"
 alias ea="vim ~/.bash_aliases"
 alias gl='git log --oneline --abbrev-commit --all --graph --decorate --color'
 alias watchc="watch --color"
-alias gail="gcloud app instances list"
-alias gavl="gcloud app versions list"
 alias p="push"
-alias got="go test -v -cover"
-alias gor="go build && ./${PWD##*/}"
 alias gohere="cd $HERE"
 alias ll="ls -lrth"
 alias gcsp="gcloud config set project"
@@ -18,11 +13,18 @@ alias cdll="cd $(ll | awk '{print $9}' | tail -n 1)"
 alias realias="curl -X GET https://raw.githubusercontent.com/joeyism/.files/master/.bash_aliases > ~/.bash_aliases && source ~/.bash_aliases"
 alias ha="head ~/.bash_aliases"
 
+alias pipr="pip3 install --user -r requirements.txt"
+alias piu="pip3 install --user"
+
+alias got="go test -v -cover"
+alias gor="go build && ./${PWD##*/}"
+
 alias gcl="gcloud config list"
 alias gcsp="gcloud config set project"
 alias gcil="gcloud compute instances list"
 alias gcs="gcloud compute ssh"
-
+alias gail="gcloud app instances list"
+alias gavl="gcloud app versions list"
 
 check_no_args(){
     if [ $# -eq 0 ]
