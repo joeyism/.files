@@ -23,6 +23,8 @@ alias gcl="gcloud config list"
 alias gcsp="gcloud config set project"
 alias gcil="gcloud compute instances list"
 alias gcis="gcloud compute instances start"
+alias gciss="gcloud compute instances stop"
+
 alias gcs="gcloud compute ssh"
 alias gail="gcloud app instances list"
 alias gavl="gcloud app versions list"
