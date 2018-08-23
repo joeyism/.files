@@ -25,8 +25,9 @@ alias gcsp="gcloud config set project"
 alias gcil="gcloud compute instances list"
 alias gcis="gcloud compute instances start"
 alias gciss="gcloud compute instances stop"
-
 alias gcs="gcloud compute ssh"
+complete -W "$(gcloud compute instances list | awk '{print $1}' | tail -n +2)" gcs
+
 alias gail="gcloud app instances list"
 alias gavl="gcloud app versions list"
 
