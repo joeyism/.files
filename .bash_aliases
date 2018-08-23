@@ -9,6 +9,7 @@ alias p="push"
 alias gohere="cd $HERE"
 alias ll="ls -lrth"
 alias gcsp="gcloud config set project"
+complete -W "$(gcloud projects list | awk '{print $1}' | tail -n +2)" gcsp
 alias cdll="cd $(ll | awk '{print $9}' | tail -n 1)"
 alias realias="curl -X GET https://raw.githubusercontent.com/joeyism/.files/master/.bash_aliases > ~/.bash_aliases && source ~/.bash_aliases"
 alias ha="head ~/.bash_aliases"
