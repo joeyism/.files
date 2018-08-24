@@ -9,7 +9,10 @@ alias p="push"
 alias gohere="cd $HERE"
 alias ll="ls -lrth"
 alias gcsp="gcloud config set project"
-complete -W "$(gcloud projects list | awk '{print $1}' | tail -n +2)" gcsp
+function _gcsp_(){
+    COMPREPLY=($(compgen -W "$(gcloud projects list | awk '{print $1}' | tail -n +2)" -- "${COMP_WORDS[1]}"))
+}
+complete -F _gcsp_ gcsp
 alias cdll="cd $(ll | awk '{print $9}' | tail -n 1)"
 alias realias="curl -X GET https://raw.githubusercontent.com/joeyism/.files/master/.bash_aliases > ~/.bash_aliases && source ~/.bash_aliases"
 alias ha="head ~/.bash_aliases"
@@ -26,7 +29,10 @@ alias gcil="gcloud compute instances list"
 alias gcis="gcloud compute instances start"
 alias gciss="gcloud compute instances stop"
 alias gcs="gcloud compute ssh"
-complete -W "$(gcloud compute instances list | awk '{print $1}' | tail -n +2)" gcs
+function _gcs_(){
+    COMPREPLY=($(compgen -W "$(gcloud compute instances list | awk '{print $1}' | tail -n +2)" -- "${COMP_WORDS[1]}"))
+}
+complete -F _gcs_ gcs
 
 alias gail="gcloud app instances list"
 alias gavl="gcloud app versions list"
