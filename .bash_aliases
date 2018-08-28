@@ -27,7 +27,35 @@ alias gcl="gcloud config list"
 alias gcsp="gcloud config set project"
 alias gcil="gcloud compute instances list"
 alias gcis="gcloud compute instances start"
+function _gcis_(){
+    local nonterminated_names=""
+    while read i
+    do
+        if [ "${i: -10}" == "TERMINATED" ]
+        then
+            nonterminated_names="${nonterminated_names} $(printf $i | awk '{print $1}')"
+        fi
+    done <<<$(gcloud compute instances list | sed 1d )
+    local cur=${COMP_WORDS[COMP_CWORD]}
+    COMPREPLY=($(compgen -W "$nonterminated_names" -- $cur))
+}
+complete -F _gcis_ gcis
+
 alias gciss="gcloud compute instances stop"
+function _gciss_(){
+    local nonterminated_names=""
+    while read i
+    do
+        if [ "${i: -7}" == "RUNNING" ]
+        then
+            nonterminated_names="${nonterminated_names} $(printf $i | awk '{print $1}')"
+        fi
+    done <<<$(gcloud compute instances list | sed 1d )
+    local cur=${COMP_WORDS[COMP_CWORD]}
+    COMPREPLY=($(compgen -W "$nonterminated_names" -- $cur))
+}
+complete -F _gciss_ gciss
+
 alias gcs="gcloud compute ssh"
 function _gcs_(){
     COMPREPLY=($(compgen -W "$(gcloud compute instances list | awk '{print $1}' | tail -n +2)" -- "${COMP_WORDS[1]}"))
