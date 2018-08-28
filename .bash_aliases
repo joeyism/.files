@@ -64,6 +64,7 @@ complete -F _gcs_ gcs
 
 alias gail="gcloud app instances list"
 alias gavl="gcloud app versions list"
+alias gad="gcloud app deploy"
 
 check_no_args(){
     if [ $# -eq 0 ]
