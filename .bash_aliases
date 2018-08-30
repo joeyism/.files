@@ -61,6 +61,9 @@ function _gcs_(){
     COMPREPLY=($(compgen -W "$(gcloud compute instances list | awk '{print $1}' | tail -n +2)" -- "${COMP_WORDS[1]}"))
 }
 complete -F _gcs_ gcs
+alias gcscp="gcloud compute scp"
+complete -F _gcs_ gcsp
+
 
 alias gail="gcloud app instances list"
 alias gavl="gcloud app versions list"
