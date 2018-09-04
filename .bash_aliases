@@ -62,7 +62,7 @@ function _gcs_(){
 }
 complete -F _gcs_ gcs
 alias gcscp="gcloud compute scp"
-complete -F _gcs_ gcsp
+complete -F _gcs_ gcscp
 
 
 alias gail="gcloud app instances list"
