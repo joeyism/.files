@@ -8,6 +8,7 @@ alias watchc="watch --color"
 alias p="push"
 alias gohere="cd $HERE"
 alias ll="ls -lrth"
+alias weather="curl wttr.in"
 alias gcsp="gcloud config set project"
 function _gcsp_(){
     COMPREPLY=($(compgen -W "$(gcloud projects list | awk '{print $1}' | tail -n +2)" -- "${COMP_WORDS[1]}"))
@@ -28,31 +29,13 @@ alias gcsp="gcloud config set project"
 alias gcil="gcloud compute instances list"
 alias gcis="gcloud compute instances start"
 function _gcis_(){
-    local nonterminated_names=""
-    while read i
-    do
-        if [ "${i: -10}" == "TERMINATED" ]
-        then
-            nonterminated_names="${nonterminated_names} $(printf $i | awk '{print $1}')"
-        fi
-    done <<<$(gcloud compute instances list | sed 1d )
-    local cur=${COMP_WORDS[COMP_CWORD]}
-    COMPREPLY=($(compgen -W "$nonterminated_names" -- $cur))
+    COMPREPLY=($(compgen -W "$(gcloud compute instances list | awk '{print $1}' | tail -n +2)" -- "${COMP_WORDS[1]}"))
 }
 complete -F _gcis_ gcis
 
 alias gciss="gcloud compute instances stop"
 function _gciss_(){
-    local nonterminated_names=""
-    while read i
-    do
-        if [ "${i: -7}" == "RUNNING" ]
-        then
-            nonterminated_names="${nonterminated_names} $(printf $i | awk '{print $1}')"
-        fi
-    done <<<$(gcloud compute instances list | sed 1d )
-    local cur=${COMP_WORDS[COMP_CWORD]}
-    COMPREPLY=($(compgen -W "$nonterminated_names" -- $cur))
+    COMPREPLY=($(compgen -W "$(gcloud compute instances list | awk '{print $1}' | tail -n +2)" -- "${COMP_WORDS[1]}"))
 }
 complete -F _gciss_ gciss
 
