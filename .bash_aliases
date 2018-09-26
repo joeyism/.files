@@ -1,5 +1,6 @@
 #!/bin/bash
 alias :q=exit
+alias :e=vim
 alias port="sudo netstat -tulpn"
 alias sa="source ~/.bash_aliases"
 alias ea="vim ~/.bash_aliases"
