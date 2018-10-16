@@ -115,7 +115,9 @@ map <Leader>**  *N<C-w><C-w>n
 " Make space after work
 map <Leader><Space>  a 
 " move to buffer
-nnoremap <Leader>l :ls<CR>:b 
+nnoremap <Leader>e :ls<CR>:b 
+nnoremap <Leader>l :bn<CR>
+nnoremap <Leader>h :bp<CR>
 " use tag to find method under cursor
 map <Leader>tf "ryaw:tag <C-R>"<CR>:tags<CR>
 " next buffer
