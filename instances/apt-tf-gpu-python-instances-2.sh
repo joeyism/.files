@@ -11,6 +11,10 @@ sudo apt -y update
 sudo apt -y upgrade
 sudo apt -y install gcc-6 make python3-pip build-essential gcc-multilib dkms libelf-dev g++-6 nvidia-375 nvidia-384 nvidia-modprobe libxext-dev libx11-dev x11proto-gl-dev
 
+# Remove previous installations
+sudo apt remove --purge nvidia*
+sudo apt remove --purge libcuda*
+sudo rm -rf /usr/local/cuda*
 
 # Let gcc to be gcc-6
 sudo rm /usr/bin/gcc /usr/bin/gcc-ar /usr/bin/gcc-nm /usr/bin/gcc-ranlib /usr/bin/g++
