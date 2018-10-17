@@ -22,7 +22,7 @@ sudo ln -s /usr/bin/g++-6 /usr/bin/g++
 
 # Install CUDA
 wget https://developer.nvidia.com/compute/cuda/9.0/Prod/local_installers/cuda_9.0.176_384.81_linux-run
-sudo bash cuda_9.0.176_384.81_linux-run
+#sudo bash cuda_9.0.176_384.81_linux-run
 sudo bash cuda_9.0.176_384.81_linux-run --override --extract=$HOME
 sudo bash cuda-linux.9.0.176-22781540.run
 sudo bash NVIDIA-Linux-x86_64-384.81.run
