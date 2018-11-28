@@ -2,7 +2,7 @@
 
 ##########################################################################
 # COMMON
-##########################################################################
+#
 alias :q=exit
 alias gohere="cd $HERE"
 alias ll="ls -lrth"
@@ -15,6 +15,14 @@ findfile(){
     find . -path ./node_modules -prune -o -name $1 -print
 }
 check_no_args(){
+#   sample_use_check_no_args(){
+#       check_no_args $@
+#       if [ $? == 0 ]
+#       then
+#           echo $?
+#           echo "after"
+#       fi
+#   }
     if [ $# -eq 0 ]
         then
             echo "No arguments supplied"
@@ -23,18 +31,25 @@ check_no_args(){
             return 0
     fi
 }
-# sample_use_check_no_args(){
-#     check_no_args $@
-#     if [ $? == 0 ]
-#     then
-#         echo $?
-#         echo "after"
-#     fi
-# }
+view_aliases(){
+    TOPRINT=false
+    INPUT="${1^^}"
+    while IFS='' read -r line || [[ -n "$line" ]]; do
+        if [[ $line == *$INPUT* ]]; then
+            TOPRINT=true
+        elif [[ $line == "##########################################################################" ]]; then
+            TOPRINT=false
+        fi
+
+        if $TOPRINT; then
+            echo $line
+        fi
+    done < ~/.bash_aliases
+}
 
 ##########################################################################
 # CDA-ABLE
-##########################################################################
+#
 alias githome='git rev-parse --show-toplevel'
 alias latest="ls -t1 |  head -n 1"
 alias cdll="cd $(ll | awk '{print $9}' | tail -n 1)"
@@ -45,7 +60,7 @@ cda(){
 
 ##########################################################################
 # BASH_ALIASES RELATED
-##########################################################################
+#
 alias sa="source ~/.bash_aliases"
 alias ea="vim ~/.bash_aliases"
 alias realias="curl -X GET https://raw.githubusercontent.com/joeyism/.files/master/.bash_aliases > ~/.bash_aliases && source ~/.bash_aliases"
@@ -53,7 +68,7 @@ alias ha="head ~/.bash_aliases"
 
 ##########################################################################
 # CHECK STATUS OF MACHINE
-##########################################################################
+#
 alias pingg="ping google.com"
 alias battery="upower -i /org/freedesktop/UPower/devices/battery_BAT0"
 alias port="sudo netstat -tulpn"
@@ -95,19 +110,19 @@ complete -W "$(ls ~/.ssh/pw)" pw
 
 ##########################################################################
 # TERMINAL BROWSING
-##########################################################################
+#
 alias terminal-browser="w3m http://www.google.com"
 alias w3mvim="vim -c \":W3m https://www.google.com\""
 
 ##########################################################################
 # GIT-RELATED
-##########################################################################
+#
 alias gl='git log --oneline --abbrev-commit --all --graph --decorate --color'
 alias p="push"
 
 ##########################################################################
 # PYTHON RELATED
-##########################################################################
+#
 alias pipr="pip install --user -r requirements.txt"
 alias pip3r="pip3 install --user -r requirements.txt"
 alias pipu="pip install --user"
@@ -115,13 +130,13 @@ alias pip3u="pip3 install --user"
 
 ##########################################################################
 # GOLANG RELATED
-##########################################################################
+#
 alias got="go test -v -cover"
 alias gor="go build && ./${PWD##*/}"
 
 ##########################################################################
 # GCP RELATED
-##########################################################################
+#
 alias gcsp="gcloud config set project"
 function _gcsp_(){
     COMPREPLY=($(compgen -W "$(gcloud projects list | awk '{print $1}' | tail -n +2)" -- "${COMP_WORDS[1]}"))
@@ -231,7 +246,7 @@ remove_gcloud_app_by_service(){
 
 ##########################################################################
 # AWS RELATED
-##########################################################################
+#
 ecslog_once(){
     ecs-cli logs --task-id $1 --region us-east-1 --aws-profile hubbabd --task-def $(aws ecs describe-tasks --cluster production-ecs --tasks $1 --profile hubbabd | jq -r '.tasks[0].taskDefinitionArn' | cut -d '/' -f2)
 }
