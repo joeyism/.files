@@ -42,7 +42,7 @@ view_aliases(){
         fi
 
         if $TOPRINT; then
-            echo $line
+            printf "$line\n"
         fi
     done < ~/.bash_aliases
 }
