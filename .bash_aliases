@@ -46,6 +46,11 @@ view_aliases(){
         fi
     done < ~/.bash_aliases
 }
+senv(){
+    set -a
+    source $1
+    set +a
+}
 
 ##########################################################################
 # CDA-ABLE
