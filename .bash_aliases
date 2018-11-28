@@ -1,72 +1,19 @@
 #!/bin/bash
+
+##########################################################################
+# COMMON
+##########################################################################
 alias :q=exit
-alias port="sudo netstat -tulpn"
-alias sa="source ~/.bash_aliases"
-alias ea="vim ~/.bash_aliases"
-
-alias pingg="ping google.com"
-
-alias latest="ls -t1 |  head -n 1"
-alias battery="upower -i /org/freedesktop/UPower/devices/battery_BAT0"
-alias terminal-browser="w3m http://www.google.com"
-alias w3mvim="vim -c \":W3m https://www.google.com\""
-
-# cda-able
-alias githome='git rev-parse --show-toplevel'
-
-alias gl='git log --oneline --abbrev-commit --all --graph --decorate --color'
-
-alias watchc="watch --color"
-alias p="push"
 alias gohere="cd $HERE"
 alias ll="ls -lrth"
-alias gcsp="gcloud config set project"
-function _gcsp_(){
-    COMPREPLY=($(compgen -W "$(gcloud projects list | awk '{print $1}' | tail -n +2)" -- "${COMP_WORDS[1]}"))
+alias watchc="watch --color"
+grep_code(){
+    grep -rnw . -e $1 --exclude-dir={node_modules,venv}
 }
-complete -F _gcsp_ gcsp
-alias cdll="cd $(ll | awk '{print $9}' | tail -n 1)"
-alias realias="curl -X GET https://raw.githubusercontent.com/joeyism/.files/master/.bash_aliases > ~/.bash_aliases && source ~/.bash_aliases"
-alias ha="head ~/.bash_aliases"
 
-alias pipr="pip install --user -r requirements.txt"
-alias pip3r="pip3 install --user -r requirements.txt"
-alias pipu="pip install --user"
-alias pip3u="pip3 install --user"
-
-alias got="go test -v -cover"
-alias gor="go build && ./${PWD##*/}"
-
-alias gcl="gcloud config list"
-alias gcsp="gcloud config set project"
-alias gcil="gcloud compute instances list"
-alias gcis="gcloud compute instances start"
-function _gcis_(){
-    COMPREPLY=($(compgen -W "$(gcloud compute instances list | awk '{print $1}' | tail -n +2)" -- "${COMP_WORDS[1]}"))
+findfile(){
+    find . -path ./node_modules -prune -o -name $1 -print
 }
-complete -F _gcis_ gcis
-alias gciss="gcloud compute instances stop"
-function _gciss_(){
-    COMPREPLY=($(compgen -W "$(gcloud compute instances list | awk '{print $1}' | tail -n +2)" -- "${COMP_WORDS[1]}"))
-}
-complete -F _gciss_ gciss
-alias gcs="gcloud compute ssh"
-function _gcs_(){
-    COMPREPLY=($(compgen -W "$(gcloud compute instances list | awk '{print $1}' | tail -n +2)" -- "${COMP_WORDS[1]}"))
-}
-complete -F _gcs_ gcs
-
-function _gcscp_(){
-    list="$(gcloud compute instances list | awk '{print $1}' | tail -n +2)"
-    list="$list $(ls)"
-    COMPREPLY=($(compgen -W "$list" -- "${COMP_WORDS[1]}"))
-}
-alias gcscp="gcloud compute scp"
-complete -F _gcscp_ gcscp
-
-alias gail="gcloud app instances list"
-alias gavl="gcloud app versions list"
-
 check_no_args(){
     if [ $# -eq 0 ]
         then
@@ -76,16 +23,40 @@ check_no_args(){
             return 0
     fi
 }
+# sample_use_check_no_args(){
+#     check_no_args $@
+#     if [ $? == 0 ]
+#     then
+#         echo $?
+#         echo "after"
+#     fi
+# }
 
-sample_use_check_no_args(){
-    check_no_args $@
-    if [ $? == 0 ]
-    then
-        echo $?
-        echo "after"
-    fi
+##########################################################################
+# CDA-ABLE
+##########################################################################
+alias githome='git rev-parse --show-toplevel'
+alias latest="ls -t1 |  head -n 1"
+alias cdll="cd $(ll | awk '{print $9}' | tail -n 1)"
+
+cda(){
+    cd $(printf "${BASH_ALIASES[$1]}" | bash)
 }
 
+##########################################################################
+# BASH_ALIASES RELATED
+##########################################################################
+alias sa="source ~/.bash_aliases"
+alias ea="vim ~/.bash_aliases"
+alias realias="curl -X GET https://raw.githubusercontent.com/joeyism/.files/master/.bash_aliases > ~/.bash_aliases && source ~/.bash_aliases"
+alias ha="head ~/.bash_aliases"
+
+##########################################################################
+# CHECK STATUS OF MACHINE
+##########################################################################
+alias pingg="ping google.com"
+alias battery="upower -i /org/freedesktop/UPower/devices/battery_BAT0"
+alias port="sudo netstat -tulpn"
 proc_origin(){
     sudo readlink -f /proc/$1/exe
 }
@@ -120,6 +91,71 @@ pw(){
 
 }
 complete -W "$(ls ~/.ssh/pw)" pw
+
+
+##########################################################################
+# TERMINAL BROWSING
+##########################################################################
+alias terminal-browser="w3m http://www.google.com"
+alias w3mvim="vim -c \":W3m https://www.google.com\""
+
+##########################################################################
+# GIT-RELATED
+##########################################################################
+alias gl='git log --oneline --abbrev-commit --all --graph --decorate --color'
+alias p="push"
+
+##########################################################################
+# PYTHON RELATED
+##########################################################################
+alias pipr="pip install --user -r requirements.txt"
+alias pip3r="pip3 install --user -r requirements.txt"
+alias pipu="pip install --user"
+alias pip3u="pip3 install --user"
+
+##########################################################################
+# GOLANG RELATED
+##########################################################################
+alias got="go test -v -cover"
+alias gor="go build && ./${PWD##*/}"
+
+##########################################################################
+# GCP RELATED
+##########################################################################
+alias gcsp="gcloud config set project"
+function _gcsp_(){
+    COMPREPLY=($(compgen -W "$(gcloud projects list | awk '{print $1}' | tail -n +2)" -- "${COMP_WORDS[1]}"))
+}
+complete -F _gcsp_ gcsp
+alias gcl="gcloud config list"
+alias gcsp="gcloud config set project"
+alias gcil="gcloud compute instances list"
+alias gcis="gcloud compute instances start"
+function _gcis_(){
+    COMPREPLY=($(compgen -W "$(gcloud compute instances list | awk '{print $1}' | tail -n +2)" -- "${COMP_WORDS[1]}"))
+}
+complete -F _gcis_ gcis
+alias gciss="gcloud compute instances stop"
+function _gciss_(){
+    COMPREPLY=($(compgen -W "$(gcloud compute instances list | awk '{print $1}' | tail -n +2)" -- "${COMP_WORDS[1]}"))
+}
+complete -F _gciss_ gciss
+alias gcs="gcloud compute ssh"
+function _gcs_(){
+    COMPREPLY=($(compgen -W "$(gcloud compute instances list | awk '{print $1}' | tail -n +2)" -- "${COMP_WORDS[1]}"))
+}
+complete -F _gcs_ gcs
+
+function _gcscp_(){
+    list="$(gcloud compute instances list | awk '{print $1}' | tail -n +2)"
+    list="$list $(ls)"
+    COMPREPLY=($(compgen -W "$list" -- "${COMP_WORDS[1]}"))
+}
+alias gcscp="gcloud compute scp"
+complete -F _gcscp_ gcscp
+
+alias gail="gcloud app instances list"
+alias gavl="gcloud app versions list"
 
 remove_gcloud_app_by_id(){
     check_no_args $@
@@ -193,17 +229,9 @@ remove_gcloud_app_by_service(){
         done
 }
 
-grep_code(){
-    grep -rnw . -e $1 --exclude-dir={node_modules,venv}
-}
-
-findfile(){
-    find . -path ./node_modules -prune -o -name $1 -print
-}
-cda(){
-    cd $(printf "${BASH_ALIASES[$1]}" | bash)
-}
-
+##########################################################################
+# AWS RELATED
+##########################################################################
 ecslog_once(){
     ecs-cli logs --task-id $1 --region us-east-1 --aws-profile hubbabd --task-def $(aws ecs describe-tasks --cluster production-ecs --tasks $1 --profile hubbabd | jq -r '.tasks[0].taskDefinitionArn' | cut -d '/' -f2)
 }
