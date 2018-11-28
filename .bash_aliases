@@ -6,11 +6,16 @@ alias ea="vim ~/.bash_aliases"
 
 alias pingg="ping google.com"
 
+alias latest="ls -t1 |  head -n 1"
 alias battery="upower -i /org/freedesktop/UPower/devices/battery_BAT0"
 alias terminal-browser="w3m http://www.google.com"
 alias w3mvim="vim -c \":W3m https://www.google.com\""
 
+# cda-able
+alias githome='git rev-parse --show-toplevel'
+
 alias gl='git log --oneline --abbrev-commit --all --graph --decorate --color'
+
 alias watchc="watch --color"
 alias p="push"
 alias gohere="cd $HERE"
@@ -24,8 +29,10 @@ alias cdll="cd $(ll | awk '{print $9}' | tail -n 1)"
 alias realias="curl -X GET https://raw.githubusercontent.com/joeyism/.files/master/.bash_aliases > ~/.bash_aliases && source ~/.bash_aliases"
 alias ha="head ~/.bash_aliases"
 
-alias pipr="pip3 install --user -r requirements.txt"
-alias piu="pip3 install --user"
+alias pipr="pip install --user -r requirements.txt"
+alias pip3r="pip3 install --user -r requirements.txt"
+alias pipu="pip install --user"
+alias pip3u="pip3 install --user"
 
 alias got="go test -v -cover"
 alias gor="go build && ./${PWD##*/}"
@@ -188,6 +195,13 @@ remove_gcloud_app_by_service(){
 
 grep_code(){
     grep -rnw . -e $1 --exclude-dir={node_modules,venv}
+}
+
+findfile(){
+    find . -path ./node_modules -prune -o -name $1 -print
+}
+cda(){
+    cd $(${BASH_ALIASES[$1]})
 }
 
 ecslog_once(){
