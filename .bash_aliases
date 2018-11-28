@@ -201,7 +201,7 @@ findfile(){
     find . -path ./node_modules -prune -o -name $1 -print
 }
 cda(){
-    cd $(${BASH_ALIASES[$1]})
+    cd $(printf "${BASH_ALIASES[$1]}" | bash)
 }
 
 ecslog_once(){
