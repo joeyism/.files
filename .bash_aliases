@@ -115,7 +115,7 @@ complete -W "$(ls ~/.ssh/pw)" pw
 vpn(){
     sudo openvpn --config /etc/openvpn/client/$1
 }
-complete -W "$(sudo ls /etc/openvpn/client/*.conf)" vpn
+complete -W "$(sudo ls /etc/openvpn/client/)" vpn
 
 ##########################################################################
 # TERMINAL BROWSING
