@@ -31,7 +31,7 @@ check_no_args(){
             return 0
     fi
 }
-view_aliases(){
+ha(){ # help alias
     TOPRINT=false
     INPUT="${1^^}"
     while IFS='' read -r line || [[ -n "$line" ]]; do
@@ -69,7 +69,6 @@ cda(){
 alias sa="source ~/.bash_aliases"
 alias ea="vim ~/.bash_aliases"
 alias realias="curl -X GET https://raw.githubusercontent.com/joeyism/.files/master/.bash_aliases > ~/.bash_aliases && source ~/.bash_aliases"
-alias ha="head ~/.bash_aliases"
 
 ##########################################################################
 # CHECK STATUS OF MACHINE
@@ -112,10 +111,14 @@ pw(){
 }
 complete -W "$(ls ~/.ssh/pw)" pw
 
-vpn(){
-    sudo openvpn --config /etc/openvpn/client/$1
-}
-complete -W "$(ls /etc/openvpn/client/)" vpn
+##########################################################################
+# DISPLAY
+#
+alias display_laptop_brightness="xrandr --output eDP-1 --brightness"
+alias display_hdmi_brightness="xrandr --output HDMI-1 --brightness"
+alias display_enable_hdmi="xrandr -d :0 --output HDMI-1 --auto"
+alias display_list="xrandr -q"
+
 
 ##########################################################################
 # TERMINAL BROWSING
