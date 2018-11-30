@@ -26,11 +26,11 @@ ethernet _first_ {
 }
 
 battery all {
-	format = "%status %percentage %remaining"
+	format = "%status %remaining (%emptytime %consumption)"
 
-	status_chr = "CHARGING "
-	status_bat = "BATTERY "
-  status_unk = "UNKNOWN "
+	status_chr = "CHR"
+	status_bat = "BAT"
+  status_unk = "UNK"
   status_full = "FULL "
 	
 	low_threshold = 11
