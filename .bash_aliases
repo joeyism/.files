@@ -111,6 +111,12 @@ pw(){
 }
 complete -W "$(ls ~/.ssh/pw)" pw
 
+vpn(){
+    sudo openvpn --config /etc/openvpn/client/$1
+}
+complete -W "$(ls /etc/openvpn/client/)" vpn
+
+
 ##########################################################################
 # DISPLAY
 #
