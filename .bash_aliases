@@ -69,6 +69,7 @@ cda(){
 alias sa="source ~/.bash_aliases"
 alias ea="vim ~/.bash_aliases"
 alias realias="curl -X GET https://raw.githubusercontent.com/joeyism/.files/master/.bash_aliases > ~/.bash_aliases && source ~/.bash_aliases"
+alias diffa="vimdiff <(curl -sL https://raw.githubusercontent.com/joeyism/.files/master/.bash_aliases) ~/.bash_aliases"
 
 ##########################################################################
 # CHECK STATUS OF MACHINE
@@ -124,6 +125,7 @@ alias display_laptop_brightness="xrandr --output eDP-1 --brightness"
 alias display_hdmi_brightness="xrandr --output HDMI-1 --brightness"
 alias display_enable_hdmi="xrandr -d :0 --output HDMI-1 --auto"
 alias display_list="xrandr -q"
+alias display_mirror="xrandr --output HDMI-1 --same-as eDP-1"
 
 
 ##########################################################################
@@ -145,6 +147,8 @@ alias pipr="pip install --user -r requirements.txt"
 alias pip3r="pip3 install --user -r requirements.txt"
 alias pipu="pip install --user"
 alias pip3u="pip3 install --user"
+alias ho="honcho -e .env run "
+
 
 ##########################################################################
 # GOLANG RELATED
