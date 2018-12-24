@@ -7,6 +7,8 @@ alias :q=exit
 alias gohere="cd $HERE"
 alias ll="ls -lrth"
 alias watchc="watch --color"
+alias whatismyip="curl ifconfig.me"
+alias whereami='printf "$(curl -s ifconfig.co/city), $(curl -s ifconfig.co/country) {$(curl -s curl ifconfig.me)}"'
 grep_code(){
     grep -rnw . -e $1 --exclude-dir={node_modules,venv}
 }
@@ -111,6 +113,10 @@ pw(){
 
 }
 complete -W "$(ls ~/.ssh/pw)" pw
+
+##########################################################################
+# NETWORK
+#
 
 vpn(){
     sudo openvpn --config /etc/openvpn/client/$1
@@ -316,4 +322,16 @@ stream-kinesis(){
 
     fi
 
+}
+
+
+##########################################################################
+# ARCH Related
+#
+update_pacman_key(){
+    sudo pacman-key --populate archlinux
+    sudo pacman-key --refresh-keys
+    sudo /etc/pacman.d/gnupg /etc/pacman.d/gnupg-$(date +%F)
+    sudo pacman-key --init
+    sudo pacman-key --populate archlinux
 }
