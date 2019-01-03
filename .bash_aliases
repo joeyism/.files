@@ -9,6 +9,10 @@ alias ll="ls -lrth"
 alias watchc="watch --color"
 alias whatismyip="curl ifconfig.me"
 alias whereami='printf "$(curl -s ifconfig.co/city), $(curl -s ifconfig.co/country) {$(curl -s curl ifconfig.me)}"'
+cheat(){
+  curl cheat.sh/$1
+}
+alias grep_cheat="curl cheat.sh/grep"
 grep_code(){
     grep -rnw . -e $1 --exclude-dir={node_modules,venv}
 }
