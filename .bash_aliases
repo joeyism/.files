@@ -357,6 +357,8 @@ alias dil="docker image ls"
 dbash(){
     docker run $1 -it bash
 }
+complete -W "$(docker ps --format '{{.Names}}')" dbash
+
 ##########################################################################
 # ARCH Related
 #
