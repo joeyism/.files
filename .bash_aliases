@@ -37,7 +37,7 @@ check_no_args(){
             return 0
     fi
 }
-ha(){ # help alias
+helpa(){ # help alias
     TOPRINT=false
     INPUT="${1^^}"
     while IFS='' read -r line || [[ -n "$line" ]]; do
@@ -344,7 +344,7 @@ ec2-list(){
 }
 
 ##########################################################################
-# ARCH Related
+# DOCKER Related
 #
 alias drc="docker rm $(docker ps -aq)" # docker rm containers
 
