@@ -4,7 +4,6 @@
 # COMMON
 #
 alias :q=exit
-alias gohere="cd $HERE"
 alias ll="ls -lrth"
 alias watchc="watch --color"
 alias whatismyip="curl ifconfig.me"
@@ -13,16 +12,18 @@ cheat(){
   curl cheat.sh/$1
 }
 alias grep_cheat="curl cheat.sh/grep"
+gohere(){
+    cd $HERE
+}
 grep_code(){
     grep -rnw . -e $1 --exclude-dir={node_modules,venv}
 }
-
 findfile(){
     find . -path ./node_modules -prune -o -name $1 -print
 }
-check_no_args(){
+_check_no_args(){
 #   sample_use_check_no_args(){
-#       check_no_args $@
+#       _check_no_args $@
 #       if [ $? == 0 ]
 #       then
 #           echo $?
