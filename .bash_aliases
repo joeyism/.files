@@ -348,15 +348,12 @@ ec2-list(){
 ##########################################################################
 # DOCKER Related
 #
-alias drcs="docker rm $(docker ps -aq)" # docker rm containers
-alias dscs="docker stop $(docker ps -q)" #docker stop containers
-alias dris="docker rmi $(docker images -q)" #docker rm images
-alias dps="docker ps"
-alias dpsa="docker ps -a"
-alias dil="docker image ls"
-dbash(){
-    docker exec -it $1 bash
-}
+dps(){ docker ps ;};
+dil(){ docker image ls ;};
+drcs(){ docker rm $(docker ps -aq) ;}; # docker rm containers
+dscs(){ docker stop $(docker ps -q) ;}; #docker stop containers
+dris(){ docker rmi $(docker images -q) ;}; #docker rm images
+dbash(){ docker exec -it $1 bash ;};
 complete -W "$(docker ps --format '{{.Names}}')" dbash
 
 ##########################################################################
