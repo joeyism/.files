@@ -352,7 +352,9 @@ alias drc="docker rm $(docker ps -aq)" # docker rm containers
 alias dps="docker ps"
 alias dpsa="docker ps -a"
 alias dil="docker image ls"
-
+dbash(){
+    docker run $1 -it bash
+}
 ##########################################################################
 # ARCH Related
 #
