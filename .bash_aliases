@@ -347,6 +347,9 @@ ec2-list(){
 # DOCKER Related
 #
 alias drc="docker rm $(docker ps -aq)" # docker rm containers
+alias dps="docker ps"
+alias dpsa="docker ps -a"
+alias dil="docker image ls"
 
 ##########################################################################
 # ARCH Related
