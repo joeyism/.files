@@ -349,7 +349,7 @@ ec2-list(){
 # DOCKER Related
 #
 alias drcs="docker rm $(docker ps -aq)" # docker rm containers
-alias dscs="docker stop $(docker ps -aq)" #docker stop containers
+alias dscs="docker stop $(docker ps -q)" #docker stop containers
 alias dris="docker rmi $(docker images -q)" #docker rm images
 alias dps="docker ps"
 alias dpsa="docker ps -a"
