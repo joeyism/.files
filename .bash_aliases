@@ -353,6 +353,7 @@ dil(){ docker image ls ;};
 drcs(){ docker rm $(docker ps -aq) ;}; # docker rm containers
 dscs(){ docker stop $(docker ps -q) ;}; #docker stop containers
 dris(){ docker rmi $(docker images -q) ;}; #docker rm images
+drun(){ docker run -it -d $@ ;};
 dbash(){ docker exec -it $1 bash ;};
 complete -W "$(docker ps --format '{{.Names}}')" dbash
 
