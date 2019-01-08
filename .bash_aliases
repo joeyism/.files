@@ -355,7 +355,7 @@ alias dps="docker ps"
 alias dpsa="docker ps -a"
 alias dil="docker image ls"
 dbash(){
-    docker run $1 -it bash
+    docker exec -it $1 bash
 }
 complete -W "$(docker ps --format '{{.Names}}')" dbash
 
