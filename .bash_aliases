@@ -69,6 +69,7 @@ alias cdll="cd $(ll | awk '{print $9}' | tail -n 1)"
 cda(){
     cd $(printf "${BASH_ALIASES[$1]}" | bash)
 }
+complete -W "githome latest cdll" cda
 
 ##########################################################################
 # BASH_ALIASES RELATED
