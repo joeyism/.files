@@ -206,7 +206,7 @@ alias gail="gcloud app instances list"
 alias gavl="gcloud app versions list"
 
 remove_gcloud_app_by_id(){
-    check_no_args $@
+    _check_no_args $@
     if [ $? != 0 ]
     then
         return $?
@@ -224,7 +224,7 @@ remove_gcloud_app_by_id(){
 }
 
 remove_gcloud_app_version_by_status(){
-    check_no_args $@
+    _check_no_args $@
     if [ $? != 0 ]
     then
         return $?
@@ -242,7 +242,7 @@ remove_gcloud_app_version_by_status(){
 }
 
 remove_gcloud_app_version_by_service(){
-    check_no_args $@
+    _check_no_args $@
     if [ $? != 0 ]
     then
         return $?
@@ -260,7 +260,7 @@ remove_gcloud_app_version_by_service(){
 }
 
 remove_gcloud_app_by_service(){
-    check_no_args $@
+    _check_no_args $@
     if [ $? != 0 ]
     then
         return $?
