@@ -346,6 +346,11 @@ ec2-list(){
 ##########################################################################
 # ARCH Related
 #
+alias drc="docker rm $(docker ps -aq)" # docker rm containers
+
+##########################################################################
+# ARCH Related
+#
 update_pacman_key(){
     sudo pacman-key --populate archlinux
     sudo pacman-key --refresh-keys
