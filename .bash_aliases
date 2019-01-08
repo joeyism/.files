@@ -353,9 +353,11 @@ drcs(){ docker rm $(docker ps -aq) ;}; # docker rm containers
 dscs(){ docker stop $(docker ps -q) ;}; #docker stop containers
 dris(){ docker rmi $(docker images -q) ;}; #docker rm images
 drun(){ docker run -it -d $@ ;};
-complete -W "$(docker image ls --format '{{.Repository}}')" drun
+_drun_(){ docker image ls --format '{{.Repository}}' ;};
+complete -F _drun_ drun
 dbash(){ docker exec -it $1 bash ;};
-complete -W "$(docker ps --format '{{.Names}}')" dbash
+_dbash_(){ docker ps --format '{{.Names}}' ;};
+complete -F _dbash_ dbash
 
 ##########################################################################
 # ARCH Related
