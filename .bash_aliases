@@ -18,7 +18,6 @@ gohere(){
 grep_code(){
     grep -rnw . -e $1 --exclude-dir={node_modules,venv}
 }
-alias grep_git="git rev-list --all | xargs git grep"
 findfile(){
     find . -path ./node_modules -prune -o -name $1 -print
 }
@@ -151,6 +150,7 @@ alias w3mvim="vim -c \":W3m https://www.google.com\""
 #
 alias gl='git log --oneline --abbrev-commit --all --graph --decorate --color'
 alias p="push"
+alias grep_git="git rev-list --all | xargs git grep"
 
 ##########################################################################
 # PYTHON RELATED
