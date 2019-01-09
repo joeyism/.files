@@ -18,6 +18,7 @@ gohere(){
 grep_code(){
     grep -rnw . -e $1 --exclude-dir={node_modules,venv}
 }
+alias grep_git="git rev-list --all | xargs git grep"
 findfile(){
     find . -path ./node_modules -prune -o -name $1 -print
 }
@@ -347,16 +348,16 @@ ec2-list(){
 ##########################################################################
 # DOCKER Related
 #
-dps(){ docker ps ;};
-dil(){ docker image ls ;};
-drcs(){ docker rm $(docker ps -aq) ;}; # docker rm containers
-dscs(){ docker stop $(docker ps -q) ;}; #docker stop containers
-dris(){ docker rmi $(docker images -q) ;}; #docker rm images
+alias dps='docker ps'
+alias dil='docker image ls'
+alias drcs='docker rm $(docker ps -aq)' # docker rm containers
+alias dscs='docker stop $(docker ps -q)' #docker stop containers
+alias dris='docker rmi $(docker images -q)' #docker rm images
 drun(){ docker run -it -d $@ ;};
-_drun_(){ docker image ls --format '{{.Repository}}' ;};
+_drun_(){ COMPREPLY=($(compgen -W "$(docker image ls --format '{{.Repository}}')" -- "${COMP_WORDS[1]}")) ; };
 complete -F _drun_ drun
 dbash(){ docker exec -it $1 bash ;};
-_dbash_(){ docker ps --format '{{.Names}}' ;};
+_dbash_(){ COMPREPLY=($(compgen -W "$(docker ps --format '{{.Names}}')" -- "${COMP_WORDS[1]}")) ;};
 complete -F _dbash_ dbash
 
 ##########################################################################
