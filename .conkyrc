@@ -1,0 +1,102 @@
+--[[
+Conky, a system monitor, based on torsmo
+
+Any original torsmo code is licensed under the BSD license
+
+All code written since the fork of torsmo is licensed under the GPL
+
+Please see COPYING for details
+
+Copyright (c) 2004, Hannu Saransaari and Lauri Hakkarainen
+Copyright (c) 2005-2012 Brenden Matthews, Philip Kovacs, et. al. (see AUTHORS)
+All rights reserved.
+
+This program is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+You should have received a copy of the GNU General Public License
+along with this program.  If not, see <http://www.gnu.org/licenses/>.
+]]
+
+conky.config = {
+    alignment = 'top_right',
+    background = true,
+	double_buffer = true,
+    border_width = 1,
+    cpu_avg_samples = 2,
+	default_color = 'white',
+    default_outline_color = 'white',
+    default_shade_color = 'white',
+    draw_borders = false,
+    draw_graph_borders = true,
+    draw_outline = false,
+    draw_shades = false,
+    use_xft = true,
+    font = 'Cantarell:size=10',
+    gap_x = 5,
+    gap_y = 20,
+    minimum_height = 5,
+	minimum_width = 5,
+    net_avg_samples = 2,
+    no_buffers = true,
+    out_to_console = false,
+    out_to_stderr = false,
+    extra_newline = true,
+    own_window = true,
+    own_window_class = 'Conky',
+    own_window_transparent = false,
+    own_window_argb_visual = true,	
+    own_window_argb_value = 20,
+    own_window_type = 'desktop',
+    own_window_hints = 'below',
+    stippled_borders = 0,
+    update_interval = 1,
+    uppercase = false,
+    use_spacer = 'none',
+    show_graph_scale = true,
+    show_graph_range = false
+}
+
+conky.text = [[
+${color 5294E2}$hr
+${color #5294E2}$alignc ${exec cat /proc/sys/kernel/hostname}
+${voffset -5}${color 5294E2}$hr
+${color grey}Uptime:${color white} $uptime	
+${color grey}OS:${color white} ${exec uname -r}
+${color grey}Username:${color white} ${exec whoami}
+${color grey}CPU:${color white} ${exec lscpu | sed -nr '/Model name/ s/.*:\s*(.*) @ .*/\1/p'}
+${color grey}Location:${color white} ${texeci 6000 location}
+${color grey}SSID:${color white} ${texeci 6000 iwgetid -r}
+${color white}${texeci 1 iwconfig wlp3s0 | grep -i quality | awk '{$1=$1;print}'}
+${color grey}Volume:${color white} ${texeci 1 pamixer --get-volume}/100
+${color grey}Battery
+${color white}${texeci 1 upower -i /org/freedesktop/UPower/devices/battery_BAT0 | grep -E "state|to\ full|percentage" | awk '{$1=$1;print}'}
+${voffset -5}${color 5294E2}$hr
+${color 5294E2}${alignc}CPU/Disk 
+${voffset -5}${color 5294E2}$hr
+${color grey}CPU Usage:$color ${goto 130} $cpu% ${color grey}${goto 170}Disk I/O:$color $alignr ${diskio}
+${color grey}GHz:$color ${goto 130} $freq_g  ${goto 170}${color grey}MHz:$color $alignr $freq
+${color #c9c9c9}${cpugraph 0 32,155 c9c9c9 c9c9c9} $alignr ${color #c9c9c9}${diskiograph 32,155 c9c9c9 c9c9c9 750}
+${voffset -5}${color grey}Processes:$color ${goto 130} $processes  ${goto 170}${color grey}Running:$color $alignr $running_processes
+${voffset -5}${color 5294E2}$hr
+${color 5294E2}${alignc}Connections 
+${voffset -5}${color 5294E2}$hr
+${color grey}Download ${goto 170}${color grey}Upload 
+${color #c9c9c9}${downspeedgraph wlp3s0 32,155 c9c9c9 c9c9c9} $alignr ${color #c9c9c9}${upspeedgraph wlp3s0 32,155 c9c9c9 c9c9c9}
+${voffset -10}${color #c9c9c9}${downspeedgraph enp0s25 32,155 c9c9c9 c9c9c9} $alignr ${color #c9c9c9}${upspeedgraph enp0s25 32,155 c9c9c9 c9c9c9}
+${voffset -15}${color 5294E2}$hr
+${color 5294E2}${alignc}Data 
+${voffset -5}${color 5294E2}$hr
+${color grey}RAM:$color ${goto 65} $mem/$memmax ${goto 170}${color grey}Swap: $color $alignr $swap/$swapmax
+${color #c9c9c9}${membar 4,155} $alignr ${color #c9c9c9}${swapbar 4, 155}
+${color grey}Linux: $alignr $color ${fs_used /}/${fs_size /} 
+${color #c9c9c9}${fs_bar 4 /}
+${color grey}/home/joeyism: $alignr $color${fs_used /home/joeyism}/${fs_size /home/joeyism} 
+${color #c9c9c9}${fs_bar 4 /home/$(whoami)}
+]]
