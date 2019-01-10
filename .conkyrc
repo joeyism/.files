@@ -68,7 +68,7 @@ conky.text = [[
 ${color 5294E2}$hr
 ${color #5294E2}$alignc ${exec cat /proc/sys/kernel/hostname}
 ${voffset -5}${color 5294E2}$hr
-${color grey}Uptime:${color white} $uptime	
+${color grey}Uptime:${color white} $uptime	$alignr ${color white} $time
 ${color grey}OS:${color white} ${exec uname -r}
 ${color grey}Username:${color white} ${exec whoami}
 ${color grey}CPU:${color white} ${exec lscpu | sed -nr '/Model name/ s/.*:\s*(.*) @ .*/\1/p'}
@@ -76,8 +76,7 @@ ${color grey}Location:${color white} ${texeci 6000 location}
 ${color grey}SSID:${color white} ${texeci 6000 iwgetid -r}
 ${color white}${texeci 1 iwconfig wlp3s0 | grep -i quality | awk '{$1=$1;print}'}
 ${color grey}Volume:${color white} ${texeci 1 pamixer --get-volume}/100
-${color grey}Battery
-${color white}${texeci 1 upower -i /org/freedesktop/UPower/devices/battery_BAT0 | grep -E "state|to\ full|percentage" | awk '{$1=$1;print}'}
+${color grey}Battery: ${color white}${battery_percent}% ${battery_time}${color grey}${battery_bar}
 ${voffset -5}${color 5294E2}$hr
 ${color 5294E2}${alignc}CPU/Disk 
 ${voffset -5}${color 5294E2}$hr
@@ -85,6 +84,10 @@ ${color grey}CPU Usage:$color ${goto 130} $cpu% ${color grey}${goto 170}Disk I/O
 ${color grey}GHz:$color ${goto 130} $freq_g  ${goto 170}${color grey}MHz:$color $alignr $freq
 ${color #c9c9c9}${cpugraph 0 32,155 c9c9c9 c9c9c9} $alignr ${color #c9c9c9}${diskiograph 32,155 c9c9c9 c9c9c9 750}
 ${voffset -5}${color grey}Processes:$color ${goto 130} $processes  ${goto 170}${color grey}Running:$color $alignr $running_processes
+${voffset -5}${color 5294E2}$hr
+Name${goto 100}Percentage${goto 180}CPU${goto 230}Memory
+${color grey}${top name 1}${goto 100}${top io_perc 1}${goto 175}${top cpu 1}${goto 225}${top mem 1}
+${color grey}${top name 2}${goto 100}${top io_perc 2}${goto 175}${top cpu 2}${goto 225}${top mem 2}
 ${voffset -5}${color 5294E2}$hr
 ${color 5294E2}${alignc}Connections 
 ${voffset -5}${color 5294E2}$hr
