@@ -99,5 +99,5 @@ ${color #c9c9c9}${membar 4,155} $alignr ${color #c9c9c9}${swapbar 4, 155}
 ${color grey}Linux: $alignr $color ${fs_used /}/${fs_size /} 
 ${color #c9c9c9}${fs_bar 4 /}
 ${color grey}/home/joeyism: $alignr $color${fs_used /home/joeyism}/${fs_size /home/joeyism} 
-${color #c9c9c9}${fs_bar 4 /home/$(whoami)}
+${color #c9c9c9}${fs_bar 4 /home/joeyism}
 ]]
