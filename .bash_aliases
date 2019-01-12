@@ -152,13 +152,15 @@ alias gl='git log --oneline --abbrev-commit --all --graph --decorate --color'
 alias p="push"
 alias grep_git="git rev-list --all | xargs git grep"
 pushall(){
-    check_no_args $@
-    if [ $? == 0 ] 
-    then
-        git add -A
-        git commit -m "$@"
-        git push origin $(git rev-parse --abbrev-ref HEAD)
-    fi  
+    if [ $# -eq 0 ]
+        then
+            read -p "Commit message: " message
+        else
+            message=$@
+    fi
+    git add -A
+    git commit -m "$message"
+    git push origin $(git rev-parse --abbrev-ref HEAD)
 }
 
 ##########################################################################
