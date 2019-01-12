@@ -180,20 +180,22 @@ alias gcl="gcloud config list"
 alias gcsp="gcloud config set project"
 alias gcil="gcloud compute instances list"
 alias gcis="gcloud compute instances start"
-function _gcis_(){
+function _gcil_name_(){
     COMPREPLY=($(compgen -W "$(gcloud compute instances list | awk '{print $1}' | tail -n +2)" -- "${COMP_WORDS[1]}"))
 }
-complete -F _gcis_ gcis
+complete -F _gcil_name_ gcis
 alias gciss="gcloud compute instances stop"
-function _gciss_(){
-    COMPREPLY=($(compgen -W "$(gcloud compute instances list | awk '{print $1}' | tail -n +2)" -- "${COMP_WORDS[1]}"))
-}
-complete -F _gciss_ gciss
+complete -F _gcil_name_ gciss
 alias gcs="gcloud compute ssh"
-function _gcs_(){
-    COMPREPLY=($(compgen -W "$(gcloud compute instances list | awk '{print $1}' | tail -n +2)" -- "${COMP_WORDS[1]}"))
+complete -F _gcil_name_ gcs
+function gcissh(){
+    gcis $@
+    until gcs $@
+    do
+      sleep 0.1
+    done
 }
-complete -F _gcs_ gcs
+complete -F _gcil_name_ gcissh
 
 function _gcscp_(){
     list="$(gcloud compute instances list | awk '{print $1}' | tail -n +2)"
