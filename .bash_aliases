@@ -67,8 +67,12 @@ senv(){
 #
 RED='\033[0;31m'
 GREEN='\033[0;32m'
+GREEN_B='\033[1;32m'
+YELLOW='\033[0;33m'
+YELLOW_B='\033[1;33m'
 BLUE='\033[0;34m'
 CYAN='\033[0;36m'
+CYAN_B='\033[1;36m'
 NC='\033[0m' # no colour
 
 ##########################################################################
@@ -160,20 +164,31 @@ alias w3mvim="vim -c \":W3m https://www.google.com\""
 alias gl='git log --oneline --abbrev-commit --all --graph --decorate --color'
 alias p="push"
 alias grep_git="git rev-list --all | xargs git grep"
+alias gdiff="git diff"
+gitlist(){
+    printf "${CYAN_B}New Files${NC}\n"
+    printf "${GREEN}$(git status --porcelain | awk 'match($1, "?"){print $2}') ${NC}"
+    printf "\n\n"
+    printf "${CYAN_B}Modified Files${NC}\n"
+    printf "${YELLOW}$(git status --porcelain | awk 'match($1, "M"){print $2}') ${NC}"
+    printf "\n"
+}
 push(){
-  read -p "Commit files (all): " commit_files
-  read -p "Commit message: " message
-  if [ -z "$commit_files" ]
-  then
-    commit_files="-A"
-  fi
-  git add $commit_files
-  printf "${GREEN}Committing...${NC}"
-  git commit -m "$message"
-  printf "${GREEN}Pushing...${NC}"
-  git push origin $(git rev-parse --abbrev-ref HEAD)
+    gitlist
+    read -p "Commit files (all): " commit_files
+    read -p "Commit message: " message
+    if [ -z "$commit_files" ]
+    then
+        commit_files="-A"
+    fi
+    git add $commit_files
+    printf "${GREEN}Committing...${NC}\n"
+    git commit -m "$message"
+    printf "${GREEN}Pushing...${NC}\n"
+    git push origin $(git rev-parse --abbrev-ref HEAD)
 }
 pushall(){
+    gitlist
     if [ $# -eq 0 ]
         then
             read -p "Commit message: " message
@@ -181,9 +196,9 @@ pushall(){
             message=$@
     fi
     git add -A
-    printf "${GREEN}Committing...${NC}"
+    printf "${GREEN}Committing...${NC}\n"
     git commit -m "$message"
-    printf "${GREEN}Pushing...${NC}"
+    printf "${GREEN}Pushing...${NC}\n"
     git push origin $(git rev-parse --abbrev-ref HEAD)
 }
 pull(){
