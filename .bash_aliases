@@ -15,6 +15,9 @@ alias grep_cheat="curl cheat.sh/grep"
 gohere(){
     cd $HERE
 }
+here(){
+    HERE=$(pwd)
+}
 grep_code(){
     grep -rnw . -e $1 --exclude-dir={node_modules,venv}
 }
@@ -58,6 +61,15 @@ senv(){
     source $1
     set +a
 }
+
+##########################################################################
+# COLOURS
+#
+RED='\033[0;31m'
+GREEN='\033[0;32m'
+BLUE='\033[0;34m'
+CYAN='\033[0;36m'
+NC='\033[0m' # no colour
 
 ##########################################################################
 # CDA-ABLE
@@ -104,9 +116,6 @@ pwdf(){
     echo $(pwd)/$1
 }
 
-here(){
-    HERE=$(pwd)
-}
 
 pw(){
     if [ $1 == list ]
@@ -151,6 +160,19 @@ alias w3mvim="vim -c \":W3m https://www.google.com\""
 alias gl='git log --oneline --abbrev-commit --all --graph --decorate --color'
 alias p="push"
 alias grep_git="git rev-list --all | xargs git grep"
+push(){
+  read -p "Commit files (all): " commit_files
+  read -p "Commit message: " message
+  if [ -z "$commit_files" ]
+  then
+    commit_files="-A"
+  fi
+  git add $commit_files
+  printf "${GREEN}Committing...${NC}"
+  git commit -m "$message"
+  printf "${GREEN}Pushing...${NC}"
+  git push origin $(git rev-parse --abbrev-ref HEAD)
+}
 pushall(){
     if [ $# -eq 0 ]
         then
@@ -159,7 +181,9 @@ pushall(){
             message=$@
     fi
     git add -A
+    printf "${GREEN}Committing...${NC}"
     git commit -m "$message"
+    printf "${GREEN}Pushing...${NC}"
     git push origin $(git rev-parse --abbrev-ref HEAD)
 }
 pull(){
