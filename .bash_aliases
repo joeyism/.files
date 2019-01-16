@@ -171,7 +171,7 @@ gitlist(){
     printf "\n\n"
     printf "${CYAN_B}Modified Files${NC}\n"
     printf "${YELLOW}$(git status --porcelain | awk 'match($1, "M"){print $2}') ${NC}"
-    printf "\n"
+    printf "\n\n"
 }
 push(){
     gitlist
