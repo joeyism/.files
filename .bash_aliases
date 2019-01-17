@@ -8,8 +8,12 @@ alias ll="ls -lrth"
 alias watchc="watch --color"
 alias whatismyip="curl ifconfig.me"
 alias whereami='printf "$(curl -s ifconfig.co/city), $(curl -s ifconfig.co/country) {$(curl -s curl ifconfig.me)}"'
+mkcd(){
+    mkdir $@
+    cd $@
+}
 cheat(){
-  curl cheat.sh/$1
+    curl cheat.sh/$1
 }
 alias grep_cheat="curl cheat.sh/grep"
 gohere(){
@@ -36,6 +40,14 @@ _check_no_args(){
     if [ $# -eq 0 ]
         then
             echo "No arguments supplied"
+            return 1
+        else
+            return 0
+    fi
+}
+_check_no_args_quiet(){
+    if [ $# -eq 0 ]
+        then
             return 1
         else
             return 0
@@ -157,6 +169,93 @@ alias display_mirror="xrandr --output HDMI-1 --same-as eDP-1"
 #
 alias terminal-browser="w3m http://www.google.com"
 alias w3mvim="vim -c \":W3m https://www.google.com\""
+
+##########################################################################
+# TASK-RELATED
+#
+
+task(){
+    _check_no_args_quiet $@
+    if [ $? == 0 ]; then
+        if [ $1 = "new" ]; then
+            if [ -z "$2" ]; then
+                read -p "Task: " task_id
+                export TASK_ID=$task_id
+            else
+                export TASK_ID=$2 
+            fi
+            echo "$TASK_ID" >> .task
+        elif [ $1 = "select" ]; then
+            if [ -z "$2" ]; then
+                printf "${CYAN}Available tasks: ${NC}\n"
+                printf "$(cat .task)\n"
+                read -p "Task: " task_id
+                export TASK_ID=$task_id
+            else
+                export TASK_ID=$2
+            fi
+            printf "Task ${GREEN}${TASK_ID}${NC}\n"
+        elif [ $1 = "tmux" ]; then
+            tmux new -s $TASK_ID
+        elif [ $1 = "branch" ]; then
+            git checkout -b $TASK_ID | git checkout $TASK_ID
+        elif [ $1 = "write" ]; then
+            echo $TASK_ID >> .task
+        elif [ $1 = "rm" ]; then
+            if [ -z "$2" ]; then
+                printf "${CYAN}Available tasks: ${NC}\n"
+                printf "$(cat .task)\n"
+                read -p "Task: " task_id
+                export RM_TASK_ID=$task_id
+            else
+                export RM_TASK_ID=$2
+            fi
+
+            sed -i -e "/$RM_TASK_ID/d" .task
+            if [ $RM_TASK_ID = $TASK_ID ]; then
+                export TASK_ID=
+            fi
+            printf "Removed Task ${GREEN}${2}${NC}\n"
+        elif [ $1 = "ls" ]; then
+            printf "$(cat .task)\n"
+        elif [ $1 == "purge" ]; then
+            rm .task
+        fi
+    else
+        if [ -z ${TASK_ID} ]; then
+            printf "${RED}There is no task${NC}\n"
+        else
+            printf "Current Task ${GREEN}${TASK_ID}${NC}\n"
+        fi
+    fi
+}
+_task()
+{
+    local cur prev
+
+    cur=${COMP_WORDS[COMP_CWORD]}
+    prev=${COMP_WORDS[COMP_CWORD-1]}
+
+    case ${COMP_CWORD} in
+        1)
+            COMPREPLY=($(compgen -W "new select tmux branch write rm ls purge" -- ${cur}))
+            ;;
+        2)
+            case ${prev} in
+                select)
+                    COMPREPLY=($(compgen -W "$(cat .task)" -- ${cur}))
+                    ;;
+                rm)
+                    COMPREPLY=($(compgen -W "$(cat .task)" -- ${cur}))
+                    ;;
+            esac
+            ;;
+        *)
+            COMPREPLY=()
+            ;;
+    esac
+}
+complete -F _task task
 
 ##########################################################################
 # GIT-RELATED
