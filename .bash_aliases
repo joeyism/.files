@@ -8,6 +8,7 @@ alias ll="ls -lrth"
 alias watchc="watch --color"
 alias whatismyip="curl ifconfig.me"
 alias whereami='printf "$(curl -s ifconfig.co/city), $(curl -s ifconfig.co/country) {$(curl -s curl ifconfig.me)}"'
+alias copy="xclip -selection clipboard"
 mkcd(){
     mkdir $@
     cd $@
@@ -77,6 +78,7 @@ senv(){
 ##########################################################################
 # COLOURS
 #
+WHITE='\033[0;97m'
 RED='\033[0;31m'
 GREEN='\033[0;32m'
 GREEN_B='\033[1;32m'
@@ -173,8 +175,53 @@ alias w3mvim="vim -c \":W3m https://www.google.com\""
 ##########################################################################
 # TASK-RELATED
 #
+reade () {
+  tmpdir=$(date "+/tmp/%Y%m%d%H%M%S$$")
+  mkdir "${tmpdir}"
+  for ptag in "${predefinedtags[@]}" ; do
+    touch "${tmpdir}"/"${ptag}"
+  done
+  readetags=$(cd "${tmpdir}" || printf "internal error" ; read -re usertags ; printf "%s" "${usertags}")
+  rm -rf "${tmpdir}" 2>/dev/null >/dev/null
+  eval "${1}"=\"\$\{readetags\}\"
+}
+
+_gitlab_mr(){ ##TODO: WIP
+  default_WIP="WIP: "
+  read -p "Merge Title: " merge_title
+  read -p "WIP (default: y)?" yn
+    case $yn in
+        [Yy]* ) WIP=$default_WIP; break;;
+        [Nn]* ) break;;
+        * ) WIP=$default_WIP; break;;
+    esac
+  project=${PWD##*/}
+  id="textemma%2F${project}"
+  source_branch=$(git rev-parse --abbrev-ref HEAD)
+  target_branch="master"
+  body=$(cat <<EOF
+{
+  "id": "$id",
+  "source_branch": "$source_branch",
+  "target_branch": "$target_branch",
+  "title": "${WIP}Resolve $source_branch $merge_title",
+  "remove_source_branch": true,
+  "squash": true
+}
+EOF
+)
+  curl --header "Content-Type: application/json" \
+    --request POST \
+    --data "$body" \
+    https://gitlab.com/projects/${id}/merge_requests
+}
+_task_write_first(){
+  sed -i "1i$TASK_ID" .task
+}
 
 task(){
+    export TASK_ID=$(head -n 1 .task)
+
     _check_no_args_quiet $@
     if [ $? == 0 ]; then
         if [ $1 = "new" ]; then
@@ -184,7 +231,7 @@ task(){
             else
                 export TASK_ID=$2 
             fi
-            echo "$TASK_ID" >> .task
+            _task_write_first
         elif [ $1 = "select" ]; then
             if [ -z "$2" ]; then
                 printf "${CYAN}Available tasks: ${NC}\n"
@@ -194,13 +241,15 @@ task(){
             else
                 export TASK_ID=$2
             fi
-            printf "Task ${GREEN}${TASK_ID}${NC}\n"
+            sed -i "/$TASK_ID/d" .task && sed -i "1i$TASK_ID" .task
         elif [ $1 = "tmux" ]; then
             tmux new -s $TASK_ID
         elif [ $1 = "branch" ]; then
-            git checkout -b $TASK_ID | git checkout $TASK_ID
+            git checkout master
+            git pull origin master
+            git checkout -b $TASK_ID || git checkout $TASK_ID
         elif [ $1 = "write" ]; then
-            echo $TASK_ID >> .task
+            _task_write_first
         elif [ $1 = "rm" ]; then
             if [ -z "$2" ]; then
                 printf "${CYAN}Available tasks: ${NC}\n"
@@ -222,11 +271,7 @@ task(){
             rm .task
         fi
     else
-        if [ -z ${TASK_ID} ]; then
-            printf "${RED}There is no task${NC}\n"
-        else
-            printf "Current Task ${GREEN}${TASK_ID}${NC}\n"
-        fi
+        printf "Task is ${GREEN}${TASK_ID}${NC}\n"
     fi
 }
 _task()
@@ -256,6 +301,12 @@ _task()
     esac
 }
 complete -F _task task
+alias t="task"
+alias tt="task tmux"
+alias tb="task branch"
+alias tbt="task branch && task tmux"
+alias ts="task select"
+alias tls="task ls"
 
 ##########################################################################
 # GIT-RELATED
@@ -265,11 +316,15 @@ alias p="push"
 alias grep_git="git rev-list --all | xargs git grep"
 alias gdiff="git diff"
 gitlist(){
+    printf "You are in branch ${GREEN}$(git rev-parse --abbrev-ref HEAD)${NC}\n"
     printf "${CYAN_B}New Files${NC}\n"
-    printf "${GREEN}$(git status --porcelain | awk 'match($1, "?"){print $2}') ${NC}"
+    printf " ${GREEN}$(git status --porcelain | awk 'match($1, "?"){print " " $2}') ${NC}"
     printf "\n\n"
     printf "${CYAN_B}Modified Files${NC}\n"
-    printf "${YELLOW}$(git status --porcelain | awk 'match($1, "M"){print $2}') ${NC}"
+    printf "${YELLOW}$(git status --porcelain | awk 'match($1, "M"){print " " $2}') ${NC}"
+    printf "\n\n"
+    printf "${CYAN_B}Deleted Files${NC}\n"
+    printf "${RED}$(git status --porcelain | awk 'match($1, "D"){print " " $2}') ${NC}"
     printf "\n\n"
 }
 push(){
@@ -312,6 +367,7 @@ alias pip3r="pip3 install --user -r requirements.txt"
 alias pipu="pip install --user"
 alias pip3u="pip3 install --user"
 alias ho="honcho -e .env run "
+alias rm_pycache='find . | grep -E "(__pycache__|\.pyc|\.pyo$)" | xargs rm -rf'
 
 
 ##########################################################################
@@ -523,4 +579,26 @@ update_pacman_key(){
     sudo /etc/pacman.d/gnupg /etc/pacman.d/gnupg-$(date +%F)
     sudo pacman-key --init
     sudo pacman-key --populate archlinux
+}
+
+
+##########################################################################
+# MISC Related
+#
+pearson_flights(){
+  raw_data=$(curl -s 'https://www.torontopearson.com/FlightScheduleData/arr_gtaa_data_today.txt?_=1548271570315' -H 'cookie: GTAA_TAID=; EktGUID=75d1c646-d570-49f1-a709-3d9b48dbde90; _gcl_au=1.1.1787598826.1548269618; ecm=user_id=0&isMembershipUser=0&site_id=&username=&new_site=/&unique_id=0&site_preview=0&langvalue=0&DefaultLanguage=4105&NavLanguage=4105&LastValidLanguageID=4105&DefaultCurrency=840&SiteCurrency=840&ContType=&UserCulture=1033&dm=www.torontopearson.com&SiteLanguage=4105; AWSELB=2777B31F1EDD0B2866FBD8E69E9795B1136ED7BACC200227FC3AC034E5C0826C3CB29F6A0EB39357E9BA0F30EF5E56656E780D161AFB9B5CA124926C680DED8F4B5932DF5C' -H 'accept-encoding: gzip, deflate, br' -H 'accept-language: en-GB,en-US;q=0.9,en;q=0.8' -H 'user-agent: Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/71.0.3578.98 Safari/537.36 Vivaldi/2.2.1388.37' -H 'accept: application/json, text/javascript, */*; q=0.01' -H 'referer: https://www.torontopearson.com/en/flights/schedules/' -H 'authority: www.torontopearson.com' -H 'x-requested-with: XMLHttpRequest' --compressed)
+  printf "\nLast Updated: "
+  echo $raw_data | jq -r '.["lastUpdated"]'
+  echo ""
+  for flight in $(jq -r '.aaData[] | @base64' <<< "$raw_data"); do
+    flight=$(base64 --decode <<< $flight)
+    if [ "$(echo $flight | jq -r '.[2]')" == "$1" ]; then
+      echo -e "${GREEN}$(echo $flight | jq -r '.[0]') ${WHITE}no $(echo $flight | jq -r '.[1]') from ${YELLOW}$(echo $flight | jq -r '.[2]')${NC}"
+      echo -e "\tScheduled: $(echo $flight | jq -r '.[3]')"
+      echo -e "\tExpected: $(echo $flight | jq -r '.[4]')"
+      echo -e "\tStatus: $(echo $flight | jq -r '.[5]')"
+      echo ""
+export -f pearson_flights
+    fi
+  done
 }
