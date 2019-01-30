@@ -218,6 +218,9 @@ EOF
 _task_write_first(){
   sed -i "1i$TASK_ID" .task
 }
+_task_select_first(){
+  sed -i "/$TASK_ID/d" .task && sed -i "1i$TASK_ID" .task
+}
 
 task(){
     export TASK_ID=$(head -n 1 .task)
@@ -231,7 +234,15 @@ task(){
             else
                 export TASK_ID=$2 
             fi
-            _task_write_first
+            if grep -Fxq "$TASK_ID" .task
+            then
+                echo "Task already exists!"
+                echo "Switching to $TASK_ID now..."
+                _task_select_first
+            else
+                _task_write_first
+            fi
+            printf "Task is ${GREEN}${TASK_ID}${NC}\n"
         elif [ $1 = "select" ]; then
             if [ -z "$2" ]; then
                 printf "${CYAN}Available tasks: ${NC}\n"
@@ -243,7 +254,7 @@ task(){
             else
                 export TASK_ID=$2
             fi
-            sed -i "/$TASK_ID/d" .task && sed -i "1i$TASK_ID" .task
+            _task_select_first
         elif [ $1 = "tmux" ]; then
             tmux new -s $TASK_ID
         elif [ $1 = "branch" ]; then
