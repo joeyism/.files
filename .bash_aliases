@@ -235,9 +235,11 @@ task(){
         elif [ $1 = "select" ]; then
             if [ -z "$2" ]; then
                 printf "${CYAN}Available tasks: ${NC}\n"
-                printf "$(cat .task)\n"
-                read -p "Task: " task_id
-                export TASK_ID=$task_id
+                select SELECT_TASK in $(cat .task);
+                do
+                    export TASK_ID=$SELECT_TASK
+                    break
+                done
             else
                 export TASK_ID=$2
             fi
@@ -253,9 +255,11 @@ task(){
         elif [ $1 = "rm" ]; then
             if [ -z "$2" ]; then
                 printf "${CYAN}Available tasks: ${NC}\n"
-                printf "$(cat .task)\n"
-                read -p "Task: " task_id
-                export RM_TASK_ID=$task_id
+                select SELECT_TASK in $(cat .task);
+                do
+                    export RM_TASK_ID=$SELECT_TASK
+                    break
+                done
             else
                 export RM_TASK_ID=$2
             fi
@@ -264,7 +268,7 @@ task(){
             if [ $RM_TASK_ID = $TASK_ID ]; then
                 export TASK_ID=
             fi
-            printf "Removed Task ${GREEN}${2}${NC}\n"
+            printf "Removed Task ${GREEN}${RM_TASK_ID}${NC}\n"
         elif [ $1 = "ls" ]; then
             printf "$(cat .task)\n"
         elif [ $1 == "purge" ]; then
@@ -327,6 +331,7 @@ gitlist(){
     printf "${RED}$(git status --porcelain | awk 'match($1, "D"){print " " $2}') ${NC}"
     printf "\n\n"
 }
+alias glist="gitlist"
 push(){
     gitlist
     read -p "Commit files (all): " commit_files
