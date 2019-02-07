@@ -24,7 +24,10 @@ here(){
     HERE=$(pwd)
 }
 grep_code(){
-    grep -rnw . -e $1 --exclude-dir={node_modules,venv}
+    grep -rnw . -e "$@" --exclude-dir={node_modules,venv}
+}
+grep_code_filename(){
+    grep -rnwl . -e "$@" --exclude-dir={node_modules,venv}
 }
 findfile(){
     find . -path ./node_modules -prune -o -name $1 -print
@@ -96,6 +99,9 @@ alias githome='git rev-parse --show-toplevel'
 alias latest="ls -t1 |  head -n 1"
 declare -A cda_locations=()
 while IFS='' read -r line || [[ -n "$line" ]]; do     _key=$(echo $line| awk '{print $1}'); _value=$(echo $line | awk '{print $2}'); cda_locations[$_key]=$_value; done < ~/.cda
+if [ ! -f ~/.cda ]; then
+  touch ~/.cda
+fi
 cda(){
     if [ -z "${BASH_ALIASES[$1]}" ]; then
       cd ${cda_locations[$1]}
@@ -243,7 +249,9 @@ task(){
             else
                 export TASK_ID=$2 
             fi
-            if grep -Fxq "$TASK_ID" .task
+            if [ ! -f .task ]; then
+                echo $TASK_ID > .task
+            elif grep -Fxq "$TASK_ID" .task
             then
                 echo "Task already exists!"
                 echo "Switching to $TASK_ID now..."
