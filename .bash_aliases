@@ -98,7 +98,8 @@ NC='\033[0m' # no colour
 alias githome='git rev-parse --show-toplevel'
 alias latest="ls -t1 |  head -n 1"
 declare -A cda_locations=()
-while IFS='' read -r line || [[ -n "$line" ]]; do     _key=$(echo $line| awk '{print $1}'); _value=$(echo $line | awk '{print $2}'); cda_locations[$_key]=$_value; done < ~/.cda
+cda_total_keys=""
+while IFS='' read -r line || [[ -n "$line" ]]; do     _key=$(echo $line| awk '{print $1}'); _value=$(echo $line | awk '{print $2}'); cda_locations[$_key]=$_value; cda_total_keys="$cda_total_keys $_key"; done < ~/.cda
 if [ ! -f ~/.cda ]; then
   touch ~/.cda
 fi
@@ -109,7 +110,7 @@ cda(){
       cd $(printf "${BASH_ALIASES[$1]}" | bash)
     fi
 }
-complete -W "githome latest" cda
+complete -W "githome latest $cda_total_keys" cda
 
 ##########################################################################
 # BASH_ALIASES RELATED
@@ -347,6 +348,7 @@ alias gl='git log --oneline --abbrev-commit --all --graph --decorate --color'
 alias p="push"
 alias grep_git="git rev-list --all | xargs git grep"
 alias gdiff="git diff"
+alias master="git checkout master && pull"
 gitlist(){
     printf "You are in branch ${GREEN}$(git rev-parse --abbrev-ref HEAD)${NC}\n"
     printf "${CYAN_B}New Files${NC}\n"
