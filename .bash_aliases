@@ -637,7 +637,7 @@ pearson_flights(){
       echo -e "\tExpected: $(echo $flight | jq -r '.[4]')"
       echo -e "\tStatus: $(echo $flight | jq -r '.[5]')"
       echo ""
-export -f pearson_flights
     fi
   done
 }
+export -f pearson_flights
