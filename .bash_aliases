@@ -235,7 +235,7 @@ _task_write_first(){
   sed -i "1i$TASK_ID" .task
 }
 _task_select_first(){
-  sed -i "/$TASK_ID/d" .task && sed -i "1i$TASK_ID" .task
+  sed -i "/$TASK_ID/d" .task && awk -i inplace "BEGINFILE{print \"$TASK_ID\"}{print}" .task
 }
 
 task(){
@@ -251,13 +251,16 @@ task(){
                 export TASK_ID=$2 
             fi
             if [ ! -f .task ]; then
+                echo 1
                 echo $TASK_ID > .task
-            elif grep -Fxq "$TASK_ID" .task
-            then
+            elif grep -Fxq "$TASK_ID" .task; then
+                echo 2
                 echo "Task already exists!"
                 echo "Switching to $TASK_ID now..."
                 _task_select_first
             else
+                echo 3
+                echo $TASK_ID
                 _task_write_first
             fi
             printf "Task is ${GREEN}${TASK_ID}${NC}\n"
@@ -340,6 +343,7 @@ alias tb="task branch"
 alias tbt="task branch && task tmux"
 alias ts="task select"
 alias tls="task ls"
+alias tn="task new"
 
 ##########################################################################
 # GIT-RELATED
