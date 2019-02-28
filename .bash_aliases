@@ -367,6 +367,14 @@ gitlist(){
     printf "\n\n"
 }
 alias glist="gitlist"
+_push(){
+    printf "${GREEN}Pushing...${NC}\n"
+    git push origin $(git rev-parse --abbrev-ref HEAD)
+
+    if ! git-remote-branch-exists; then
+        xdg-open $(git-new-merge-request)
+    fi
+}
 push(){
     gitlist
     read -p "Commit files (all): " commit_files
@@ -378,8 +386,7 @@ push(){
     git add $commit_files
     printf "${GREEN}Committing...${NC}\n"
     git commit -m "$message"
-    printf "${GREEN}Pushing...${NC}\n"
-    git push origin $(git rev-parse --abbrev-ref HEAD)
+    _push
 }
 pushall(){
     gitlist
@@ -392,8 +399,7 @@ pushall(){
     git add -A
     printf "${GREEN}Committing...${NC}\n"
     git commit -m "$message"
-    printf "${GREEN}Pushing...${NC}\n"
-    git push origin $(git rev-parse --abbrev-ref HEAD)
+    _push
 }
 pull(){
     if [ $# -eq 0 ]
@@ -410,6 +416,36 @@ _git-revert(){
     COMPREPLY=($(compgen -W "$(git status --porcelain | awk '{print $2}')" -- "${COMP_WORDS[1]}"))
 }
 complete -F _git-revert git-revert
+git-source(){
+    origin_url=$(git remote get-url origin)
+    if [[ $origin_url == *"github"* ]]; then
+        echo "github"
+    elif [[ $origin_url == *"gitlab"* ]]; then
+        echo "gitlab"
+    else
+        echo ""
+    fi
+}
+git-new-merge-request(){
+    gitsource=$(git-source)
+    url=$(git remote get-url origin)
+    nwo=$(echo "$url" | sed -E "s/^[^:]+:([^/]+\/[^.]+).git$/\1/")
+    branch=$(git rev-parse --abbrev-ref HEAD)
+    if [ $gitsource == "github" ]; then
+        echo "https://$gitsource.com/$nwo/pull/new/$branch"
+    elif [ $gitsource == "gitlab" ]; then
+        echo "https://gitlab.com/$nwo/merge_requests/new?merge_request%5Bsource_branch%5D=$branch"
+    fi
+}
+git-remote-branch-exists(){
+    origin_url=$(git remote get-url origin)
+    branch=$(git rev-parse --abbrev-ref HEAD)
+    if [[ $(git ls-remote --heads $origin_url $branch) ]]; then
+        true
+    else
+        false
+    fi
+}
 
 ##########################################################################
 # PYTHON RELATED
