@@ -13,6 +13,10 @@ mkcd(){
     mkdir $@
     cd $@
 }
+status(){
+  task
+  gitlist
+}
 cheat(){
     curl cheat.sh/$1
 }
@@ -353,7 +357,7 @@ alias master="git checkout master && pull"
 gitlist(){
     printf "You are in branch ${GREEN}$(git rev-parse --abbrev-ref HEAD)${NC}\n"
     printf "${CYAN_B}New Files${NC}\n"
-    printf " ${GREEN}$(git status --porcelain | awk 'match($1, "?"){print " " $2}') ${NC}"
+    printf "${GREEN}$(git status --porcelain | awk 'match($1, "?"){print " " $2}') ${NC}"
     printf "\n\n"
     printf "${CYAN_B}Modified Files${NC}\n"
     printf "${YELLOW}$(git status --porcelain | awk 'match($1, "M"){print " " $2}') ${NC}"
@@ -392,8 +396,20 @@ pushall(){
     git push origin $(git rev-parse --abbrev-ref HEAD)
 }
 pull(){
-    git pull origin $(git rev-parse --abbrev-ref HEAD)
+    if [ $# -eq 0 ]
+        then
+            git pull origin $(git rev-parse --abbrev-ref HEAD)
+        else
+            git pull origin $@
+    fi
 }
+git-revert(){
+    git checkout -- $@
+}
+_git-revert(){
+    COMPREPLY=($(compgen -W "$(git status --porcelain | awk '{print $2}')" -- "${COMP_WORDS[1]}"))
+}
+complete -F _git-revert git-revert
 
 ##########################################################################
 # PYTHON RELATED
@@ -589,6 +605,13 @@ ec2-list(){
           fi
         done
     done
+}
+s3_cat(){
+  location=$1
+  filenames=$(aws s3 ls $location | awk '{print $4}')
+  for filename in $filenames; do
+    echo "$(aws s3 cp ${location}${filename} -)"
+  done
 }
 
 ##########################################################################
