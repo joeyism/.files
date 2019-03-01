@@ -627,20 +627,23 @@ stream-kinesis(){
     fi
 
 }
-ec2-list(){
-    EC2_RAW=$(aws ec2 describe-instances)
-    for reservation in $(jq -r '.Reservations[] | @base64' <<< "$EC2_RAW"); do
-        reservation=$(base64 --decode <<< $reservation)
-        for tag in $(jq -r  '.Instances[0].Tags[] | @base64' <<< "$reservation" 2>/dev/null ); do
-          tag=$(base64 --decode <<< $tag)
-          if [ $(jq -r '.Key' <<< "$tag") == "Name" ]; then
-              printf $(jq -r '.Value' <<< "$tag")
-              printf "\t"
-              printf $(jq -r '.Instances[0].PrivateIpAddress' <<< "$reservation")
-              printf "\n"
-          fi
-        done
-    done
+#ec2-list(){
+#    EC2_RAW=$(aws ec2 describe-instances)
+#    for reservation in $(jq -r '.Reservations[] | @base64' <<< "$EC2_RAW"); do
+#        reservation=$(base64 --decode <<< $reservation)
+#        for tag in $(jq -r  '.Instances[0].Tags[] | @base64' <<< "$reservation" 2>/dev/null ); do
+#          tag=$(base64 --decode <<< $tag)
+#          if [ $(jq -r '.Key' <<< "$tag") == "Name" ]; then
+#              printf $(jq -r '.Value' <<< "$tag")
+#              printf "\t"
+#              printf $(jq -r '.Instances[0].PrivateIpAddress' <<< "$reservation")
+#              printf "\n"
+#          fi
+#        done
+#    done
+#}
+ec2list(){
+  aws ec2 describe-instances --output table   --query 'Reservations[].Instances[].[Tags[?Key==`Name`] | [0].Value, PublicIpAddress, PrivateIpAddress]'  --filters "Name=tag-value,Values=*$1*" "Name=instance-state-name, Values=running"
 }
 s3_cat(){
   location=$1
