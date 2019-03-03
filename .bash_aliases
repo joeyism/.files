@@ -706,3 +706,7 @@ pearson_flights(){
   done
 }
 export -f pearson_flights
+android_mount(){
+    mkdir -p ~/AndroidMountPoint
+    jmtpfs ~/AndroidMountPoint
+}
