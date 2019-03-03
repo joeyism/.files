@@ -706,7 +706,25 @@ pearson_flights(){
   done
 }
 export -f pearson_flights
-android_mount(){
+mount_android(){
     mkdir -p ~/AndroidMountPoint
     jmtpfs ~/AndroidMountPoint
+}
+mount_status(){
+    sudo fdisk -l 
+    mount -v | grep "^/" | awk '{print "\nPartition identifier: " $1  "\n Mountpoint: "  $3}'
+}
+mount_helper(){
+  read -p "Partition identifier: " partition_identifier
+  read -p "Mountpoint: " mountpoint
+  sudo mount -o rw $partition_identifier $mountpoint
+}
+unmount(){
+    mount -v | grep "^/" | awk '{print "\nPartition identifier: " $1  "\n Mountpoint: "  $3}'
+    printf "\nPick a partition to unmount:\n"
+    select partition_identifier in $(mount | grep "^/" | awk '{print $1}');
+    do
+        sudo umount $partition_identifier
+        break
+    done
 }
