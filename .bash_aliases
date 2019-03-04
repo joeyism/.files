@@ -367,12 +367,15 @@ gitlist(){
     printf "\n\n"
 }
 alias glist="gitlist"
+git-new-mr(){
+    xdg-open $(git-mr-url)
+}
 _push(){
     printf "${GREEN}Pushing...${NC}\n"
     git push origin $(git rev-parse --abbrev-ref HEAD)
-
-    if ! git-remote-branch-exists; then
-        xdg-open $(git-new-merge-request)
+    git-remote-branch-exists
+    if [ $? == 1 ]; then
+        git-new-mr
     fi
 }
 push(){
@@ -404,8 +407,10 @@ pushall(){
 pull(){
     if [ $# -eq 0 ]
         then
+            echo "git pull origin $(git rev-parse --abbrev-ref HEAD)"
             git pull origin $(git rev-parse --abbrev-ref HEAD)
         else
+            echo "git pull origin $@"
             git pull origin $@
     fi
 }
@@ -426,7 +431,7 @@ git-source(){
         echo ""
     fi
 }
-git-new-merge-request(){
+git-mr-url(){
     gitsource=$(git-source)
     url=$(git remote get-url origin)
     nwo=$(echo "$url" | sed -E "s/^[^:]+:([^/]+\/[^.]+).git$/\1/")
@@ -441,9 +446,9 @@ git-remote-branch-exists(){
     origin_url=$(git remote get-url origin)
     branch=$(git rev-parse --abbrev-ref HEAD)
     if [[ $(git ls-remote --heads $origin_url $branch) ]]; then
-        true
+        return 0
     else
-        false
+        return 1
     fi
 }
 gitvim(){
