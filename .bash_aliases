@@ -446,6 +446,9 @@ git-remote-branch-exists(){
         false
     fi
 }
+gitvim(){
+  vim $(git status --porcelain | awk '(match($1, "M") || match($1, "?")){print $2}')
+}
 
 ##########################################################################
 # PYTHON RELATED
