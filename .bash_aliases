@@ -372,10 +372,14 @@ git-new-mr(){
 }
 _push(){
     printf "${GREEN}Pushing...${NC}\n"
-    git push origin $(git rev-parse --abbrev-ref HEAD)
     git-remote-branch-exists
-    if [ $? == 1 ]; then
+    exists=$?
+    git push origin $(git rev-parse --abbrev-ref HEAD)
+    if [ $exists == 1 ]; then
+        echo "new MR"
         git-new-mr
+    else
+        echo "MR already exists"
     fi
 }
 push(){
@@ -672,6 +676,7 @@ s3_cat(){
 alias dps='docker ps'
 alias dil='docker image ls'
 alias drcs='docker rm $(docker ps -aq)' # docker rm containers
+alias drcsf='docker rm -f $(docker ps -aq)' # docker rm containers
 alias dscs='docker stop $(docker ps -q)' #docker stop containers
 alias dris='docker rmi $(docker images -q)' #docker rm images
 drun(){ docker run -it -d $@ ;};
