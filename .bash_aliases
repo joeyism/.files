@@ -9,6 +9,7 @@ alias watchc="watch --color"
 alias whatismyip="curl ifconfig.me"
 alias whereami='printf "$(curl -s ifconfig.co/city), $(curl -s ifconfig.co/country) {$(curl -s curl ifconfig.me)}"'
 alias copy="xclip -selection clipboard"
+alias wut="fortune | cowsay | lolcat"
 mkcd(){
     mkdir $@
     cd $@
@@ -37,14 +38,16 @@ findfile(){
     find . -path ./node_modules -prune -o -name $1 -print
 }
 _check_no_args(){
-#   sample_use_check_no_args(){
-#       _check_no_args $@
-#       if [ $? == 0 ]
-#       then
-#           echo $?
-#           echo "after"
-#       fi
-#   }
+#     somefunction(){
+#        _check_no_args $@
+#        if [ $? != 0 ]
+#        then
+#            echo "Some help doc to show how to use somefunction"
+#            return $?
+#        fi
+#        some_code_to_run_here
+#     }
+
     if [ $# -eq 0 ]
         then
             echo "No arguments supplied"
@@ -662,12 +665,30 @@ stream-kinesis(){
 ec2list(){
   aws ec2 describe-instances --output table   --query 'Reservations[].Instances[].[Tags[?Key==`Name`] | [0].Value, PublicIpAddress, PrivateIpAddress]'  --filters "Name=tag-value,Values=*$1*" "Name=instance-state-name, Values=running"
 }
+alias s3_buckets="aws s3 ls"
 s3_cat(){
-  location=$1
-  filenames=$(aws s3 ls $location | awk '{print $4}')
-  for filename in $filenames; do
-    echo "$(aws s3 cp ${location}${filename} -)"
-  done
+    _check_no_args_quiet $@
+    if [ $? != 0 ]
+    then
+        echo "Usage:"
+        printf "\ts3_cat [s3://bucket/folders]\n"
+        return $?
+    fi
+    location=$1
+    filenames=$(aws s3 ls $location | awk '{print $4}')
+    for filename in $filenames; do
+        echo "$(aws s3 cp ${location}${filename} -)"
+    done
+}
+s3_filter(){
+    _check_no_args_quiet $@
+    if [ $? != 0 ]
+    then
+        echo "Usage:"
+        printf "\ts3_filter [bucket] [name-to-filter-by : optional]\n"
+        return $?
+    fi
+    aws s3 ls --summarize --human-readable --recursive $1 | egrep "*$2*"
 }
 
 ##########################################################################
