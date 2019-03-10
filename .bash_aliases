@@ -472,6 +472,7 @@ alias pip3u="pip3 install --user"
 alias ho="honcho -e .env run "
 alias rm_pycache='find . | grep -E "(__pycache__|\.pyc|\.pyo$)" | xargs rm -rf'
 python_publish(){
+    m2r README.md
     python setup.py sdist bdist_wheel
     twine check dist/*
     twine upload dist/*
