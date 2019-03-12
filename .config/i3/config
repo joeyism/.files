@@ -166,3 +166,4 @@ bar {
         workspace_buttons yes
 }
 exec --no-startup-id xsetroot -solid "#000000"
+exec --no-startup-id conky
