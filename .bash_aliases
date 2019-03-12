@@ -719,6 +719,12 @@ update_pacman_key(){
     sudo pacman-key --populate archlinux
 }
 
+##########################################################################
+# Audio Related
+#
+
+alias audio_master_unmute="amixer sset Master unmute"
+alias audio_master_mute="amixer sset Master mute"
 
 ##########################################################################
 # MISC Related
