@@ -54,7 +54,7 @@ conky.config = {
     own_window_transparent = false,
     own_window_argb_visual = true,	
     own_window_argb_value = 20,
-    own_window_type = 'desktop',
+    own_window_type = 'override',
     own_window_hints = 'below',
     stippled_borders = 0,
     update_interval = 1,
@@ -72,10 +72,9 @@ ${color grey}Uptime:${color white} $uptime	$alignr ${color white} $time
 ${color grey}OS:${color white} ${exec uname -r}
 ${color grey}Username:${color white} ${exec whoami}
 ${color grey}CPU:${color white} ${exec lscpu | sed -nr '/Model name/ s/.*:\s*(.*) @ .*/\1/p'}
-${color grey}Location:${color white} ${texeci 6000 location}
+${color grey}Location:${color white} ${texeci 30 location}
 ${color grey}SSID:${color white} ${texeci 6000 iwgetid -r}
-${color white}${texeci 1 iwconfig wlp3s0 | grep -i quality | awk '{$1=$1;print}'}
-${color grey}Volume:${color white} ${texeci 1 pamixer --get-volume}/100
+${color white}${texeci 1 iwconfig wlp2s0 | grep -i quality | awk '{$1=$1;print}'}
 ${color grey}Battery: ${color white}${battery_percent}% ${battery_time}${color grey}${battery_bar}
 ${voffset -5}${color 5294E2}$hr
 ${color 5294E2}${alignc}CPU/Disk 
@@ -92,7 +91,7 @@ ${voffset -5}${color 5294E2}$hr
 ${color 5294E2}${alignc}Connections 
 ${voffset -5}${color 5294E2}$hr
 ${color grey}Download ${goto 170}${color grey}Upload 
-${color #c9c9c9}${downspeedgraph wlp3s0 32,155 c9c9c9 c9c9c9} $alignr ${color #c9c9c9}${upspeedgraph wlp3s0 32,155 c9c9c9 c9c9c9}
+${color #c9c9c9}${downspeedgraph wlp2s0 32,155 c9c9c9 c9c9c9} $alignr ${color #c9c9c9}${upspeedgraph wlp2s0 32,155 c9c9c9 c9c9c9}
 ${voffset -10}${color #c9c9c9}${downspeedgraph enp0s25 32,155 c9c9c9 c9c9c9} $alignr ${color #c9c9c9}${upspeedgraph enp0s25 32,155 c9c9c9 c9c9c9}
 ${voffset -15}${color 5294E2}$hr
 ${color 5294E2}${alignc}Data 
@@ -101,6 +100,7 @@ ${color grey}RAM:$color ${goto 65} $mem/$memmax ${goto 170}${color grey}Swap: $c
 ${color #c9c9c9}${membar 4,155} $alignr ${color #c9c9c9}${swapbar 4, 155}
 ${color grey}Linux: $alignr $color ${fs_used /}/${fs_size /} 
 ${color #c9c9c9}${fs_bar 4 /}
-${color grey}/home/joeyism: $alignr $color${fs_used /home/joeyism}/${fs_size /home/joeyism} 
-${color #c9c9c9}${fs_bar 4 /home/joeyism}
+${color grey}/home/joey: $alignr $color${fs_used /home/joey}/${fs_size /home/joey} 
+${color #c9c9c9}${fs_bar 4 /home/joey}
+${color grey}${curl wttr.in/toronto?0mQT 5}
 ]]
