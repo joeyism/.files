@@ -130,7 +130,8 @@ imap <C-]><C-]>  {}<Left><CR><CR><Up><Tab>
 "{<CR><CR>}<Esc><Up>i<Tab>
 " complete the inline
 imap <C-e>  <Esc>A)<Esc>
-map <Leader>yf :let @+=@%<C-R>
+" copy name of current path/filename.ext into registry, essentially yank filename
+map <Leader>yf :let @+=@%<CR>
 
 
 " autocmd FileType html imap <C-m>  <Esc>F<y%$pF<a/F>i
