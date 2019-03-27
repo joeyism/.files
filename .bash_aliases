@@ -13,6 +13,7 @@ alias wut="fortune | cowsay | lolcat"
 alias grep_cheat="curl cheat.sh/grep"
 alias gohere='cd $HERE'
 alias here='HERE=$(pwd)'
+alias s='status'
 mkcd(){
     mkdir $@
     cd $@
@@ -205,35 +206,6 @@ reade () {
   eval "${1}"=\"\$\{readetags\}\"
 }
 
-_gitlab_mr(){ ##TODO: WIP
-  default_WIP="WIP: "
-  read -p "Merge Title: " merge_title
-  read -p "WIP (default: y)?" yn
-    case $yn in
-        [Yy]* ) WIP=$default_WIP; break;;
-        [Nn]* ) break;;
-        * ) WIP=$default_WIP; break;;
-    esac
-  project=${PWD##*/}
-  id="textemma%2F${project}"
-  source_branch=$(git rev-parse --abbrev-ref HEAD)
-  target_branch="master"
-  body=$(cat <<EOF
-{
-  "id": "$id",
-  "source_branch": "$source_branch",
-  "target_branch": "$target_branch",
-  "title": "${WIP}Resolve $source_branch $merge_title",
-  "remove_source_branch": true,
-  "squash": true
-}
-EOF
-)
-  curl --header "Content-Type: application/json" \
-    --request POST \
-    --data "$body" \
-    https://gitlab.com/projects/${id}/merge_requests
-}
 _task_write_first(){
   sed -i "1i$TASK_ID" .task
 }
@@ -785,4 +757,28 @@ unmount(){
         sudo umount $partition_identifier
         break
     done
+}
+
+get-env-from-envfile(){
+  _check_no_args_quiet $1 && _check_no_args_quiet $2
+  if [ $? == 1 ]; then
+    printf "Please enter env file and var name\n\n"
+    printf "\tget-env-from-envfile [env file] [variable wanted in env file]\n\n"
+    return 1
+  fi
+  envfile=$1
+  env_wanted=$2
+  declare -A envars=()
+  total_env_from_file=""
+  while IFS='' read -r line || [[ -n "$line" ]]; do     
+    if [ ! -z "$line" ]; then 
+      _key=$(echo $line| cut -d= -f1); 
+      _value=$(echo $line | cut -d= -f2); 
+      if [ $_key == $env_wanted ]; then
+        echo $_value
+      fi
+      envars[$_key]=$_value; 
+      total_env_from_file="$total_env_from_file $_key"; 
+    fi
+  done < $envfile
 }
