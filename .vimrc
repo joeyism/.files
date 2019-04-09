@@ -80,11 +80,10 @@ nmap <C-W>u :call MergeTabs()<CR>
 if &diff
     colorscheme apprentice
 endif
-
+set omnifunc=syntaxcomplete#Complete
 "
 " leader
 " 
-command! LeaderHelp echo "Commands for \<Leader\>\n" "rc\tshow vimrc\n" "rerc\treload vimrc after changes\n" "..\topen directory here\n" "m0\tmove tab to first\n" "mapy\tset make to python\n" "mago\tset make to golang\n" "make\tmake\n" "mala\trun last make\n" "la\trun last command" "fo\tfold this area"
 
 let mapleader = " "
 
@@ -92,57 +91,23 @@ let mapleader = " "
 map <Leader>rc  :tabe ~/.vimrc<CR>
 " reload vimrc
 map <Leader>rerc  :so $MYVIMRC<CR>
-" open directory here
-map <Leader>..  :tabe %<CR><F3><C-w>l:q<CR>
-" move tab to first
-map <Leader>m0  :tabm0<CR>
-" set make to python
-map <Leader>mapy  :set makeprg=python\ %<CR>    
-" set make to go
-map <Leader>mago  :set makegrg=go\ run\ %<CR>
-" run/make
-map <Leader>make  :make<CR>
-" run last make
-map <Leader>mala  :make<Up><CR>
-" last
-map <Leader>la  :<Up><CR>               
-" fold one
-map <Leader>fo  $zf%j
-" add new line
-map <Leader><CR>  o<Esc>
-" find in other file
-map <Leader>**  *N<C-w><C-w>n
-" Make space after work
-map <Leader><Space>  a 
-" move to buffer
-nnoremap <Leader>e :ls<CR>:b 
-nnoremap <Leader>l :bn<CR>
-nnoremap <Leader>h :bp<CR>
-" use tag to find method under cursor
-map <Leader>tf "ryaw:tag <C-R>"<CR>:tags<CR>
-" next buffer
-map <Leader>bn :bn<CR>
-map <Leader>bp :bp<CR>
-" exit insert mode with Ctrl-p instead of Ctrl-[
-imap <C-p>  <Esc>                       
-" complete bracket and insert in the middle
-imap <C-]><C-]>  {}<Left><CR><CR><Up><Tab>
-"{<CR><CR>}<Esc><Up>i<Tab>
-" complete the inline
-imap <C-e>  <Esc>A)<Esc>
-" copy name of current path/filename.ext into registry, essentially yank filename
+" copy name of current path/filename.ext into registry
 map <Leader>yf :let @+=@%<CR>
+" add to current line, then new line below. For reformatting python code
+nnoremap <silent> <C-j> Ja<CR><Esc>
 
+"python
+let g:pymode_lint_ignore = ["E501", "W", "E111", "E0100"]
+let g:pymode_options_colorcolumn = 0
+let g:syntastic_check_on_open = 0
+let g:syntastic_check_on_wq = 1
+let g:pymode_rope_lookup_project = 0
+let g:pymode_rope = 0
+au FileType python setl sw=2 sts=2 et
+map <Leader>pdb oimport pdb
+pdb.set_trace():w
 
-" autocmd FileType html imap <C-m>  <Esc>F<y%$pF<a/F>i
+command! W  write
 
-"Scala
-" Find file from imports
-map <Leader>sff  vaW"syo<Esc>"sp0x:s/\./\//g<CR>:silent! s/_/\*/g<CR>"sddu:tabfind **/<C-R>s<Backspace>
-" Find file from under highlighted cursor (above without the visual)
-map <Leader>sfv  "syo<Esc>"sp0x:s/\./\//g<CR>:silent! s/_/\*/g<CR>"sddu:tabfind **/<C-R>s<Backspace>
-" Find next, and scroll down a little
-map <Leader>ne  n<C-e><C-e><C-e><C-e><C-e>
-
-imap <C-p>  <Esc>
-
+"typescript
+autocmd BufNewFile,BufRead *.ts set syntax=typescript
