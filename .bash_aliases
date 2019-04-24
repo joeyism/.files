@@ -782,6 +782,26 @@ get-env-from-envfile(){
     fi
   done < $envfile
 }
+_get-env-from-envfile(){ 
+    local cur prev
+
+    cur=${COMP_WORDS[COMP_CWORD]}
+    prev=${COMP_WORDS[COMP_CWORD-1]}
+
+    case ${COMP_CWORD} in
+        1)
+            COMPREPLY=($(compgen -W "$(ls -A)" -- ${cur}))
+            ;;
+        2)
+            COMPREPLY=($(compgen -W "$(cat $prev | awk '{print $1}')" -- ${cur}))
+            ;;
+        *)
+            COMPREPLY=()
+            ;;
+    esac
+
+}
+complete -F _get-env-from-envfile get-env-from-envfile
 
 ngrok-url(){
   curl --silent http://127.0.0.1:4040/api/tunnels | jq -r ".tunnels[0].public_url"
