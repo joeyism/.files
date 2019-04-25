@@ -96,6 +96,15 @@ map <Leader>yf :let @+=@%<CR>
 " add to current line, then new line below. For reformatting python code
 nnoremap <silent> <C-j> Ja<CR><Esc>
 
+function! CloseAllBuffersButCurrent()
+  let curr = bufnr("%")
+  let last = bufnr("$")
+
+  if curr > 1    | silent! execute "1,".(curr-1)."bd"     | endif
+  if curr < last | silent! execute (curr+1).",".last."bd" | endif
+endfunction
+
+
 "python
 let g:pymode_lint_ignore = ["E501", "W", "E111", "E0100"]
 let g:pymode_options_colorcolumn = 0
@@ -111,3 +120,7 @@ command! W  write
 
 "typescript
 autocmd BufNewFile,BufRead *.ts set syntax=typescript
+set omnifunc=syntaxcomplete#Complete
+"" Press F8 when cursor is above a require path, and it'll open the path
+"" assuming the extension of file is same as current file
+map <F8> :let mycurf=expand('%:p:h')."/".expand("<cfile>").".".expand('%:e')<CR>:execute("e ".mycurf)<CR>
