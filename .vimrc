@@ -95,6 +95,10 @@ map <Leader>rerc  :so $MYVIMRC<CR>
 map <Leader>yf :let @+=@%<CR>
 " add to current line, then new line below. For reformatting python code
 nnoremap <silent> <C-j> Ja<CR><Esc>
+" move between buffers
+nnoremap <silent> <C-l> :bn<CR>
+nnoremap <silent> <C-h> :bp<CR>
+
 
 function! CloseAllBuffersButCurrent()
   let curr = bufnr("%")
@@ -113,8 +117,6 @@ let g:syntastic_check_on_wq = 1
 let g:pymode_rope_lookup_project = 0
 let g:pymode_rope = 0
 au FileType python setl sw=2 sts=2 et
-map <Leader>pdb oimport pdb
-pdb.set_trace():w
 
 command! W  write
 
