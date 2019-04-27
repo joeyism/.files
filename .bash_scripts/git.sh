@@ -9,7 +9,7 @@ alias unadd="git reset"
 gitlist(){
     printf "You are in branch ${GREEN}$(git rev-parse --abbrev-ref HEAD)${NC}\n"
     printf "${CYAN_B}New Files${NC}\n"
-    printf "${GREEN}$(git status --porcelain | awk '(match($1, "?") || match($1, "A")){print " " $2}') ${NC}"
+    printf "${GREEN}$(git status --porcelain | awk '(match($1, "\?") || match($1, "A")){print " " $2}') ${NC}"
     printf "\n\n"
     printf "${CYAN_B}Modified Files${NC}\n"
     printf "${YELLOW}$(git status --porcelain | awk 'match($1, "M"){print " " $2}') ${NC}"
