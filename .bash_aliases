@@ -48,6 +48,14 @@ senv(){
 # BASH_ALIASES RELATED
 #
 alias sa="source ~/.bash_aliases"
-alias ea="vim ~/.bash_aliases"
 alias realias="curl -X GET https://raw.githubusercontent.com/joeyism/.files/master/.bash_aliases > ~/.bash_aliases && source ~/.bash_aliases"
 alias diffa="vimdiff <(curl -sL https://raw.githubusercontent.com/joeyism/.files/master/.bash_aliases) ~/.bash_aliases"
+ea(){
+    _check_no_args_quiet $1
+    if [ $? == 1 ]; then
+        vim ~/.bash_aliases
+    else
+        vim ~/.bash_scripts/$1
+    fi
+}
+complete -W "$(ls ~/.bash_scripts/)" ea
