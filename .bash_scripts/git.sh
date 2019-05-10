@@ -141,3 +141,17 @@ checkout(){
         fi  
     fi  
 }
+complete -W "$(_get_git_branches)" checkout
+merge(){
+    _check_no_args_quiet $1
+    if [ $? == 1 ]; then
+        select BRANCH_NAME in $(_get_git_branches);
+        do
+            git merge $BRANCH_NAME
+            break
+        done
+    else
+        git merge $1
+    fi
+}
+complete -W "$(_get_git_branches)" merge
