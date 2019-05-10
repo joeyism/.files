@@ -113,7 +113,31 @@ git-merge-file(){
         git checkout $SELECT_BRANCH $@
     done
 }
-
 gitvim(){
   vim $(git status --porcelain | awk '(match($1, "M") || match($1, "?")){print $2}')
+}
+_get_git_branches(){
+    git branch | cut -c 3-
+}
+checkout(){
+    _check_no_args_quiet $1
+    if [ $? == 1 ]; then
+        select BRANCH_NAME in $(_get_git_branches);
+        do  
+            git checkout $BRANCH_NAME
+            break
+        done
+    else
+        if [ $1 == "new" ]; then
+            _check_no_args_quiet $2
+            if [ $? == 1 ]; then
+                read -p "New Branch Name: " BRANCH_NAME
+                git checkout -b $BRANCH_NAME
+            else
+                git checkout -b $2
+            fi  
+        else
+            git checkout $1
+        fi  
+    fi  
 }
