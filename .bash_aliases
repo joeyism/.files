@@ -3,7 +3,7 @@
 ##########################################################################
 # COMMON
 #
-for f in ~/.bash_profile_*; do source $f; done
+for f in ~/.bash_scripts/*; do source $f; done
 alias :q=exit
 alias ll="ls -lrth"
 alias watchc="watch --color"
