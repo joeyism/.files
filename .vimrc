@@ -98,6 +98,12 @@ nnoremap <silent> <C-j> Ja<CR><Esc>
 " move between buffers
 nnoremap <silent> <C-l> :bn<CR>
 nnoremap <silent> <C-h> :bp<CR>
+" move screen
+nnoremap <silent> <C-L> <C-W>>
+nnoremap <silent> <C-H> <C-W><
+" terminal
+nnoremap <silent> <C-t><C-t> :vertical terminal<CR>
+nnoremap <silent> <C-t><C-h> :terminal<CR>
 
 
 function! CloseAllBuffersButCurrent()
