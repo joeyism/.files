@@ -99,8 +99,8 @@ nnoremap <silent> <C-j> Ja<CR><Esc>
 nnoremap <silent> <C-l> :bn<CR>
 nnoremap <silent> <C-h> :bp<CR>
 " move screen
-nnoremap <silent> <C-L> <C-W>>
-nnoremap <silent> <C-H> <C-W><
+nnoremap <silent> <C-M-L> <C-W>>
+nnoremap <silent> <C-M-H> <C-W><
 " terminal
 nnoremap <silent> <C-t><C-t> :vertical terminal<CR>
 nnoremap <silent> <C-t><C-h> :terminal<CR>
