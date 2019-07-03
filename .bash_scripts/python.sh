@@ -11,3 +11,10 @@ python_publish(){
     twine check dist/*
     twine upload dist/*
 }
+venv(){
+  if [ -d "./venv" ]; then
+    source venv/bin/activate
+  else
+    virtualenv venv
+  fi
+}
