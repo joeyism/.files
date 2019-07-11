@@ -151,19 +151,12 @@ mode "resize" {
         bindsym Escape mode "default"
 }
 
+
 bindsym $mod+r mode "resize"
 bindsym Mod1+l exec i3lock --color=000000
 
 # Start i3bar to display a workspace bar (plus the system information i3status
 # finds out, if available)
-bar {
-        status_command polybar example
-        mode hide
-        hidden_state hide
-        tray_output primary
-        position top
-        tray_padding 0
-        workspace_buttons yes
-}
 exec --no-startup-id xsetroot -solid "#000000"
 exec --no-startup-id conky
+exec --no-startup-id polybar example
