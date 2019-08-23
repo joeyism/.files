@@ -376,6 +376,8 @@ type = internal/battery
 battery = BAT0
 adapter = AC0
 full-at = 98
+label-active-font = 7
+
 
 format-charging = <animation-charging> <label-charging>
 format-charging-underline = #ffb52a
@@ -432,6 +434,8 @@ type = custom/menu
 expand-right = true
 
 format-spacing = 1
+label-active-font = 7
+
 
 label-open = 
 label-open-foreground = ${colors.secondary}
