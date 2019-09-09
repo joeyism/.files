@@ -60,6 +60,15 @@ pushall(){
     git commit -m "$message"
     _push
 }
+pushto(){
+    if [ $# -eq 0 ]
+        then
+            read -p "Branch to push to: " tobranch
+        else
+            tobranch=$1
+    fi
+    git push origin $(git rev-parse --abbrev-ref HEAD):$tobranch ${@:2}
+}
 pull(){
     if [ $# -eq 0 ]
         then
