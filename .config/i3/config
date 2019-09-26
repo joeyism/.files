@@ -159,4 +159,6 @@ bindsym Mod1+l exec i3lock --color=000000
 # finds out, if available)
 exec --no-startup-id xsetroot -solid "#000000"
 exec --no-startup-id conky
+exec --no-startup-id feh --bg-fill ~/Pictures/wallpaper/180210-flip.jpg
+exec --no-startup-id polybar example
 exec_always --no-startup-id ~/.config/i3/polybar.sh &
