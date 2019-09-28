@@ -55,12 +55,12 @@ font-0 = siji:pixelsize=10;0
 font-1 = siji:pixelsize=15;0
 font-2 = siji:pixelsize=10;1
 font-3 = Font Awesome 5 Free:size=10;4
-font-7 = NotoEmoji:size=11;1
+font-4 = NotoEmoji:size=11;1
 
 
 modules-left = bspwm i3
 modules-center =
-modules-right = filesystem xbacklight alsa xkeyboard memory cpu wlan eth battery temperature date powermenu
+modules-right = filesystem screen alsa xkeyboard memory cpu wlan eth battery temperature date powermenu
 
 tray-position = right
 tray-padding = 2
@@ -183,27 +183,16 @@ icon-next = 
 label-song-maxlen = 25
 label-song-ellipsis = true
 
-[module/xbacklight]
-type = internal/xbacklight
-
-format = <label> <bar>
-label = BL
-
-bar-width = 10
-bar-indicator = |
-bar-indicator-foreground = #fff
-bar-indicator-font = 2
-bar-fill = ─
-bar-fill-font = 2
-bar-fill-foreground = #9f78e1
-bar-empty = ─
-bar-empty-font = 2
-bar-empty-foreground = ${colors.foreground-alt}
-
-[module/backlight-acpi]
-inherit = module/xbacklight
-type = internal/backlight
-card = intel_backlight
+[module/screen]
+; To get this to work, you must run
+;   sudo chmod 666 /sys/class/backlight/intel_backlight/brightness
+type = custom/script
+format-prefix = "Brightness: "
+label = %output:0:2%
+exec = light -G
+scroll-up = light -A 5
+scroll-down = light -U 5
+interval = 0.1
 
 [module/cpu]
 type = internal/cpu
@@ -434,7 +423,7 @@ type = custom/menu
 expand-right = true
 
 format-spacing = 1
-label-active-font = 7
+label-active-font = 4
 
 
 label-open = 
