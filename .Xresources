@@ -34,7 +34,8 @@
 URxvt*scrollBar:         false
 URxvt*scrollBar_right:   false
 
-URxvt*transparent:       false
+URxvt.transparent:   true
+URxvt.shading:       10
 
 URxvt.font: xft:Mono:pixelsize=12
 URxvt.letterSpace: 0

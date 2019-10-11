@@ -17,3 +17,9 @@ venv(){
   fi
   source venv/bin/activate $@
 }
+venv3(){
+  if [ ! -d "./venv" ]; then
+    virtualenv venv -p python3 $@
+  fi
+  source venv/bin/activate $@
+}

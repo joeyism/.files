@@ -39,6 +39,8 @@ Plugin 'majutsushi/tagbar'
 
 Plugin 'romainl/Apprentice'
 
+Plugin 'rking/ag.vim'
+
 call vundle#end()            " required
 
 " My shit

@@ -59,3 +59,11 @@ ea(){
     fi
 }
 complete -W "$(ls ~/.bash_scripts/)" ea
+updatea(){
+    for file in $(git status --porcelain | awk 'match($1, "M"){print " " $2}')
+    do
+        git add $file
+    done
+    git commit -m "update"
+    git push origin master
+}
