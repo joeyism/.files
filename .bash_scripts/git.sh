@@ -60,6 +60,12 @@ pushall(){
     git commit -m "$message"
     _push
 }
+git-changeme(){
+    read -p "Username: " username
+    read -p "Email: " email
+    git config --global user.name "$username"
+    git config --global user.email "$email"
+}
 pushto(){
     if [ $# -eq 0 ]
         then
