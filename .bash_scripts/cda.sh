@@ -13,5 +13,9 @@ cda(){
     else
       cd $(printf "${BASH_ALIASES[$1]}" | bash)
     fi
+    
+    if [ -d "venv" ]; then
+      venv
+    fi
 }
 complete -W "githome latest $cda_total_keys" cda
