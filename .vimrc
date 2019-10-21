@@ -107,6 +107,9 @@ nnoremap <silent> <C-M-H> <C-W><
 " terminal
 nnoremap <silent> <C-t><C-t> :vertical terminal<CR>
 nnoremap <silent> <C-t><C-h> :terminal<CR>
+" save/load
+map <Leader>ss  :mks! saved.vim<CR>
+map <Leader>sl  :source saved.vim<CR>
 
 
 function! CloseAllBuffersButCurrent()
