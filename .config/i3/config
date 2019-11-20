@@ -116,6 +116,13 @@ bindsym $mod+Shift+8 move container to workspace 8
 bindsym $mod+Shift+9 move container to workspace 9
 bindsym $mod+Shift+0 move container to workspace 10
 
+# misc, such as volume and brightness
+bindsym XF86MonBrightnessUp exec light -A 5
+bindsym XF86MonBrightnessDown exec light -U 5
+bindsym XF86AudioRaiseVolume exec amixer -q -D pulse sset Master 5%+
+bindsym XF86AudioLowerVolume exec amixer -q -D pulse sset Master 5%-
+bindsym XF86AudioMute exec amixer -q -D pulse sset Master toggle
+
 # reload the configuration file
 bindsym $mod+Shift+c reload
 # restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
@@ -169,4 +176,5 @@ exec --no-startup-id xsetroot -solid "#000000"
 exec --no-startup-id conky
 exec --no-startup-id feh --bg-fill ~/Pictures/wallpaper/180210-flip.jpg
 exec --no-startup-id polybar example
+exec --no-startup-id i3-battery-popup
 exec_always --no-startup-id ~/.config/i3/polybar.sh &
