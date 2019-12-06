@@ -138,3 +138,6 @@ set omnifunc=syntaxcomplete#Complete
 "" Press F8 when cursor is above a require path, and it'll open the path
 "" assuming the extension of file is same as current file
 map <F8> :let mycurf=expand('%:p:h')."/".expand("<cfile>").".".expand('%:e')<CR>:execute("e ".mycurf)<CR>
+
+"nerdtree
+let NERDTreeIgnore = ['\.pyc$']
