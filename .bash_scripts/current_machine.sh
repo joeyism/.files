@@ -22,8 +22,20 @@ pwdf(){
     echo $(pwd)/$1
 }
 
+_gen_pw(){
+  date +%s | sha256sum | base64 | head -c 32 ; echo
+}
 
 pw(){
+    _check_no_args_quiet $@
+    if [ $? != 0 ]
+    then
+        read -p "Name of the service: " service
+        new_pw=$(_gen_pw)
+        echo $new_pw > ~/.ssh/pw/$service
+        echo $new_pw | copy
+        return
+    fi
     if [ $1 == list ]
     then
         ls ~/.ssh/pw
