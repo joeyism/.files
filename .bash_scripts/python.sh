@@ -10,6 +10,9 @@ python_publish(){
     python setup.py sdist bdist_wheel
     twine check dist/*
     twine upload dist/*
+    VERSION=$(cat $(find **/__init__.py) | egrep '^__version__\s*=\s*"(.*)"' | cut -d '"' -f2)
+    git tag $VERSION
+    git push --tag origin master
 }
 venv(){
   if [ ! -d "./venv" ]; then
