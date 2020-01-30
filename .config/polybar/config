@@ -172,7 +172,8 @@ label-urgent-padding = ${module/bspwm.label-urgent-padding}
 
 [module/screen]
 ; To get this to work, you must run
-;   sudo chmod 666 /sys/class/backlight/intel_backlight/brightness
+;   sudo usermod -a -G video $USER
+; and install https://github.com/haikarainen/light#debian
 type = custom/script
 format-prefix = "Brightness: "
 exec = light -G
