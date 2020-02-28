@@ -60,7 +60,7 @@ font-4 = NotoEmoji:size=11;1
 
 modules-left = bspwm i3
 modules-center =
-modules-right = filesystem screen alsa xkeyboard memory cpu wlan eth battery temperature date powermenu
+modules-right = spotify filesystem screen alsa xkeyboard memory cpu wlan eth battery temperature date powermenu
 
 tray-position = right
 tray-padding = 2
