@@ -409,6 +409,14 @@ menu-2-0-exec = sudo poweroff
 menu-2-1 = cancel
 menu-2-1-exec = menu-open-0
 
+[module/spotify]
+type = custom/script
+interval = 1
+format-prefix = " "
+format = <label>
+exec = python /home/joeyism/.config/polybar/spotify_status.py -f '{artist}: {song}'
+format-underline = #1db954
+
 [settings]
 screenchange-reload = true
 ;compositing-background = xor
