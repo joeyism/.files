@@ -33,7 +33,7 @@ pw(){
         read -p "Name of the service: " service
         new_pw=$(_gen_pw)
         echo $new_pw > ~/.ssh/pw/$service
-        echo $new_pw | copy
+        echo $new_pw | xclip -selection clipboard
         return
     fi
     if [ $1 == list ]
