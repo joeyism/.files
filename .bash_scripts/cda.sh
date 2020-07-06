@@ -8,6 +8,10 @@ if [ ! -f ~/.cda ]; then
   touch ~/.cda
 fi
 cda(){
+    if [ -d "venv" ]; then
+      deactivate
+    fi
+
     if [ -z "${BASH_ALIASES[$1]}" ]; then
       cd ${cda_locations[$1]}
     else
