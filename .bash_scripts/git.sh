@@ -6,6 +6,7 @@ alias gdiff="git diff"
 alias master="git checkout master && pull"
 alias uncommit="git reset --soft HEAD^"
 alias unadd="git reset"
+alias rm_orig='find . | grep -E "(\.orig$)" | xargs rm -rf'
 gitlist(){
     printf "You are in branch ${GREEN}$(git rev-parse --abbrev-ref HEAD)${NC}\n"
     printf "${CYAN_B}New Files${NC}\n"
