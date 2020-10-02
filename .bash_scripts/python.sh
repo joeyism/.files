@@ -14,12 +14,7 @@ python_publish(){
     git tag $VERSION
     git push --tag origin master
 }
-venv(){
-  if [ ! -d "./venv" ]; then
-    virtualenv venv $@
-  fi
-  source venv/bin/activate $@
-}
+alias venv=venv3
 venv3(){
   if [ ! -d "./venv" ]; then
     virtualenv venv -p python3 $@
