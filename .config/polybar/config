@@ -22,11 +22,26 @@
 background = #00222222
 background-alt = #00444444
 ;foreground = ${xrdb:color7:#222}
-foreground = #dfdfdf
-foreground-alt = #dfdfdf
 primary = #ffb52a
 secondary = #e60053
 alert = #bd2c40
+underline-green = #00ff9f
+underline-green-2 = #00FF41
+underline-teal = #4bffdc
+underline-teal-2 = #00b8ff
+underline-blue = #0a6cf5
+underline-blue-2 = #001eff
+underline-red = #B51F07
+underline-grey = #7a8488
+underline-light-grey = #def4df
+underline-yellow = #fdf800
+underline-purple = #bd00ff
+underline-pink = #d600ff
+underline-orange = #ff9700
+
+underline-general = ${colors.underline-grey}
+foreground = ${colors.underline-grey}
+foreground-alt = #e6f2ff
 
 [bar/example]
 ;monitor = ${env:MONITOR:HDMI-1}
@@ -56,7 +71,7 @@ font-0 = siji:pixelsize=10;0
 font-1 = siji:pixelsize=15;0
 font-2 = siji:pixelsize=10;1
 font-3 = Font Awesome 5 Free:size=10;4
-font-4 = NotoEmoji:size=11;1
+font-4 = NotoEmoji:scale=10;1
 
 
 modules-left = bspwm i3
@@ -91,15 +106,15 @@ blacklist-0 = num lock
 
 format-prefix = " "
 format-prefix-foreground = ${colors.foreground-alt}
-format-prefix-underline = ${colors.secondary}
+format-prefix-underline = ${colors.underline-general}
 
 label-layout = %layout%
-label-layout-underline = ${colors.secondary}
+label-layout-underline = ${colors.underline-general}
 
 label-indicator-padding = 2
 label-indicator-margin = 1
 label-indicator-background = ${colors.secondary}
-label-indicator-underline = ${colors.secondary}
+label-indicator-underline = ${colors.underline-general}
 
 [module/filesystem]
 type = internal/fs
@@ -151,6 +166,7 @@ label-focused = %index%
 label-focused-background = ${module/bspwm.label-focused-background}
 label-focused-underline = ${module/bspwm.label-focused-underline}
 label-focused-padding = ${module/bspwm.label-focused-padding}
+label-focused-foreground = ${module/bspwm.label-focused-underline}
 
 ; unfocused = Inactive workspace on any monitor
 label-unfocused = %index%
@@ -177,6 +193,7 @@ label-urgent-padding = ${module/bspwm.label-urgent-padding}
 ; and install https://github.com/haikarainen/light#debian
 type = custom/script
 format-prefix = "☀️: "
+format-foreground = ${colors.foreground}
 exec = light -G
 scroll-up = light -A 5
 scroll-down = light -U 5
@@ -187,9 +204,10 @@ type = internal/cpu
 interval = 2
 format = <label> <ramp-coreload>
 format-prefix = "CPU: "
-format-prefix-foreground = ${colors.foreground-alt}
-format-underline = #f90000
+format-prefix-foreground = ${colors.foreground}
+format-underline = ${colors.underline-general}
 label = %percentage:2%% 
+label-foreground = ${colors.underline-teal}
 ramp-coreload-spacing = 1
 ramp-coreload-0 = ▁
 ramp-coreload-1 = ▂
@@ -199,34 +217,27 @@ ramp-coreload-4 = ▅
 ramp-coreload-5 = ▆
 ramp-coreload-6 = ▇
 ramp-coreload-7 = █
+ramp-coreload-foreground = ${colors.underline-teal}
 
 [module/memory]
 type = internal/memory
 format = <label> <bar-used>
-interval = 2
+interval = 1
 format-prefix = "Mem: "
-format-prefix-foreground = ${colors.foreground-alt}
-format-underline = #4bffdc
+format-prefix-foreground = ${colors.foreground}
+format-underline = ${colors.underline-general}
 label = %gb_used%/%gb_total%   %percentage_used%% 
+label-foreground = ${colors.underline-yellow}
 
 bar-used-indicator =
 bar-used-width = 10
-bar-used-foreground-0 = #55aa55
-bar-used-foreground-1 = #557755
-bar-used-foreground-2 = #f5a70a
-bar-used-foreground-3 = #ff5555
+bar-used-foreground-0 = ${colors.underline-yellow}
+bar-used-foreground-1 = ${colors.underline-yellow}
+bar-used-foreground-2 = ${colors.underline-orange}
+bar-used-foreground-3 = ${colors.underline-red}
 bar-used-fill = ▐
 bar-used-empty = ▐
 bar-used-empty-foreground = #444444
-
-ramp-used-0 = ▁
-ramp-used-1 = ▂
-ramp-used-2 = ▃
-ramp-used-3 = ▄
-ramp-used-4 = ▅
-ramp-used-5 = ▆
-ramp-used-6 = ▇
-ramp-used-7 = █
 
 
 [module/wlan]
@@ -236,24 +247,13 @@ interval = 3.0
 
 accumulate-stats = true
 
-
-format-connected = <ramp-signal> <label-connected>
-format-connected-underline = #9f78e1
+format-connected = <label-connected>
+format-connected-underline = ${colors.underline-general}
 label-connected = %essid% %downspeed:9%⬇ %upspeed:9%⬆
+label-connected-foreground = ${colors.foreground}
 
-;format-disconnected =
 format-disconnected = <label-disconnected>
-;format-disconnected-underline = ${self.format-connected-underline}
-;label-disconnected = %ifname% disconnected
-;label-disconnected-foreground = ${colors.foreground-alt}
 format-packetloss = <animation-packetloss> <label-connected>
-
-ramp-signal-0 = 
-ramp-signal-1 = 
-ramp-signal-2 = 
-ramp-signal-3 = 
-ramp-signal-4 = 
-ramp-signal-foreground = ${colors.foreground-alt}
 
 label-packetloss = %essid%
 animation-packetloss-0-foreground = #ffa64c
@@ -266,7 +266,7 @@ type = internal/network
 interface = vetha1e519a
 interval = 3.0
 
-format-connected-underline = #55aa55
+format-connected-underline = ${colors.underline-general}
 format-connected-prefix = " "
 format-connected-prefix-foreground = ${colors.foreground-alt}
 label-connected = %local_ip%
@@ -289,7 +289,7 @@ time-alt = %H:%M:%S
 
 format-prefix = 
 format-prefix-foreground = ${colors.foreground-alt}
-format-underline = #0a6cf5
+format-underline = ${colors.underline-general}
 
 label = %date% %time%
 foreground = ${colors.foreground-alt}
@@ -298,63 +298,59 @@ foreground = ${colors.foreground-alt}
 type = internal/alsa
 
 format-volume = <label-volume> <bar-volume>
-label-volume = VOL
+label-volume = 🔊
 label-volume-foreground = ${root.foreground}
 
 format-muted-prefix = " "
 format-muted-foreground = ${colors.foreground-alt}
-label-muted = sound muted
+label-muted = 🔈
 
 bar-volume-width = 6
-bar-volume-foreground-0 = #55aa55
-bar-volume-foreground-1 = #55aa55
-bar-volume-foreground-2 = #55aa55
-bar-volume-foreground-3 = #55aa55
-bar-volume-foreground-4 = #55aa55
-bar-volume-foreground-5 = #f5a70a
-bar-volume-foreground-6 = #ff5555
+bar-volume-foreground-0 = ${colors.underline-blue}
+bar-volume-foreground-1 = ${colors.underline-blue}
+bar-volume-foreground-2 = ${colors.underline-blue}
+bar-volume-foreground-3 = ${colors.underline-blue}
+bar-volume-foreground-4 = ${colors.underline-blue}
+bar-volume-foreground-5 = ${colors.underline-red}
+bar-volume-foreground-6 = ${colors.underline-red}
 bar-volume-gradient = false
 bar-volume-indicator = |
 bar-volume-indicator-font = 2
 bar-volume-fill = ─
-bar-volume-fill-font = 2
+bar-volume-fill-font = ${colors.underline-general}
 bar-volume-empty = ─
-bar-volume-empty-font = 2
-bar-volume-empty-foreground = ${colors.foreground-alt}
+bar-volume-empty-font = ${colors.underline-general}
+bar-volume-empty-foreground = ${colors.foreground}
 
 [module/battery]
 type = internal/battery
 battery = BAT0
 adapter = AC0
-full-at = 98
+full-at = 97
 label-active-font = 7
 
 
 format-charging = <animation-charging> <label-charging>
-format-charging-underline = #ffb52a
+format-charging-underline = ${colors.underline-general}
 
 format-discharging = <animation-discharging> <label-discharging>
 format-discharging-underline = ${self.format-charging-underline}
 
 format-full-prefix = "⚡️"
-format-full-prefix-foreground = ${colors.foreground-alt}
+format-full-prefix-foreground = ${colors.underline-teal}
 format-full-underline = ${self.format-charging-underline}
 
-ramp-capacity-0 = 
-ramp-capacity-1 = 
-ramp-capacity-2 = 
-ramp-capacity-foreground = ${colors.foreground-alt}
 
 animation-charging-0 = ⚡️
 animation-charging-1 = ⚡️
 animation-charging-2 = ⚡️
-animation-charging-foreground = ${colors.foreground-alt}
+animation-charging-foreground = ${colors.underline-teal}
 animation-charging-framerate = 750
 
-animation-discharging-0 = ☄️
-animation-discharging-1 = ☄️
-animation-discharging-2 = ☄️
-animation-discharging-foreground = ${colors.foreground-alt}
+animation-discharging-0 = 🔋
+animation-discharging-1 = 🔋
+animation-discharging-2 = 🔋
+animation-discharging-foreground = ${colors.underline-teal}
 animation-discharging-framerate = 750
 
 [module/temperature]
@@ -362,22 +358,18 @@ type = internal/temperature
 thermal-zone = 0
 warn-temperature = 60
 
-format-prefix = "T: "
-format-prefix-foreground = ${colors.foreground-alt}
+format-prefix = "🌡️"
+format-prefix-foreground = ${colors.foreground}
 
-format = <ramp> <label>
-format-underline = #f50a4d
-format-warn = <ramp> <label-warn>
+format = <label>
+format-underline = ${colors.underline-general}
+format-warn = <label-warn>
 format-warn-underline = ${self.format-underline}
 
 label = %temperature-c%
+label-foreground = ${colors.underline-green}
 label-warn = %temperature-c%
-label-warn-foreground = ${colors.secondary}
-
-ramp-0 = 
-ramp-1 = 
-ramp-2 = 
-ramp-foreground = ${colors.foreground-alt}
+label-warn-foreground = ${colors.underline-red}
 
 [module/powermenu]
 type = custom/menu
