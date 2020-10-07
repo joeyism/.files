@@ -183,6 +183,8 @@ client.placeholder      #000000 #0c0c0c #ffffff #000000   #0c0c0c
 
 client.background       #ffffff
 
+default_border pixel 0
+
 bindsym $mod+r mode "resize"
 bindsym Mod1+l exec i3lock --color=000000
 
