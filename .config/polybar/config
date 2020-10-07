@@ -18,7 +18,8 @@
 
 [colors]
 ;background = ${xrdb:color0:#222}
-background = #aa222222
+;aa is little transparent, FF is not
+background = #00222222
 background-alt = #00444444
 ;foreground = ${xrdb:color7:#222}
 foreground = #dfdfdf
@@ -175,7 +176,7 @@ label-urgent-padding = ${module/bspwm.label-urgent-padding}
 ;   sudo usermod -a -G video $USER
 ; and install https://github.com/haikarainen/light#debian
 type = custom/script
-format-prefix = "Brightness: "
+format-prefix = "☀️: "
 exec = light -G
 scroll-up = light -A 5
 scroll-down = light -U 5
@@ -209,7 +210,7 @@ format-underline = #4bffdc
 label = %gb_used%/%gb_total%   %percentage_used%% 
 
 bar-used-indicator =
-bar-used-width = 20
+bar-used-width = 10
 bar-used-foreground-0 = #55aa55
 bar-used-foreground-1 = #557755
 bar-used-foreground-2 = #f5a70a
@@ -304,7 +305,7 @@ format-muted-prefix = " "
 format-muted-foreground = ${colors.foreground-alt}
 label-muted = sound muted
 
-bar-volume-width = 10
+bar-volume-width = 6
 bar-volume-foreground-0 = #55aa55
 bar-volume-foreground-1 = #55aa55
 bar-volume-foreground-2 = #55aa55

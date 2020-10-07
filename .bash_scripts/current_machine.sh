@@ -2,6 +2,11 @@
 alias pingg="ping google.com"
 alias battery="upower -i /org/freedesktop/UPower/devices/battery_BAT0"
 alias port="sudo netstat -tulpn"
+
+kssh(){
+    kitty +kitty ssh $@
+}
+
 proc_origin(){
     sudo readlink -f /proc/$1/exe
 }

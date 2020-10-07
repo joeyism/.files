@@ -40,7 +40,9 @@ Plugin 'majutsushi/tagbar'
 
 Plugin 'romainl/Apprentice'
 
-Plugin 'rking/ag.vim'
+Plugin 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+Plugin 'junegunn/fzf.vim'
+Plugin 'leafgarland/typescript-vim'
 
 call vundle#end()            " required
 
