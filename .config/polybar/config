@@ -19,29 +19,30 @@
 [colors]
 ;background = ${xrdb:color0:#222}
 ;aa is little transparent, FF is not
-background = #00222222
+background = #00222200
 background-alt = #00444444
 ;foreground = ${xrdb:color7:#222}
 primary = #ffb52a
 secondary = #e60053
 alert = #bd2c40
-underline-green = #00ff9f
-underline-green-2 = #00FF41
-underline-teal = #4bffdc
-underline-teal-2 = #00b8ff
-underline-blue = #0a6cf5
-underline-blue-2 = #001eff
-underline-red = #B51F07
-underline-grey = #7a8488
-underline-light-grey = #def4df
-underline-yellow = #fdf800
-underline-purple = #bd00ff
-underline-pink = #d600ff
-underline-orange = #ff9700
+constant-green = #00ff9f
+constant-green-2 = #00FF41
+constant-teal = #4bffdc
+constant-teal-2 = #00b8ff
+constant-blue = #0a6cf5
+constant-blue-2 = #001eff
+constant-red = #B51F07
+constant-grey = #7a8488
+constant-clear = #00222200
+constant-light-grey = #def4df
+constant-yellow = #fdf800
+constant-purple = #bd00ff
+constant-pink = #d600ff
+constant-orange = #ff9700
 
-underline-general = ${colors.underline-grey}
-foreground = ${colors.underline-grey}
-foreground-alt = #e6f2ff
+general = ${colors.constant-grey}
+underline = ${colors.constant-clear}
+foreground = ${colors.constant-grey}
 
 [bar/example]
 ;monitor = ${env:MONITOR:HDMI-1}
@@ -105,16 +106,16 @@ type = internal/xkeyboard
 blacklist-0 = num lock
 
 format-prefix = " "
-format-prefix-foreground = ${colors.foreground-alt}
-format-prefix-underline = ${colors.underline-general}
+format-prefix-foreground = ${colors.foreground}
+format-prefix-underline = ${colors.underline}
 
 label-layout = %layout%
-label-layout-underline = ${colors.underline-general}
+label-layout-underline = ${colors.underline}
 
 label-indicator-padding = 2
 label-indicator-margin = 1
 label-indicator-background = ${colors.secondary}
-label-indicator-underline = ${colors.underline-general}
+label-indicator-underline = ${colors.underline}
 
 [module/filesystem]
 type = internal/fs
@@ -124,7 +125,7 @@ mount-0 = /
 
 label-mounted = %{F#0a81f5}%mountpoint%%{F-}: %percentage_used%%
 label-unmounted = %mountpoint% not mounted
-label-unmounted-foreground = ${colors.foreground-alt}
+label-unmounted-foreground = ${colors.foreground}
 
 [module/bspwm]
 type = internal/bspwm
@@ -142,7 +143,7 @@ label-urgent-background = ${colors.alert}
 label-urgent-padding = 2
 
 label-empty = %index%
-label-empty-foreground = ${colors.foreground-alt}
+label-empty-foreground = ${colors.foreground}
 label-empty-padding = 2
 
 ; Separator in between workspaces
@@ -205,9 +206,9 @@ interval = 2
 format = <label> <ramp-coreload>
 format-prefix = "CPU: "
 format-prefix-foreground = ${colors.foreground}
-format-underline = ${colors.underline-general}
+format-underline = ${colors.underline}
 label = %percentage:2%% 
-label-foreground = ${colors.underline-teal}
+label-foreground = ${colors.constant-teal}
 ramp-coreload-spacing = 1
 ramp-coreload-0 = ▁
 ramp-coreload-1 = ▂
@@ -217,7 +218,7 @@ ramp-coreload-4 = ▅
 ramp-coreload-5 = ▆
 ramp-coreload-6 = ▇
 ramp-coreload-7 = █
-ramp-coreload-foreground = ${colors.underline-teal}
+ramp-coreload-foreground = ${colors.constant-teal}
 
 [module/memory]
 type = internal/memory
@@ -225,16 +226,16 @@ format = <label> <bar-used>
 interval = 1
 format-prefix = "Mem: "
 format-prefix-foreground = ${colors.foreground}
-format-underline = ${colors.underline-general}
+format-underline = ${colors.underline}
 label = %gb_used%/%gb_total%   %percentage_used%% 
-label-foreground = ${colors.underline-yellow}
+label-foreground = ${colors.constant-yellow}
 
 bar-used-indicator =
 bar-used-width = 10
-bar-used-foreground-0 = ${colors.underline-yellow}
-bar-used-foreground-1 = ${colors.underline-yellow}
-bar-used-foreground-2 = ${colors.underline-orange}
-bar-used-foreground-3 = ${colors.underline-red}
+bar-used-foreground-0 = ${colors.constant-yellow}
+bar-used-foreground-1 = ${colors.constant-yellow}
+bar-used-foreground-2 = ${colors.constant-orange}
+bar-used-foreground-3 = ${colors.constant-red}
 bar-used-fill = ▐
 bar-used-empty = ▐
 bar-used-empty-foreground = #444444
@@ -248,7 +249,7 @@ interval = 3.0
 accumulate-stats = true
 
 format-connected = <label-connected>
-format-connected-underline = ${colors.underline-general}
+format-connected-underline = ${colors.underline}
 label-connected = %essid% %downspeed:9%⬇ %upspeed:9%⬆
 label-connected-foreground = ${colors.foreground}
 
@@ -266,16 +267,16 @@ type = internal/network
 interface = vetha1e519a
 interval = 3.0
 
-format-connected-underline = ${colors.underline-general}
+format-connected-underline = ${colors.general}
 format-connected-prefix = " "
-format-connected-prefix-foreground = ${colors.foreground-alt}
+format-connected-prefix-foreground = ${colors.foreground}
 label-connected = %local_ip%
 
 format-disconnected =
 ;format-disconnected = <label-disconnected>
 ;format-disconnected-underline = ${self.format-connected-underline}
 ;label-disconnected = %ifname% disconnected
-;label-disconnected-foreground = ${colors.foreground-alt}
+;label-disconnected-foreground = ${colors.foreground}
 
 [module/date]
 type = internal/date
@@ -288,11 +289,11 @@ time = %H:%M
 time-alt = %H:%M:%S
 
 format-prefix = 
-format-prefix-foreground = ${colors.foreground-alt}
-format-underline = ${colors.underline-general}
+format-prefix-foreground = ${colors.foreground}
+format-underline = ${colors.underline}
 
 label = %date% %time%
-foreground = ${colors.foreground-alt}
+foreground = ${colors.foreground}
 
 [module/alsa]
 type = internal/alsa
@@ -302,24 +303,24 @@ label-volume = 🔊
 label-volume-foreground = ${root.foreground}
 
 format-muted-prefix = " "
-format-muted-foreground = ${colors.foreground-alt}
+format-muted-foreground = ${colors.foreground}
 label-muted = 🔈
 
 bar-volume-width = 6
-bar-volume-foreground-0 = ${colors.underline-blue}
-bar-volume-foreground-1 = ${colors.underline-blue}
-bar-volume-foreground-2 = ${colors.underline-blue}
-bar-volume-foreground-3 = ${colors.underline-blue}
-bar-volume-foreground-4 = ${colors.underline-blue}
-bar-volume-foreground-5 = ${colors.underline-red}
-bar-volume-foreground-6 = ${colors.underline-red}
+bar-volume-foreground-0 = ${colors.constant-blue}
+bar-volume-foreground-1 = ${colors.constant-blue}
+bar-volume-foreground-2 = ${colors.constant-blue}
+bar-volume-foreground-3 = ${colors.constant-blue}
+bar-volume-foreground-4 = ${colors.constant-blue}
+bar-volume-foreground-5 = ${colors.constant-red}
+bar-volume-foreground-6 = ${colors.constant-red}
 bar-volume-gradient = false
 bar-volume-indicator = |
 bar-volume-indicator-font = 2
 bar-volume-fill = ─
-bar-volume-fill-font = ${colors.underline-general}
+bar-volume-fill-font = ${colors.general}
 bar-volume-empty = ─
-bar-volume-empty-font = ${colors.underline-general}
+bar-volume-empty-font = ${colors.general}
 bar-volume-empty-foreground = ${colors.foreground}
 
 [module/battery]
@@ -331,26 +332,26 @@ label-active-font = 7
 
 
 format-charging = <animation-charging> <label-charging>
-format-charging-underline = ${colors.underline-general}
+format-charging-underline = ${colors.underline}
 
 format-discharging = <animation-discharging> <label-discharging>
 format-discharging-underline = ${self.format-charging-underline}
 
 format-full-prefix = "⚡️"
-format-full-prefix-foreground = ${colors.underline-teal}
+format-full-prefix-foreground = ${colors.constant-teal}
 format-full-underline = ${self.format-charging-underline}
 
 
 animation-charging-0 = ⚡️
 animation-charging-1 = ⚡️
 animation-charging-2 = ⚡️
-animation-charging-foreground = ${colors.underline-teal}
+animation-charging-foreground = ${colors.constant-teal}
 animation-charging-framerate = 750
 
 animation-discharging-0 = 🔋
 animation-discharging-1 = 🔋
 animation-discharging-2 = 🔋
-animation-discharging-foreground = ${colors.underline-teal}
+animation-discharging-foreground = ${colors.constant-teal}
 animation-discharging-framerate = 750
 
 [module/temperature]
@@ -362,14 +363,14 @@ format-prefix = "🌡️"
 format-prefix-foreground = ${colors.foreground}
 
 format = <label>
-format-underline = ${colors.underline-general}
+format-underline = ${colors.underline}
 format-warn = <label-warn>
 format-warn-underline = ${self.format-underline}
 
 label = %temperature-c%
-label-foreground = ${colors.underline-green}
+label-foreground = ${colors.constant-green}
 label-warn = %temperature-c%
-label-warn-foreground = ${colors.underline-red}
+label-warn-foreground = ${colors.constant-red}
 
 [module/powermenu]
 type = custom/menu
@@ -385,7 +386,7 @@ label-open-foreground = ${colors.secondary}
 label-close =  cancel
 label-close-foreground = ${colors.secondary}
 label-separator = |
-label-separator-foreground = ${colors.foreground-alt}
+label-separator-foreground = ${colors.foreground}
 
 menu-0-0 = reboot
 menu-0-0-exec = menu-open-1
