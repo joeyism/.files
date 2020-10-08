@@ -326,7 +326,7 @@ bar-volume-empty-foreground = ${colors.foreground}
 [module/battery]
 type = internal/battery
 battery = BAT0
-adapter = AC0
+adapter = AC
 full-at = 97
 label-active-font = 7
 
@@ -369,7 +369,8 @@ format-warn-underline = ${self.format-underline}
 
 label = %temperature-c%
 label-foreground = ${colors.constant-green}
-label-warn = %temperature-c%
+
+label-warn = 🌡️%temperature-c%
 label-warn-foreground = ${colors.constant-red}
 
 [module/powermenu]
@@ -380,7 +381,7 @@ expand-right = true
 format-spacing = 1
 label-active-font = 7
 
-label-open = 
+label-open = "wow"
 label-open-foreground = ${colors.secondary}
 label-close =  cancel
 label-close-foreground = ${colors.secondary}
