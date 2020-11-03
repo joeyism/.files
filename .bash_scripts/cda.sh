@@ -12,7 +12,10 @@ cda(){
       deactivate
     fi
 
-    if [ -z "${BASH_ALIASES[$1]}" ]; then
+    if [ "$1" == "new" ]; then
+        echo "$2 $(pwd)" >> ~/.cda
+        source ~/.bash_scripts/cda.sh
+    elif [ -z "${BASH_ALIASES[$1]}" ]; then
       cd ${cda_locations[$1]}
     else
       cd $(printf "${BASH_ALIASES[$1]}" | bash)

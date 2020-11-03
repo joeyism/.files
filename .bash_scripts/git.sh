@@ -171,3 +171,6 @@ merge(){
     fi
 }
 complete -W "$(_get_git_branches)" merge
+pull-theirs(){
+    git pull -s recursive -X theirs
+}

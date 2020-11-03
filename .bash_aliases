@@ -78,3 +78,12 @@ wgeturl(){
     filename=$(echo $url | tr "?" "\n" | head -n 1 | tr "/" "\n" | tail -n 1)
     wget "$url" -O $filename
 }
+honchome(){
+    githome=$(git rev-parse --show-toplevel)
+    envfile="$githome/.env"
+    honcho -e $envfile $@
+}
+restart-spotify(){
+    systemctl --user stop spotifyd.service
+    systemctl --user start spotifyd.service
+}

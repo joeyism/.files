@@ -63,7 +63,7 @@ stream-kinesis(){
 #    done
 #}
 ec2list(){
-  aws ec2 describe-instances --output table   --query 'Reservations[].Instances[].[Tags[?Key==`Name`] | [0].Value, PublicIpAddress, PrivateIpAddress]'  --filters "Name=tag-value,Values=*$1*" "Name=instance-state-name, Values=running"
+  aws ec2 describe-instances --output table   --query 'Reservations[].Instances[].[Tags[?Key==`Name`] | [0].Value, PublicIpAddress, PrivateIpAddress]'  --filters "Name=tag-value,Values=*$1*" "Name=instance-state-name, Values=running" ${@:2}
 }
 alias s3_buckets="aws s3 ls"
 s3_cat(){

@@ -209,7 +209,7 @@ format-prefix-foreground = ${colors.foreground}
 format-underline = ${colors.underline}
 label = %percentage:2%% 
 label-foreground = ${colors.constant-teal}
-ramp-coreload-spacing = 1
+ramp-coreload-spacing = 0
 ramp-coreload-0 = ▁
 ramp-coreload-1 = ▂
 ramp-coreload-2 = ▃
@@ -227,15 +227,16 @@ interval = 1
 format-prefix = "Mem: "
 format-prefix-foreground = ${colors.foreground}
 format-underline = ${colors.underline}
-label = %gb_used%/%gb_total%   %percentage_used%% 
+label = %gb_used%/%gb_total%  %percentage_used%%
 label-foreground = ${colors.constant-yellow}
 
 bar-used-indicator =
 bar-used-width = 10
-bar-used-foreground-0 = ${colors.constant-yellow}
-bar-used-foreground-1 = ${colors.constant-yellow}
-bar-used-foreground-2 = ${colors.constant-orange}
-bar-used-foreground-3 = ${colors.constant-red}
+bar-used-foreground-0 = ${colors.constant-green-2}
+bar-used-foreground-1 = ${colors.constant-green-2}
+bar-used-foreground-2 = ${colors.constant-yellow}
+bar-used-foreground-3 = ${colors.constant-orange}
+bar-used-foreground-4 = ${colors.constant-red}
 bar-used-fill = ▐
 bar-used-empty = ▐
 bar-used-empty-foreground = #444444
@@ -250,17 +251,12 @@ accumulate-stats = true
 
 format-connected = <label-connected>
 format-connected-underline = ${colors.underline}
-label-connected = %essid% %downspeed:9%⬇ %upspeed:9%⬆
+label-connected = %essid% %downspeed:9%⬇ %upspeed:9%⬆ 📡 %signal%
 label-connected-foreground = ${colors.foreground}
 
 format-disconnected = <label-disconnected>
 format-packetloss = <animation-packetloss> <label-connected>
-
 label-packetloss = %essid%
-animation-packetloss-0-foreground = #ffa64c
-animation-packetloss-1-foreground = #000000
-; Framerate in milliseconds
-animation-packetloss-framerate = 500
 
 [module/eth]
 type = internal/network
@@ -370,7 +366,7 @@ format-warn-underline = ${self.format-underline}
 label = %temperature-c%
 label-foreground = ${colors.constant-green}
 
-label-warn = 🌡️%temperature-c%
+label-warn = 🔥%temperature-c%🔥
 label-warn-foreground = ${colors.constant-red}
 
 [module/powermenu]

@@ -23,6 +23,28 @@ venv3(){
   fi
   source venv/bin/activate $@
 }
+venv38(){
+  if [ ! -d "./venv" ]; then
+    virtualenv venv -p python3.8 $@
+  fi
+  source venv/bin/activate $@
+}
 venv-jupyter(){
   python -m ipykernel install --user --name=venv
 }
+_venv_select(){
+    find venv -type f -follow -print | grep "^activate\|activate$"
+}
+venvselect(){
+    if [ $# -eq 0 ]; then
+        select activate in $(find venv -type f -follow -print | grep "^activate\|activate$");
+        do  
+            source $activate
+            break
+        done
+    else
+        source $@
+    fi
+}
+complete -W "$(_venv_select)" venvselect
+
