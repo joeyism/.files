@@ -76,6 +76,9 @@ pushto(){
     fi
     git push origin $(git rev-parse --abbrev-ref HEAD):$tobranch ${@:2}
 }
+_pull(){
+    COMPREPLY=($(compgen -W "$(git branch | tail -n +2)" -- "${COMP_WORDS[1]}"))
+}
 pull(){
     if [ $# -eq 0 ]
         then
@@ -86,6 +89,7 @@ pull(){
             git pull origin $@
     fi
 }
+complete -F _pull pull
 git-revert(){
     git checkout -- $@
 }

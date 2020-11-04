@@ -33,7 +33,9 @@ venv-jupyter(){
   python -m ipykernel install --user --name=venv
 }
 _venv_select(){
-    find venv -type f -follow -print | grep "^activate\|activate$"
+    if [ -d "./venv" ]; then
+        find venv -type f -follow -print | grep "^activate\|activate$"
+    fi
 }
 venvselect(){
     if [ $# -eq 0 ]; then

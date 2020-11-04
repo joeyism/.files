@@ -96,8 +96,6 @@ ${color 5294E2}${alignc}Data
 ${voffset -5}${color 5294E2}$hr
 ${color grey}RAM:$color ${goto 65} $mem/$memmax ${goto 170}${color grey}Swap: $color $alignr $swap/$swapmax
 ${color #c9c9c9}${membar 4,155} $alignr ${color #c9c9c9}${swapbar 4, 155}
-${color grey}Linux: $alignr $color ${fs_used /}/${fs_size /} 
-${color #c9c9c9}${fs_bar 4 /}
 ${color grey}/home/joeyism: $alignr $color${fs_used /home/joeyism}/${fs_size /home/joeyism} 
 ${color #c9c9c9}${fs_bar 4 /home/joeyism}
 ${color grey}/dev/shm: $alignr $color${fs_used /dev/shm}/${fs_size /dev/shm} 

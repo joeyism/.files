@@ -14,7 +14,8 @@ _task_write_first(){
   sed -i "1i$TASK_ID" .task
 }
 _task_select_first(){
-  sed -i "/$TASK_ID$/d" .task && awk -i inplace "BEGINFILE{print \"$TASK_ID\"}{print}" .task
+  sed -i "/$TASK_ID$/d" .task
+  _task_write_first
 }
 
 task(){
