@@ -47,6 +47,10 @@ venvselect(){
     else
         source $@
     fi
+    activate=${activate/venv\//}
+    activate=${activate/\/bin\/activate/}
+    echo "PACKAGE_PATH=$activate"
+    PACKAGE_PATH=$activate
 }
 complete -W "$(_venv_select)" venvselect
 
