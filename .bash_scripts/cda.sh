@@ -24,5 +24,9 @@ cda(){
     if [ -d "venv" ]; then
       venv
     fi
+
+    if [ -f ".bashlc" ]; then
+        source .bashlc
+    fi
 }
 complete -W "githome latest $cda_total_keys" cda

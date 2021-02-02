@@ -39,7 +39,7 @@ _venv_select(){
 }
 venvselect(){
     if [ $# -eq 0 ]; then
-        select activate in $(find venv -type f -follow -print | grep "^activate\|activate$");
+        select activate in $(find venv -type f -follow -print | grep "^activate\|activate$" | sort);
         do  
             source $activate
             break
@@ -53,4 +53,10 @@ venvselect(){
     PACKAGE_PATH=$activate
 }
 complete -W "$(_venv_select)" venvselect
-
+py-replace(){
+    if [ $# -eq 0 ]; then
+        echo py-replace SEARCH REPLACE
+    else
+        find . -name '*.py' -exec sed -i -e "s/$1/$2/g" {} \;
+    fi
+}
