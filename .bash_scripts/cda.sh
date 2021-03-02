@@ -13,8 +13,14 @@ cda(){
     fi
 
     if [ "$1" == "new" ]; then
-        echo "$2 $(pwd)" >> ~/.cda
+        if [ -z $2 ]; then
+            read -p "Alias: " alias
+        else
+            alias=$2
+        fi
+        echo "$alias $(pwd)" >> ~/.cda
         source ~/.bash_scripts/cda.sh
+        echo "Created $alias $(pwd)"
     elif [ -z "${BASH_ALIASES[$1]}" ]; then
       cd ${cda_locations[$1]}
     else
