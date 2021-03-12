@@ -100,3 +100,28 @@ mp4togif(){
   ffmpeg -i $inputname -f gif $outputgif
 }
 alias gif="sxiv -a"
+json-join(){
+    INPUT=$@;
+    _check_no_args_quiet $INPUT
+    if [ $? == 1 ]; then
+        printf "Joins JSON arrays into one output\n"
+        printf "Usage:\n"
+        printf "\tjson-join file1.json file2.json ...\n"
+        printf "\tjson-join *.json\n"
+        printf "\tjson-join *.json > output.json\n\n"
+        return 1
+    fi
+    JQ_STR='';
+    TOTAL_NUM_FILES=$(($(ls $INPUT | wc -l)-1))
+    i=0;
+    echo "["
+    for file in $INPUT; do
+        if [ $i -eq $TOTAL_NUM_FILES ]; then
+            echo "$(jq -r -s '.[]' $file | tail -n +2 | head -n -1)"
+        else
+            echo "$(jq -r -s '.[]' $file | tail -n +2 | head -n -1),"
+        fi
+        ((i++))
+    done
+    echo "]"
+}
