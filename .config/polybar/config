@@ -255,7 +255,7 @@ bar-used-empty-foreground = #444444
 
 [module/wlan]
 type = internal/network
-interface = wlp2s0
+interface = wlp3s0
 interval = 3.0
 
 accumulate-stats = true
