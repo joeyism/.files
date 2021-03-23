@@ -77,7 +77,7 @@ font-4 = NotoEmoji:scale=10;1
 
 modules-left = bspwm i3
 modules-center =
-modules-right = spotify filesystem screen alsa xkeyboard memory cpu wlan eth battery temperature date powermenu
+modules-right = filesystem screen alsa xkeyboard memory cpu wlan eth battery temperature date powermenu
 
 tray-position = right
 tray-padding = 2
@@ -163,14 +163,14 @@ label-mode-foreground = #000
 label-mode-background = ${colors.primary}
 
 ; focused = Active workspace on focused monitor
-label-focused = %index%
+label-focused = %icon%
 label-focused-background = ${module/bspwm.label-focused-background}
 label-focused-underline = ${module/bspwm.label-focused-underline}
 label-focused-padding = ${module/bspwm.label-focused-padding}
 label-focused-foreground = ${module/bspwm.label-focused-underline}
 
 ; unfocused = Inactive workspace on any monitor
-label-unfocused = %index%
+label-unfocused = %icon%
 label-unfocused-padding = ${module/bspwm.label-occupied-padding}
 
 ; visible = Active workspace on unfocused monitor
@@ -186,6 +186,17 @@ label-urgent-padding = ${module/bspwm.label-urgent-padding}
 
 ; Separator in between workspaces
 ; label-separator = |
+ws-icon-0 = 1;🌎
+ws-icon-1 = 2;💻
+ws-icon-2 = 3;📚
+ws-icon-3 = 4;🌎
+ws-icon-4 = 5;🌎
+ws-icon-5 = 6;🌎
+ws-icon-6 = 7;🌎
+ws-icon-7 = 8;🌎
+ws-icon-8 = 9;🌎
+ws-icon-9 = 10;🎵
+ws-icon-default = 🌎
 
 
 [module/screen]
@@ -244,7 +255,7 @@ bar-used-empty-foreground = #444444
 
 [module/wlan]
 type = internal/network
-interface = wlp3s0
+interface = wlp2s0
 interval = 3.0
 
 accumulate-stats = true
@@ -404,7 +415,7 @@ type = custom/script
 interval = 1
 format-prefix = " "
 format = <label>
-exec = python /home/joeyism/.config/polybar/spotify_status.py -f '{artist}: {song}'
+exec = python /home/joey/.config/polybar/spotify_status.py -f '{artist}: {song}'
 format-underline = #1db954
 
 [settings]
