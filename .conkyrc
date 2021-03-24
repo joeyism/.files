@@ -31,15 +31,15 @@ conky.config = {
 	double_buffer = true,
     border_width = 1,
     cpu_avg_samples = 2,
-	default_color = 'white',
-    default_outline_color = 'white',
-    default_shade_color = 'white',
+	default_color = 'def4df',
+    default_outline_color = 'def4df',
+    default_shade_color = 'def4df',
     draw_borders = false,
     draw_graph_borders = true,
     draw_outline = false,
     draw_shades = false,
     use_xft = true,
-    font = 'Cantarell:size=10',
+    font = 'Droid Sans Mono:size=9',
     gap_x = 5,
     gap_y = 20,
     minimum_height = 5,
@@ -63,35 +63,33 @@ conky.config = {
 }
 
 conky.text = [[
-${voffset -5}
-${color 5294E2}$alignc ${exec whoami}@${exec cat /proc/sys/kernel/hostname}
-${voffset -5}
-${color grey}Uptime:${color white} $uptime	$alignr ${color white} $time
-${color grey}OS:${color white} ${exec uname -r}
-${color grey}CPU:${color white} ${exec lscpu | sed -nr '/Model name/ s/.*:\s*(.*) @ .*/\1/p'}
-${color grey}Location:${color white} ${texeci 30 location}
-${color grey}SSID:${color white} ${texeci 6000 iwgetid -r}
-${color white}${texeci 1 iwconfig wlp3s0 | grep -i quality | awk '{$1=$1;print}'}
-${color grey}Battery: ${color white}${battery_percent}% ${battery_time}${color grey}${battery_bar}
+${color 7a8488}Uptime:${color def4df} $uptime	$alignr
+${color 7a8488}OS:${color def4df} ${exec uname -r}
+${color 7a8488}CPU:${color def4df} ${exec lscpu | sed -nr '/Model name/ s/.*:\s*(.*) @ .*/\1/p'}
+${color 7a8488}Location:${color def4df} ${texeci 60 location}
+${color 7a8488}SSID:${color def4df} ${texeci 6000 iwgetid -r}
+${color def4df}${texeci 1 iwconfig wlp3s0 | grep -i quality | awk '{$1=$1;print}'}
+${color 7a8488}Battery: ${color def4df}${battery_percent}% ${battery_time}${color 7a8488}${battery_bar}
 ${voffset -10}
-${color grey}CPU Usage:$color ${goto 130} $cpu% ${color grey}${goto 170}Disk I/O:$color $alignr ${diskio}
-${color grey}GHz:$color ${goto 130} $freq_g  ${goto 170}${color grey}MHz:$color $alignr $freq
-${color grey}Processes:$color ${goto 130} $processes  ${goto 170}${color grey}Running:$color $alignr $running_processes
+${color 7a8488}CPU Usage:$color ${goto 130} $cpu% ${color 7a8488}${goto 170}Disk I/O:$color $alignr ${diskio}
+${color 7a8488}GHz:$color ${goto 130} $freq_g  ${goto 170}${color 7a8488}MHz:$color $alignr $freq
+${color 7a8488}Processes:$color ${goto 130} $processes  ${goto 170}${color 7a8488}Running:$color $alignr $running_processes
 ${voffset -10}
-${color grey}Name${goto 158}CPU${goto 225}Memory${goto 300}PID
+${color 7a8488}Name${goto 158}CPU${goto 225}Memory${goto 300}PID
 ${color}${top_mem name 1}${goto 150}${top_mem cpu 1}${goto 225}${top_mem mem_res 1}${goto 300}${top_mem pid 1}
 ${color}${top_mem name 2}${goto 150}${top_mem cpu 2}${goto 225}${top_mem mem_res 2}${goto 300}${top_mem pid 2}
 ${color}${top_mem name 3}${goto 150}${top_mem cpu 3}${goto 225}${top_mem mem_res 3}${goto 300}${top_mem pid 3}
-${voffset 5}${color grey}CPU ${goto 210}${color grey}Disk I/O 
+${voffset 5}${color 7a8488}CPU ${goto 210}${color 7a8488}Disk I/O 
 ${color #c9c9c9}${cpugraph 0 32,155 c9c9c9 c9c9c9} $alignr ${color #c9c9c9}${diskiograph 32,155 c9c9c9 c9c9c9 750}
-${color grey}Download ${goto 210}${color grey}Upload 
+${color 7a8488}Download ${goto 210}${color 7a8488}Upload 
 ${color}${downspeedgraph wlp3s0 32,155 c9c9c9 c9c9c9} $alignr ${color #c9c9c9}${upspeedgraph wlp3s0 32,155 c9c9c9 c9c9c9}
 ${voffset -10}${color #c9c9c9}${downspeedgraph enp0s25 32,155 c9c9c9 c9c9c9} $alignr ${color #c9c9c9}${upspeedgraph enp0s25 32,155 c9c9c9 c9c9c9}
-${color grey}RAM:$color ${goto 65} $mem/$memmax ${goto 200}${color grey}Swap: $color $alignr $swap/$swapmax
+${color 7a8488}RAM:$color ${goto 65} $mem/$memmax ${goto 200}${color 7a8488}Swap: $color $alignr $swap/$swapmax
 ${color #c9c9c9}${membar 4,155} $alignr ${color #c9c9c9}${swapbar 4, 155}
-${color grey}/home/joeyism: $alignr $color${fs_used /home/joeyism}/${fs_size /home/joeyism} 
+${color 7a8488}/home/joeyism: $alignr $color${fs_used /home/joeyism}/${fs_size /home/joeyism} 
 ${color #c9c9c9}${fs_bar 4 /home/joeyism}
-${color grey}/dev/shm: $alignr $color${fs_used /dev/shm}/${fs_size /dev/shm} 
+${color 7a8488}/dev/shm: $alignr $color${fs_used /dev/shm}/${fs_size /dev/shm} 
 ${color #c9c9c9}${fs_bar 4 /dev/shm}
-${color grey}${curl wttr.in/montpellier?0mQT 30}
+${color #c9c9c9}${curl wttr.in/montpellier?format=%c+%C\nreal:+%t+|+feels+like:+%f\n%w+%p+%P\nHumidity:+%h\nSunrise:+%S\nSunset:+%s\n 300}
 ]]
+--${color 7a8488}${curl wttr.in/montpellier?0mQT 30}
