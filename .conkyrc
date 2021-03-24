@@ -59,46 +59,39 @@ conky.config = {
     uppercase = false,
     use_spacer = 'none',
     show_graph_scale = true,
-    show_graph_range = false
+    show_graph_range = true
 }
 
 conky.text = [[
-${color 5294E2}$hr
-${color #5294E2}$alignc ${exec cat /proc/sys/kernel/hostname}
-${voffset -5}${color 5294E2}$hr
+${voffset -5}
+${color 5294E2}$alignc ${exec whoami}@${exec cat /proc/sys/kernel/hostname}
+${voffset -5}
 ${color grey}Uptime:${color white} $uptime	$alignr ${color white} $time
 ${color grey}OS:${color white} ${exec uname -r}
-${color grey}Username:${color white} ${exec whoami}
 ${color grey}CPU:${color white} ${exec lscpu | sed -nr '/Model name/ s/.*:\s*(.*) @ .*/\1/p'}
 ${color grey}Location:${color white} ${texeci 30 location}
 ${color grey}SSID:${color white} ${texeci 6000 iwgetid -r}
 ${color white}${texeci 1 iwconfig wlp3s0 | grep -i quality | awk '{$1=$1;print}'}
 ${color grey}Battery: ${color white}${battery_percent}% ${battery_time}${color grey}${battery_bar}
-${voffset -5}${color 5294E2}$hr
-${color 5294E2}${alignc}CPU/Disk 
-${voffset -5}${color 5294E2}$hr
+${voffset -10}
 ${color grey}CPU Usage:$color ${goto 130} $cpu% ${color grey}${goto 170}Disk I/O:$color $alignr ${diskio}
 ${color grey}GHz:$color ${goto 130} $freq_g  ${goto 170}${color grey}MHz:$color $alignr $freq
+${color grey}Processes:$color ${goto 130} $processes  ${goto 170}${color grey}Running:$color $alignr $running_processes
+${voffset -10}
+${color grey}Name${goto 158}CPU${goto 225}Memory${goto 300}PID
+${color}${top_mem name 1}${goto 150}${top_mem cpu 1}${goto 225}${top_mem mem_res 1}${goto 300}${top_mem pid 1}
+${color}${top_mem name 2}${goto 150}${top_mem cpu 2}${goto 225}${top_mem mem_res 2}${goto 300}${top_mem pid 2}
+${color}${top_mem name 3}${goto 150}${top_mem cpu 3}${goto 225}${top_mem mem_res 3}${goto 300}${top_mem pid 3}
+${voffset 5}${color grey}CPU ${goto 210}${color grey}Disk I/O 
 ${color #c9c9c9}${cpugraph 0 32,155 c9c9c9 c9c9c9} $alignr ${color #c9c9c9}${diskiograph 32,155 c9c9c9 c9c9c9 750}
-${voffset -5}${color grey}Processes:$color ${goto 130} $processes  ${goto 170}${color grey}Running:$color $alignr $running_processes
-${voffset -5}${color 5294E2}$hr
-Name${goto 100}Percentage${goto 180}CPU${goto 230}Memory
-${color grey}${top name 1}${goto 100}${top io_perc 1}${goto 175}${top cpu 1}${goto 225}${top mem 1}
-${color grey}${top name 2}${goto 100}${top io_perc 2}${goto 175}${top cpu 2}${goto 225}${top mem 2}
-${voffset -5}${color 5294E2}$hr
-${color 5294E2}${alignc}Connections 
-${voffset -5}${color 5294E2}$hr
-${color grey}Download ${goto 170}${color grey}Upload 
-${color #c9c9c9}${downspeedgraph wlp3s0 32,155 c9c9c9 c9c9c9} $alignr ${color #c9c9c9}${upspeedgraph wlp3s0 32,155 c9c9c9 c9c9c9}
+${color grey}Download ${goto 210}${color grey}Upload 
+${color}${downspeedgraph wlp3s0 32,155 c9c9c9 c9c9c9} $alignr ${color #c9c9c9}${upspeedgraph wlp3s0 32,155 c9c9c9 c9c9c9}
 ${voffset -10}${color #c9c9c9}${downspeedgraph enp0s25 32,155 c9c9c9 c9c9c9} $alignr ${color #c9c9c9}${upspeedgraph enp0s25 32,155 c9c9c9 c9c9c9}
-${voffset -15}${color 5294E2}$hr
-${color 5294E2}${alignc}Data 
-${voffset -5}${color 5294E2}$hr
-${color grey}RAM:$color ${goto 65} $mem/$memmax ${goto 170}${color grey}Swap: $color $alignr $swap/$swapmax
+${color grey}RAM:$color ${goto 65} $mem/$memmax ${goto 200}${color grey}Swap: $color $alignr $swap/$swapmax
 ${color #c9c9c9}${membar 4,155} $alignr ${color #c9c9c9}${swapbar 4, 155}
 ${color grey}/home/joeyism: $alignr $color${fs_used /home/joeyism}/${fs_size /home/joeyism} 
 ${color #c9c9c9}${fs_bar 4 /home/joeyism}
 ${color grey}/dev/shm: $alignr $color${fs_used /dev/shm}/${fs_size /dev/shm} 
 ${color #c9c9c9}${fs_bar 4 /dev/shm}
-${color grey}${curl wttr.in/toronto?0mQT 30}
+${color grey}${curl wttr.in/montpellier?0mQT 30}
 ]]

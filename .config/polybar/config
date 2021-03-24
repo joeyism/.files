@@ -31,18 +31,25 @@ constant-teal = #4bffdc
 constant-teal-2 = #00b8ff
 constant-blue = #0a6cf5
 constant-blue-2 = #001eff
+constant-blue-conky = #5294E2
 constant-red = #B51F07
+constant-bright-red = #FF0000
 constant-grey = #7a8488
 constant-clear = #00222200
 constant-light-grey = #def4df
+constant-dim-grey = #444444
+constant-white = #FFFFFF
 constant-yellow = #fdf800
 constant-purple = #bd00ff
 constant-pink = #d600ff
 constant-orange = #ff9700
+constant-gold =  #FFC300
 
 general = ${colors.constant-grey}
 underline = ${colors.constant-clear}
 foreground = ${colors.constant-grey}
+foreground-alert = ${colors.constant-white}
+background-alert = ${colors.constant-bright-red}
 
 [bar/example]
 ;monitor = ${env:MONITOR:HDMI-1}
@@ -68,16 +75,16 @@ padding-right = 2
 module-margin-left = 1
 module-margin-right = 2
 
-font-0 = siji:pixelsize=10;0
-font-1 = siji:pixelsize=15;0
+#echo "$(fc-list : family | grep Awesome | tail -1):pixelsize=10"
+font-0 = FontAwesome:pixelsize=10
+font-1 = siji:pixelsize=10;0
 font-2 = siji:pixelsize=10;1
 font-3 = Font Awesome 5 Free:size=10;4
 font-4 = NotoEmoji:scale=10;1
 
 
-modules-left = bspwm i3
-modules-center =
-modules-right = filesystem screen alsa xkeyboard memory cpu wlan eth battery temperature date powermenu
+modules-left = i3
+modules-right = spotify filesystem screen alsa xkeyboard memory cpu wlan eth battery temperature date powermenu
 
 tray-position = right
 tray-padding = 2
@@ -105,7 +112,7 @@ label = %title:0:30:...%
 type = internal/xkeyboard
 blacklist-0 = num lock
 
-format-prefix = " "
+format-prefix = " "
 format-prefix-foreground = ${colors.foreground}
 format-prefix-underline = ${colors.underline}
 
@@ -123,7 +130,7 @@ interval = 25
 
 mount-0 = /
 
-label-mounted = %{F#0a81f5}%mountpoint%%{F-}: %percentage_used%%
+label-mounted =  %percentage_used%%
 label-unmounted = %mountpoint% not mounted
 label-unmounted-foreground = ${colors.foreground}
 
@@ -159,44 +166,46 @@ wrapping-scroll = false
 ;pin-workspaces = true
 
 label-mode-padding = 2
-label-mode-foreground = #000
-label-mode-background = ${colors.primary}
+label-mode-foreground = ${colors.foreground}
+label-mode-background = ${colors.background}
 
 ; focused = Active workspace on focused monitor
 label-focused = %icon%
-label-focused-background = ${module/bspwm.label-focused-background}
-label-focused-underline = ${module/bspwm.label-focused-underline}
+label-focused-background = ${colors.background}
+label-focused-underline = ${colors.constant-gold}
 label-focused-padding = ${module/bspwm.label-focused-padding}
-label-focused-foreground = ${module/bspwm.label-focused-underline}
+label-focused-foreground = ${colors.constant-gold}
 
 ; unfocused = Inactive workspace on any monitor
 label-unfocused = %icon%
-label-unfocused-padding = ${module/bspwm.label-occupied-padding}
+label-unfocused-padding = ${self.label-focused-padding}
 
 ; visible = Active workspace on unfocused monitor
-label-visible = %index%
+label-visible = %icon%
 label-visible-background = ${self.label-focused-background}
 label-visible-underline = ${self.label-focused-underline}
 label-visible-padding = ${self.label-focused-padding}
 
 ; urgent = Workspace with urgency hint set
-label-urgent = %index%
-label-urgent-background = ${module/bspwm.label-urgent-background}
+label-urgent = %icon%
+label-urgent-background = ${colors.background-alert}
+label-urgent-foreground = ${colors.foreground-alert}
 label-urgent-padding = ${module/bspwm.label-urgent-padding}
 
 ; Separator in between workspaces
 ; label-separator = |
-ws-icon-0 = 1;🌎
-ws-icon-1 = 2;💻
-ws-icon-2 = 3;📚
-ws-icon-3 = 4;🌎
-ws-icon-4 = 5;🌎
-ws-icon-5 = 6;🌎
-ws-icon-6 = 7;🌎
-ws-icon-7 = 8;🌎
-ws-icon-8 = 9;🌎
-ws-icon-9 = 10;🎵
-ws-icon-default = 🌎
+# https://fontawesome.com/cheatsheet/free/brands
+ws-icon-0 = 1;
+ws-icon-1 = 2;
+ws-icon-2 = 3;
+ws-icon-3 = 4;
+ws-icon-4 = 5;5
+ws-icon-5 = 6;6
+ws-icon-6 = 7;7
+ws-icon-7 = 8;8
+ws-icon-8 = 9;
+ws-icon-9 = 10;
+ws-icon-default = 
 
 
 [module/screen]
@@ -204,7 +213,7 @@ ws-icon-default = 🌎
 ;   sudo usermod -a -G video $USER
 ; and install https://github.com/haikarainen/light#debian
 type = custom/script
-format-prefix = "☀️: "
+format-prefix = ""
 format-foreground = ${colors.foreground}
 exec = light -G
 scroll-up = light -A 5
@@ -219,7 +228,7 @@ format-prefix = "CPU: "
 format-prefix-foreground = ${colors.foreground}
 format-underline = ${colors.underline}
 label = %percentage:2%% 
-label-foreground = ${colors.constant-teal}
+label-foreground = ${colors.foreground}
 ramp-coreload-spacing = 0
 ramp-coreload-0 = ▁
 ramp-coreload-1 = ▂
@@ -239,7 +248,7 @@ format-prefix = "Mem: "
 format-prefix-foreground = ${colors.foreground}
 format-underline = ${colors.underline}
 label = %gb_used%/%gb_total%  %percentage_used%%
-label-foreground = ${colors.constant-yellow}
+label-foreground = ${colors.foreground}
 
 bar-used-indicator =
 bar-used-width = 10
@@ -247,10 +256,10 @@ bar-used-foreground-0 = ${colors.constant-green-2}
 bar-used-foreground-1 = ${colors.constant-green-2}
 bar-used-foreground-2 = ${colors.constant-yellow}
 bar-used-foreground-3 = ${colors.constant-orange}
-bar-used-foreground-4 = ${colors.constant-red}
+bar-used-foreground-4 = ${colors.constant-bright-red}
 bar-used-fill = ▐
 bar-used-empty = ▐
-bar-used-empty-foreground = #444444
+bar-used-empty-foreground = ${colors.constant-dim-grey}
 
 
 [module/wlan]
@@ -262,13 +271,13 @@ accumulate-stats = true
 
 format-connected = <label-connected>
 format-connected-underline = ${colors.underline}
-label-connected = %essid% %downspeed:9%⬇ %upspeed:9%⬆ 📡 %signal%
+
+label-connected = %essid%%downspeed:9%⬇%upspeed:9%⬆  %signal%
 label-connected-foreground = ${colors.foreground}
 
 format-disconnected = <label-disconnected>
 format-packetloss = <animation-packetloss> <label-connected>
 label-packetloss = %essid%
-
 [module/eth]
 type = internal/network
 interface = vetha1e519a
@@ -295,10 +304,6 @@ date = " %Y-%m-%d"
 time = %H:%M
 time-alt = %H:%M:%S
 
-format-prefix = 
-format-prefix-foreground = ${colors.foreground}
-format-underline = ${colors.underline}
-
 label = %date% %time%
 foreground = ${colors.foreground}
 
@@ -306,12 +311,12 @@ foreground = ${colors.foreground}
 type = internal/alsa
 
 format-volume = <label-volume> <bar-volume>
-label-volume = 🔊
+label-volume = 
 label-volume-foreground = ${root.foreground}
 
 format-muted-prefix = " "
 format-muted-foreground = ${colors.foreground}
-label-muted = 🔈
+label-muted = 
 
 bar-volume-width = 6
 bar-volume-foreground-0 = ${colors.constant-blue}
@@ -338,47 +343,44 @@ full-at = 97
 label-active-font = 7
 
 
-format-charging = <animation-charging> <label-charging>
+format-charging = <ramp-capacity> <label-charging>
 format-charging-underline = ${colors.underline}
 
-format-discharging = <animation-discharging> <label-discharging>
+format-discharging = <ramp-capacity> <label-discharging>
 format-discharging-underline = ${self.format-charging-underline}
 
-format-full-prefix = "⚡️"
-format-full-prefix-foreground = ${colors.constant-teal}
+format-full-prefix = ""
+format-full-prefix-foreground = ${colors.foreground}
 format-full-underline = ${self.format-charging-underline}
 
-
-animation-charging-0 = ⚡️
-animation-charging-1 = ⚡️
-animation-charging-2 = ⚡️
-animation-charging-foreground = ${colors.constant-teal}
-animation-charging-framerate = 750
-
-animation-discharging-0 = 🔋
-animation-discharging-1 = 🔋
-animation-discharging-2 = 🔋
-animation-discharging-foreground = ${colors.constant-teal}
-animation-discharging-framerate = 750
+ramp-capacity-0 = 
+ramp-capacity-0-foreground = ${colors.constant-bright-red}
+ramp-capacity-1 = 
+ramp-capacity-1-foreground = ${colors.constant-yellow}
+ramp-capacity-2 = 
+ramp-capacity-2-foreground = ${colors.constant-yellow}
+ramp-capacity-3 = 
+ramp-capacity-3-foreground = ${colors.constant-white}
+ramp-capacity-4 = 
+ramp-capacity-4-foreground = ${colors.constant-white}
 
 [module/temperature]
 type = internal/temperature
 thermal-zone = 0
 warn-temperature = 60
 
-format-prefix = "🌡️"
+format-prefix = ""
 format-prefix-foreground = ${colors.foreground}
 
 format = <label>
 format-underline = ${colors.underline}
-format-warn = <label-warn>
-format-warn-underline = ${self.format-underline}
 
 label = %temperature-c%
-label-foreground = ${colors.constant-green}
+label-foreground = ${colors.foreground}
 
 label-warn = 🔥%temperature-c%🔥
 label-warn-foreground = ${colors.constant-red}
+format-warn-underline = ${self.format-underline}
 
 [module/powermenu]
 type = custom/menu
@@ -388,34 +390,25 @@ expand-right = true
 format-spacing = 1
 label-active-font = 7
 
-label-open = "wow"
-label-open-foreground = ${colors.secondary}
-label-close =  cancel
-label-close-foreground = ${colors.secondary}
+label-open = 
+label-open-foreground = ${colors.constant-white}
+label-close = 
+label-close-foreground = ${colors.constant-bright-red}
 label-separator = |
-label-separator-foreground = ${colors.foreground-alt}
+label-separator-foreground = ${colors.foreground}
 
-menu-0-0 = reboot
-menu-0-0-exec = menu-open-1
-menu-0-1 = power off
-menu-0-1-exec = menu-open-2
-
-menu-1-0 = cancel
-menu-1-0-exec = menu-open-0
-menu-1-1 = reboot
-menu-1-1-exec = sudo reboot
-
-menu-2-0 = power off
-menu-2-0-exec = sudo poweroff
-menu-2-1 = cancel
-menu-2-1-exec = menu-open-0
+menu-0-0 = 
+menu-0-0-exec = sudo reboot
+menu-0-0-foreground = ${colors.constant-green}
+menu-0-1 = 
+menu-0-1-exec = sudo poweroff
+menu-0-1-foreground = ${colors.constant-white}
 
 [module/spotify]
 type = custom/script
 interval = 1
-format-prefix = " "
 format = <label>
-exec = python /home/joey/.config/polybar/spotify_status.py -f '{artist}: {song}'
+exec = python ${HOME}/.config/polybar/spotify_status.py -f '{artist}: {song}'
 format-underline = #1db954
 
 [settings]

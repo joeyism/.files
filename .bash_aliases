@@ -15,6 +15,7 @@ alias grep_cheat="curl cheat.sh/grep"
 alias gohere='cd $HERE'
 alias here='HERE=$(pwd)'
 alias s='status'
+alias o='xdg-open'
 mkcd(){
     mkdir $@
     cd $@
@@ -36,8 +37,9 @@ findfile(){
     find . -path ./node_modules -prune -o -name $1 -print
 }
 helpa(){
-    cat ~/.bash_scripts/*${1}*.sh
+    cat ~/.bash_scripts/*${1}*
 }
+complete -W "$(ls ~/.bash_scripts/)" helpa
 senv(){
     set -a
     source $1
@@ -70,7 +72,7 @@ updatea(){
 
 wgeturl(){
     url=$1
-    _check_no_args_quiet
+    _check_no_args_quiet $1
     if [ $? != 0 ]
     then
         read -p "url: " url
@@ -86,4 +88,19 @@ honchome(){
 restart-spotify(){
     systemctl --user stop spotifyd.service
     systemctl --user start spotifyd.service
+}
+firefox-extension-zip(){
+    packagename=$1
+    _check_no_args_quiet $1
+    if [ $? != 0 ]
+    then
+        read -p "Package Name: " packagename
+    fi
+    zip -r -FS ../$packagename.zip * --exclude '*.git*' --exclude '*.swp' --exclude '*saved.vim*'
+}
+
+firefox-extension-build(){
+    honcho -e ../.env run bash
+    web-ext sign --api-key=$AMO_JWT_ISSUER --api-secret=$AMO_JWT_SECRET
+    honcho -e ../.env run web-ext build
 }

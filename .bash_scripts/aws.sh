@@ -90,4 +90,10 @@ s3_filter(){
     fi
     aws s3 ls --summarize --human-readable --recursive $1 | egrep "*$2*"
 }
-
+ssh-keys(){
+    select activate in $(find ~/.ssh -type f -print0 | xargs -0 grep -l "BEGIN RSA PRIVATE KEY");
+    do
+        echo "ssh -i $activate"
+        break
+    done
+}

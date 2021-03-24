@@ -130,7 +130,7 @@ let g:syntastic_check_on_open = 0
 let g:syntastic_check_on_wq = 1
 let g:pymode_rope_lookup_project = 0
 let g:pymode_rope = 0
-au FileType python setl sw=2 sts=2 et
+"au FileType python setl sw=2 sts=2 et
 
 command! W  write
 

@@ -27,7 +27,7 @@ _push(){
     printf "${GREEN}Pushing...${NC}\n"
     git-remote-branch-exists
     exists=$?
-    git push origin $(git rev-parse --abbrev-ref HEAD)
+    git push origin $(git rev-parse --abbrev-ref HEAD) $@
     if [ $exists == 1 ]; then
         echo "new MR"
         git-new-mr
@@ -46,7 +46,7 @@ push(){
     git add $commit_files
     printf "${GREEN}Committing...${NC}\n"
     git commit -m "$message"
-    _push
+    _push ${@:2}
 }
 pushall(){
     gitlist
@@ -59,7 +59,7 @@ pushall(){
     git add -A
     printf "${GREEN}Committing...${NC}\n"
     git commit -m "$message"
-    _push
+    _push ${@:2}
 }
 git-changeme(){
     read -p "Username: " username
