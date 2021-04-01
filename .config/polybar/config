@@ -275,7 +275,7 @@ bar-used-empty-foreground = ${colors.constant-dim-grey}
 
 [module/wlan]
 type = internal/network
-interface = wlp3s0
+interface = wlp2s0
 interval = 3.0
 
 accumulate-stats = true
@@ -325,7 +325,6 @@ format-volume = <label-volume> <bar-volume>
 label-volume = 
 label-volume-foreground = ${root.foreground}
 
-format-muted-prefix = " "
 format-muted-foreground = ${colors.foreground}
 label-muted = 
 
@@ -353,8 +352,8 @@ adapter = AC
 full-at = 97
 label-active-font = 7
 
-
-format-charging = <ramp-capacity> <label-charging>
+format-charging-prefix = 
+format-charging = <label-charging>
 format-charging-underline = ${colors.underline}
 
 format-discharging = <ramp-capacity> <label-discharging>

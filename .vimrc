@@ -41,8 +41,14 @@ Plugin 'majutsushi/tagbar'
 Plugin 'romainl/Apprentice'
 
 Plugin 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+
 Plugin 'junegunn/fzf.vim'
+
 Plugin 'leafgarland/typescript-vim'
+
+Plugin 'python-rope/ropevim'
+
+Plugin 'heavenshell/vim-pydocstring', { 'do': 'make install' }
 
 call vundle#end()            " required
 
@@ -130,6 +136,9 @@ let g:syntastic_check_on_open = 0
 let g:syntastic_check_on_wq = 1
 let g:pymode_rope_lookup_project = 0
 let g:pymode_rope = 0
+let g:pydocstring_formatter = 'numpy'
+let g:pydocstring_doq_path = '/home/joey/.local/bin/doq'
+nmap <silent> <C-_> <Plug>(pydocstring)
 "au FileType python setl sw=2 sts=2 et
 
 command! W  write
@@ -142,4 +151,4 @@ set omnifunc=syntaxcomplete#Complete
 map <F8> :let mycurf=expand('%:p:h')."/".expand("<cfile>").".".expand('%:e')<CR>:execute("e ".mycurf)<CR>
 
 "nerdtree
-let NERDTreeIgnore = ['\.pyc$']
+let NERDTreeIgnore = ['\.pyc$', '__pycache__']
