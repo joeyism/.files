@@ -46,10 +46,6 @@ Plugin 'junegunn/fzf.vim'
 
 Plugin 'leafgarland/typescript-vim'
 
-Plugin 'python-rope/ropevim'
-
-Plugin 'heavenshell/vim-pydocstring', { 'do': 'make install' }
-
 call vundle#end()            " required
 
 " My shit
@@ -132,13 +128,6 @@ endfunction
 "python
 let g:pymode_lint_ignore = ["E501", "W", "E111", "E0100"]
 let g:pymode_options_colorcolumn = 0
-let g:syntastic_check_on_open = 0
-let g:syntastic_check_on_wq = 1
-let g:pymode_rope_lookup_project = 0
-let g:pymode_rope = 0
-let g:pydocstring_formatter = 'numpy'
-let g:pydocstring_doq_path = '/home/joey/.local/bin/doq'
-nmap <silent> <C-_> <Plug>(pydocstring)
 "au FileType python setl sw=2 sts=2 et
 
 command! W  write
