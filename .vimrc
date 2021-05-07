@@ -46,8 +46,6 @@ Plugin 'junegunn/fzf.vim'
 
 Plugin 'leafgarland/typescript-vim'
 
-Plugin 'python-rope/ropevim'
-
 Plugin 'heavenshell/vim-pydocstring', { 'do': 'make install' }
 
 call vundle#end()            " required
@@ -140,6 +138,8 @@ let g:pydocstring_formatter = 'numpy'
 let g:pydocstring_doq_path = '/home/joey/.local/bin/doq'
 nmap <silent> <C-_> <Plug>(pydocstring)
 "au FileType python setl sw=2 sts=2 et
+let &grepprg = "ag --nogroup --nocolor --ignore venv"
+"
 
 command! W  write
 
