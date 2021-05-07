@@ -5,6 +5,7 @@ alias pipu="pip install --user"
 alias pip3u="pip3 install --user"
 alias ho="honcho -e .env run "
 alias rm_pycache='find . | grep -E "(__pycache__|\.pyc|\.pyo$)" | xargs rm -rf'
+alias ipy="python -m IPython"
 python_publish(){
     m2r README.md
     python3 setup.py sdist bdist_wheel

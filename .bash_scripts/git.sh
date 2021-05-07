@@ -134,7 +134,7 @@ git-merge-file(){
     done
 }
 gitvim(){
-  vim $(git status --porcelain | awk '(match($1, "M") || match($1, "?")){print $2}')
+  vim $(git status --porcelain | awk '(match($1, "M") || match($1, "\?")){print $2}')
 }
 _get_git_branches(){
     git branch | cut -c 3-
@@ -176,7 +176,7 @@ merge(){
 }
 complete -W "$(_get_git_branches)" merge
 pull-theirs(){
-    git pull -s recursive -X theirs
+    git pull -s recursive -X theirs origin $@
 }
 pull-ours(){
     git pull -s recursive -X ours
