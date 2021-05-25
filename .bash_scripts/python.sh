@@ -24,6 +24,12 @@ venv3(){
   fi
   source venv/bin/activate $@
 }
+venv36(){
+  if [ ! -d "./venv" ]; then
+    virtualenv venv -p python3.6 $@
+  fi
+  source venv/bin/activate $@
+}
 venv38(){
   if [ ! -d "./venv" ]; then
     virtualenv venv -p python3.8 $@

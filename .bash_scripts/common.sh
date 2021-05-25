@@ -26,3 +26,7 @@ _check_no_args_quiet(){
             return 0
     fi
 }
+runcho(){
+    echo $@
+    $@
+}
