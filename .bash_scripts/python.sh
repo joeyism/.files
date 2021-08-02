@@ -9,7 +9,7 @@ alias ipy="python -m IPython"
 python_publish(){
     m2r README.md
     python3 setup.py sdist bdist_wheel
-    twine check dist/*
+    #twine check dist/*
     twine upload dist/*
     VERSION=$(cat $(find **/__init__.py) | egrep '^__version__\s*=\s*"(.*)"' | cut -d '"' -f2)
     git tag $VERSION
@@ -52,7 +52,11 @@ venvselect(){
             break
         done
     else
-        source $@
+        select activate in $(find venv -type f -follow -print | grep "^activate\|activate$" | grep "$@" | sort);
+        do
+            source $activate
+            break
+        done
     fi
     activate=${activate/venv\//}
     activate=${activate/\/bin\/activate/}
