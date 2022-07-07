@@ -198,4 +198,5 @@ exec --no-startup-id conky -c ~/.conkyrc2
 exec --no-startup-id feh --bg-fill ~/customs/wallpaper/711854-flip.jpg
 exec --no-startup-id polybar example
 exec --no-startup-id i3-battery-popup
+exec --no-startup-id nm-applet
 exec_always --no-startup-id ~/.config/i3/polybar.sh &

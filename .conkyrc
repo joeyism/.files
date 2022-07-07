@@ -65,10 +65,10 @@ conky.config = {
 conky.text = [[
 ${color 7a8488}Uptime:${color def4df} $uptime	$alignr
 ${color 7a8488}OS:${color def4df} ${exec uname -r}
-${color 7a8488}CPU:${color def4df} ${exec lscpu | sed -nr '/Model name/ s/.*:\s*(.*) @ .*/\1/p'}
+${color 7a8488}CPU:${color def4df} ${exec lscpu | sed -nr '/Nom de modèle/ s/.*:\s*(.*) @ .*/\1/p'}
 ${color 7a8488}Location:${color def4df} ${texeci 60 location}
 ${color 7a8488}SSID:${color def4df} ${texeci 6000 iwgetid -r}
-${color def4df}${texeci 1 iwconfig wlp3s0 | grep -i quality | awk '{$1=$1;print}'}
+${color def4df}${texeci 1 iwconfig wlp2s0 | grep -i quality | awk '{$1=$1;print}'}
 ${color 7a8488}Battery: ${color def4df}${battery_percent}% ${battery_time}${color 7a8488}${battery_bar}
 ${voffset -10}
 ${color 7a8488}CPU Usage:$color ${goto 130} $cpu% ${color 7a8488}${goto 170}Disk I/O:$color $alignr ${diskio}
@@ -90,6 +90,6 @@ ${color 7a8488}/home/joeyism: $alignr $color${fs_used /home/joeyism}/${fs_size /
 ${color #c9c9c9}${fs_bar 4 /home/joeyism}
 ${color 7a8488}/dev/shm: $alignr $color${fs_used /dev/shm}/${fs_size /dev/shm} 
 ${color #c9c9c9}${fs_bar 4 /dev/shm}
-${color #c9c9c9}${curl wttr.in/montpellier?format=%c+%C\nreal:+%t+|+feels+like:+%f\n%w+%p+%P\nHumidity:+%h\nSunrise:+%S\nSunset:+%s\n 300}
+${color #c9c9c9}${curl wttr.in/montpellier?format=%c+%C\nreal:+%t+|+feels+like:+%f\n%w+%p+%P\nHumidity:+%h\nSunrise:+%S\nSunset:+%s\n 60}
 ]]
 --${color 7a8488}${curl wttr.in/montpellier?0mQT 30}

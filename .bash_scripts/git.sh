@@ -7,6 +7,14 @@ alias master="git checkout master && pull"
 alias uncommit="git reset --soft HEAD^"
 alias unadd="git reset"
 alias rm_orig='find . | grep -E "(\.orig$)" | xargs rm -rf'
+git-diff-previous-commit(){
+    if [ $# -eq 0 ]
+        then
+            git difftool --tool=vimdiff master master~2 -- **/*
+        else
+            git difftool --tool=vimdiff master master~2 -- $@
+    fi
+}
 gitlist(){
     printf "You are in branch ${GREEN}$(git rev-parse --abbrev-ref HEAD)${NC}\n"
     printf "${CYAN_B}New Files${NC}\n"
@@ -95,6 +103,9 @@ git-revert(){
 }
 _git-revert(){
     COMPREPLY=($(compgen -W "$(git status --porcelain | awk '{print $2}')" -- "${COMP_WORDS[1]}"))
+}
+git-revert-branch(){
+    git checkout $1 -- ${@:2}
 }
 complete -F _git-revert git-revert
 git-source(){

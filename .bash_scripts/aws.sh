@@ -65,6 +65,17 @@ stream-kinesis(){
 ec2list(){
   aws ec2 describe-instances --output table   --query 'Reservations[].Instances[].[Tags[?Key==`Name`] | [0].Value, PublicIpAddress, PrivateIpAddress]'  --filters "Name=tag-value,Values=*$1*" "Name=instance-state-name, Values=running" ${@:2}
 }
+ec2list-raw(){
+    _check_no_args_quiet $@
+    if [ $? != 0 ]
+    then
+        echo "Usage:"
+        printf "\tec2list-raw instance-query\n"
+        return $?
+    fi
+    IP_ADDRESS=$(aws ec2 describe-instances --query 'Reservations[].Instances[].PublicIpAddress' --filters "Name=tag-value,Values=*$1*" "Name=instance-state-name, Values=running" --output text ${@:2})
+    echo $IP_ADDRESS
+}
 alias s3_buckets="aws s3 ls"
 s3_cat(){
     _check_no_args_quiet $@

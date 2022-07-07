@@ -353,7 +353,7 @@ full-at = 97
 label-active-font = 7
 
 format-charging-prefix = 
-format-charging = <label-charging>
+format-charging = <ramp-capacity> <label-charging>
 format-charging-underline = ${colors.underline}
 
 format-discharging = <ramp-capacity> <label-discharging>

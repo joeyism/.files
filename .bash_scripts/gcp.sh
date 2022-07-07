@@ -22,7 +22,7 @@ function gcs-tunnel(){
     then
         echo "gcs-tunnel [machine name] [remote port] [local port] [args]"
         echo "example:"
-        echo "    gcs-tunnel joey-machine-01 6006 6006 --zone-us-central1-a"
+        echo "    gcs-tunnel joey-machine-01 6006 6006 --zone us-central1-a"
         return $?
     fi
     runcho gcloud compute ssh ${1} ${@:4} -- -NL ${2}:localhost:${3}

@@ -31,8 +31,8 @@ task(){
             else
                 export TASK_ID=$2 
             fi
-            if [ ! -f .task ]; then
-                echo $TASK_ID > .task
+            if [[ ! -f .task || ! -s .task ]]; then
+               echo $TASK_ID > .task
             elif grep -Fxq "$TASK_ID" .task; then
                 echo "Task already exists!"
                 echo "Switching to $TASK_ID now..."
@@ -55,7 +55,12 @@ task(){
             fi
             _task_select_first
         elif [ $1 = "tmux" ]; then
-            tmux new -s $TASK_ID
+            tmux has-session -t $TASK_ID 2>/dev/null
+            if [ $? != 0 ]; then
+                tmux new -s $TASK_ID
+            else
+                tmux attach-session -t $TASK_ID
+            fi
         elif [ $1 = "branch" ]; then
             git checkout master
             git pull origin master
@@ -123,6 +128,7 @@ alias tbt="task branch && task tmux"
 alias ts="task select"
 alias tsb="task select && task branch"
 alias tsbt="task select && task branch && task tmux"
+alias tnb="task new && task branch"
 alias tnbt="task new && task branch && task tmux"
 alias tls="task ls"
 alias tn="task new"
