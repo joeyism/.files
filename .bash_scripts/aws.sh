@@ -62,20 +62,6 @@ stream-kinesis(){
 #        done
 #    done
 #}
-ec2list(){
-  aws ec2 describe-instances --output table   --query 'Reservations[].Instances[].[Tags[?Key==`Name`] | [0].Value, PublicIpAddress, PrivateIpAddress]'  --filters "Name=tag-value,Values=*$1*" "Name=instance-state-name, Values=running" ${@:2}
-}
-ec2list-raw(){
-    _check_no_args_quiet $@
-    if [ $? != 0 ]
-    then
-        echo "Usage:"
-        printf "\tec2list-raw instance-query\n"
-        return $?
-    fi
-    IP_ADDRESS=$(aws ec2 describe-instances --query 'Reservations[].Instances[].PublicIpAddress' --filters "Name=tag-value,Values=*$1*" "Name=instance-state-name, Values=running" --output text ${@:2})
-    echo $IP_ADDRESS
-}
 alias s3_buckets="aws s3 ls"
 s3_cat(){
     _check_no_args_quiet $@
@@ -107,4 +93,29 @@ ssh-keys(){
         echo "ssh -i $activate"
         break
     done
+}
+get_current_ip(){
+    dig +short myip.opendns.com @resolver1.opendns.com
+}
+ec2-start(){
+    INSTANCE_ID=$(aws ec2 describe-instances --query 'Reservations[].Instances[].InstanceId' --filters "Name=tag-value,Values=*$1*" --output text ${@:2})
+    aws ec2 start-instances --instance-ids $INSTANCE_ID ${@:2}
+}
+ec2-stop(){
+    INSTANCE_ID=$(aws ec2 describe-instances --query 'Reservations[].Instances[].InstanceId' --filters "Name=tag-value,Values=*$1*" --output text ${@:2})
+    aws ec2 stop-instances --instance-ids $INSTANCE_ID ${@:2}
+}
+ec2-list(){
+  aws ec2 describe-instances --output table   --query 'Reservations[].Instances[].[Tags[?Key==`Name`] | [0].Value, PublicIpAddress, PrivateIpAddress]'  --filters "Name=tag-value,Values=*$1*" "Name=instance-state-name, Values=running" ${@:2}
+}
+ec2-list-raw(){
+    _check_no_args_quiet $@
+    if [ $? != 0 ]
+    then
+        echo "Usage:"
+        printf "\tec2list-raw instance-query\n"
+        return $?
+    fi
+    IP_ADDRESS=$(aws ec2 describe-instances --query 'Reservations[].Instances[].PublicIpAddress' --filters "Name=tag-value,Values=*$1*" "Name=instance-state-name, Values=running" --output text ${@:2})
+    echo $IP_ADDRESS
 }

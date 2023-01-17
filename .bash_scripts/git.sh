@@ -4,6 +4,7 @@ alias p="push"
 alias grep_git="git rev-list --all | xargs git grep"
 alias gdiff="git diff"
 alias master="git checkout master && pull"
+alias main="git checkout main && pull"
 alias uncommit="git reset --soft HEAD^"
 alias unadd="git reset"
 alias rm_orig='find . | grep -E "(\.orig$)" | xargs rm -rf'

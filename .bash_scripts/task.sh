@@ -21,6 +21,7 @@ _task_select_first(){
 task(){
     cda githome
     export TASK_ID=$(head -n 1 .task)
+    export MAIN_BRANCH=$(git remote show origin | sed -n '/HEAD branch/s/.*: //p')
 
     _check_no_args_quiet $@
     if [ $? == 0 ]; then
@@ -62,8 +63,8 @@ task(){
                 tmux attach-session -t $TASK_ID
             fi
         elif [ $1 = "branch" ]; then
-            git checkout master
-            git pull origin master
+            git checkout $MAIN_BRANCH
+            git pull origin $MAIN_BRANCH
             git checkout -b $TASK_ID || git checkout $TASK_ID
         elif [ $1 = "write" ]; then
             _task_write_first

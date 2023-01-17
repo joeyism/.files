@@ -36,6 +36,12 @@ venv38(){
   fi
   source venv/bin/activate $@
 }
+venv39(){
+  if [ ! -d "./venv" ]; then
+    virtualenv venv -p python3.9 $@
+  fi
+  source venv/bin/activate $@
+}
 venv-jupyter(){
   python -m ipykernel install --user --name=venv
 }
