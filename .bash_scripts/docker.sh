@@ -29,7 +29,8 @@ drunbash(){
         echo "  drunbash ubuntu:latest"
         return $?
     fi
-    docker run -it --entrypoint bash $@ ;
+    echo docker run -it ${@:2} --entrypoint bash $1
+    docker run -it ${@:2} --entrypoint bash $1
 };
 complete -F _drun_ drunbash
 dbash(){

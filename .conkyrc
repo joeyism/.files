@@ -86,8 +86,8 @@ ${color}${downspeedgraph wlp3s0 32,155 c9c9c9 c9c9c9} $alignr ${color #c9c9c9}${
 ${voffset -10}${color #c9c9c9}${downspeedgraph enp0s25 32,155 c9c9c9 c9c9c9} $alignr ${color #c9c9c9}${upspeedgraph enp0s25 32,155 c9c9c9 c9c9c9}
 ${color 7a8488}RAM:$color ${goto 65} $mem/$memmax ${goto 200}${color 7a8488}Swap: $color $alignr $swap/$swapmax
 ${color #c9c9c9}${membar 4,155} $alignr ${color #c9c9c9}${swapbar 4, 155}
-${color 7a8488}/home/joeyism: $alignr $color${fs_used /home/joeyism}/${fs_size /home/joeyism} 
-${color #c9c9c9}${fs_bar 4 /home/joeyism}
+${color 7a8488}/home/joey: $alignr $color${fs_used /home/joey}/${fs_size /home/joey} 
+${color #c9c9c9}${fs_bar 4 /home/joey}
 ${color 7a8488}/dev/shm: $alignr $color${fs_used /dev/shm}/${fs_size /dev/shm} 
 ${color #c9c9c9}${fs_bar 4 /dev/shm}
 ${color #c9c9c9}${curl wttr.in/montpellier?format=%c+%C\nreal:+%t+|+feels+like:+%f\n%w+%p+%P\nHumidity:+%h\nSunrise:+%S\nSunset:+%s\n 60}

@@ -44,7 +44,7 @@ Plugin 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 
 Plugin 'junegunn/fzf.vim'
 
-Plugin 'leafgarland/typescript-vim'
+Plugin 'pixelneo/vim-python-docstring'
 
 call vundle#end()            " required
 
@@ -115,6 +115,7 @@ nnoremap <silent> <C-t><C-h> :terminal<CR>
 map <Leader>ss  :mks! saved.vim<CR>
 map <Leader>sl  :source saved.vim<CR>
 map <Leader>ip  oimport ipdb; ipdb.set_trace()<Esc>:w<CR>
+map <Leader>pd  oimport pdb; pdb.set_trace()<Esc>:w<CR>
 
 
 function! CloseAllBuffersButCurrent()
