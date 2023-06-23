@@ -275,7 +275,7 @@ bar-used-empty-foreground = ${colors.constant-dim-grey}
 
 [module/wlan]
 type = internal/network
-interface = wlp2s0
+interface = wlp3s0
 interval = 3.0
 
 accumulate-stats = true
