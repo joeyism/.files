@@ -116,6 +116,8 @@ map <Leader>ss  :mks! saved.vim<CR>
 map <Leader>sl  :source saved.vim<CR>
 map <Leader>ip  oimport ipdb; ipdb.set_trace()<Esc>:w<CR>
 map <Leader>pd  oimport pdb; pdb.set_trace()<Esc>:w<CR>
+map <Leader>tf  :Terraform fmt<CR>
+map <Leader>ret :!ctags --recurse=yes --exclude=.git --exclude=BUILD --exclude=.svn --exclude=vendor --exclude=node_modules --exclude=db --exclude=log --exclude=venv<CR>
 
 
 function! CloseAllBuffersButCurrent()
