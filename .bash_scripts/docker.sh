@@ -50,3 +50,6 @@ complete -F _dbash_ dbash
 docker-latest-image(){
     docker image ls | head -n 2 | tail -n -1 | awk '{print $3}'
 }
+docker-test-dockerignore(){
+    rsync -avn . /dev/shm --exclude-from .dockerignore
+}
