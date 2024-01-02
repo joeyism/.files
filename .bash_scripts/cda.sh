@@ -21,10 +21,10 @@ cda(){
         echo "$alias $(pwd)" >> ~/.cda
         source ~/.bash_scripts/cda.sh
         echo "Created $alias $(pwd)"
-    elif [ -z "${BASH_ALIASES[$1]}" ]; then
-      cd ${cda_locations[$1]}
+    elif [ -z "$1" ]; then
+      cat ~/.cda
     else
-      cd $(printf "${BASH_ALIASES[$1]}" | bash)
+      cd ${cda_locations[$1]}
     fi
     
     if [ -d "venv" ]; then

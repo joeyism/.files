@@ -1,8 +1,14 @@
 #!/bin/bash
 alias pingg="ping google.com"
-alias battery="upower -i /org/freedesktop/UPower/devices/battery_BAT0"
 alias port="sudo netstat -tulpn"
 alias say="spd-say"
+
+battery(){
+    for bat in $(upower -e);
+    do
+        upower -i $bat;
+    done
+}
 
 kssh(){
     kitty +kitty ssh $@
