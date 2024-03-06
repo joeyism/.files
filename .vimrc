@@ -145,3 +145,5 @@ map <F8> :let mycurf=expand('%:p:h')."/".expand("<cfile>").".".expand('%:e')<CR>
 
 "nerdtree
 let NERDTreeIgnore = ['\.pyc$', '__pycache__']
+
+hi CursorLineNr ctermfg=11 cterm=none
