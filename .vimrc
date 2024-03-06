@@ -49,6 +49,16 @@ Plugin 'junegunn/fzf.vim'
 
 Plugin 'pixelneo/vim-python-docstring'
 
+Plugin 'Quramy/tsuquyomi'
+
+Plugin 'dense-analysis/ale'
+
+Plugin 'fatih/vim-go'
+
+Plugin 'jupyter-vim/jupyter-vim'
+
+Plugin 'vim-terraform'
+
 call vundle#end()            " required
 
 " My shit
@@ -145,8 +155,31 @@ set omnifunc=syntaxcomplete#Complete
 "" Press F8 when cursor is above a require path, and it'll open the path
 "" assuming the extension of file is same as current file
 map <F8> :let mycurf=expand('%:p:h')."/".expand("<cfile>").".".expand('%:e')<CR>:execute("e ".mycurf)<CR>
+set ballooneval
+autocmd FileType typescript setlocal balloonexpr=tsuquyomi#balloonexpr()
+autocmd FileType typescript nmap <buffer> <Leader>tt : <C-u>echo tsuquyomi#hint()<CR>
+
 
 "nerdtree
 let NERDTreeIgnore = ['\.pyc$', '__pycache__']
+
+"ale
+nmap <silent> <C-k> <Plug>(ale_previous_wrap)
+nmap <silent> <C-j> <Plug>(ale_next_wrap)
+let g:airline#extensions#ale#enabled = 1
+let g:ale_python_pylint_options = "--init-hook='import sys; sys.path.append(\".\")'"
+
+
+"vim-go
+let g:go_debug_windows = {
+      \ 'vars':       'rightbelow 60vnew',
+      \ 'stack':      'rightbelow 10new',
+\ }
+
+"jupyter-vim
+nnoremap <silent> <C-j><C-x> :JupyterSendCell<CR>
+
+" terraform
+autocmd BufNewFile,BufRead *.tf set syntax=terraform
 
 hi CursorLineNr ctermfg=11 cterm=none
