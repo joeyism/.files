@@ -61,3 +61,6 @@ complete -W "$(ls ~/.ssh/pw)" pw
 vimswp(){
     vim $(paste -d/ <(find . -type f -follow -print | grep "^[.]swp\|[.]swp" | rev | cut -d/ -f2- | rev) <(find . -type f -follow -print | grep "^[.]swp\|[.]swp" | rev | cut -d/ -f1 | cut -c 5- | rev | cut -c 2-))
 }
+history-off(){
+    set +o history
+}

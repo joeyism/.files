@@ -1,4 +1,18 @@
 #!/bin/bash
+aws-env(){
+    _check_no_args_quiet $@
+    if [ $? != 0 ]
+    then
+        eval "$(aws configure export-credentials --format env $@)" 
+    else
+        eval "$(aws configure export-credentials --profile ${1} --format env ${@:2})" 
+    fi
+}
+_aws-env(){
+    COMPREPLY=($(compgen -W "$(cat ~/.aws/credentials | awk -F'[][]' '{print $2}' | xargs)" -- "${COMP_WORDS[1]}"))
+}
+complete -F _aws-env aws-env
+
 ecslog_once(){
     ecs-cli logs --task-id $1 --region us-east-1 --aws-profile hubbabd --task-def $(aws ecs describe-tasks --cluster production-ecs --tasks $1 --profile hubbabd | jq -r '.tasks[0].taskDefinitionArn' | cut -d '/' -f2)
 }

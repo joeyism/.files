@@ -53,3 +53,11 @@ docker-latest-image(){
 docker-test-dockerignore(){
     rsync -avn . /dev/shm --exclude-from .dockerignore
 }
+docker-postgres(){
+    POSTGRES_PASSWORD=${1:-postgress}
+    echo "Postgres Password=$POSTGRES_PASSWORD"
+    docker run --name postgres -e POSTGRES_PASSWORD=$POSTGRES_PASSWORD -p 5432:5432 postgres:16 && docker container rm postgres
+}
+docker-redis(){
+    docker run --name redis -p 6379:6379 redis && docker container rm redis
+}

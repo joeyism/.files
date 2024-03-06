@@ -67,4 +67,4 @@ conky.text = [[
 ${font Tlwg Typewriter:bold:size=36}${color #bdedff}${time %H}${color #bdedff}:${color #89c0e6}${time %M}:${color #89c0e6}${time %S}
 ${font Tlwg Typewriter:bold:size=24}${time %A} ${color #bdedff}${time %d}-${time %m}-${time %Y}
 ]]
---${color 7a8488}${curl wttr.in/montpellier?0mQT 30}
+--${color 7a8488}${curl wttr.in/nice?0mQT 30}

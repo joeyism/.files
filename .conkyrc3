@@ -68,4 +68,4 @@ ${font Tlwg Typewriter:bold:size=36}${color #bdedff}${exec rainbowstream}
 ${font Tlwg Typewriter:bold:size=36}${color #bdedff} NICE DAY
 ]]
 -- ${color 7a8488}${exec rainbowstream}
---${color 7a8488}${curl wttr.in/montpellier?0mQT 30}
+--${color 7a8488}${curl wttr.in/nice?0mQT 30}
