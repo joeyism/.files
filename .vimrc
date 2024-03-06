@@ -13,6 +13,9 @@ set splitbelow
 set showcmd
 set clipboard=unnamed
 set hidden
+set cursorline
+set cursorlineopt=number
+
    
 " - ^x^n for JUST this file
 " - ^x^f for filenames (works with our path trick!)
