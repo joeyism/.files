@@ -182,4 +182,4 @@ nnoremap <silent> <C-j><C-x> :JupyterSendCell<CR>
 " terraform
 autocmd BufNewFile,BufRead *.tf set syntax=terraform
 
-hi CursorLineNr ctermfg=11 cterm=none
+hi CursorLineNr cterm=none ctermfg=11
