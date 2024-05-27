@@ -57,6 +57,24 @@ push(){
     git commit -m "$message"
     _push ${@:2}
 }
+pushm(){
+    printf "You are in branch ${GREEN}$(git rev-parse --abbrev-ref HEAD)${NC}\n"
+    printf "${CYAN_B}Modified Files${NC}\n"
+    printf "${YELLOW}$(git status --porcelain | awk 'match($1, "M"){print " " $2}') ${NC}"
+    printf "\n\n"
+
+
+    if [ $# -eq 0 ]
+        then
+            read -p "Commit message: " message
+        else
+            message=$@
+    fi
+    git add -u
+    printf "${GREEN}Committing...${NC}\n"
+    git commit -m "$message"
+    _push ${@:2}
+}
 pushall(){
     gitlist
     if [ $# -eq 0 ]

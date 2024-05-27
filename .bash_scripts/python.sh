@@ -48,6 +48,12 @@ venv310(){
   fi
   source venv/bin/activate $@
 }
+venv311(){
+  if [ ! -d "./venv" ]; then
+    virtualenv venv -p python3.11 $@
+  fi
+  source venv/bin/activate $@
+}
 venv-jupyter(){
   python -m ipykernel install --user --name=venv
 }

@@ -5,6 +5,7 @@ alias drcs='docker rm $(docker ps -aq)' # docker rm containers
 alias drcsf='docker rm -f $(docker ps -aq)' # docker rm containers
 alias dscs='docker stop $(docker ps -q)' #docker stop containers
 alias dris='docker rmi $(docker images -q)' #docker rm images
+alias dcrma='docker rm $(docker container ls -aq)'
 drun(){
     _check_no_args_quiet $@
     if [ $? != 0 ]
@@ -54,9 +55,22 @@ docker-test-dockerignore(){
     rsync -avn . /dev/shm --exclude-from .dockerignore
 }
 docker-postgres(){
-    POSTGRES_PASSWORD=${1:-postgress}
-    echo "Postgres Password=$POSTGRES_PASSWORD"
-    docker run --name postgres -e POSTGRES_PASSWORD=$POSTGRES_PASSWORD -p 5432:5432 postgres:16 && docker container rm postgres
+    echo "Usage:"
+    echo "docker-postgres [username] [password] [database] [port]"
+    echo "Ex."
+    echo "  docker-postgres postgres postgress postgres 5432"
+    
+    POSTGRES_USER=${1:-postgres}
+    POSTGRES_PASSWORD=${2:-postgress}
+    POSTGRES_DB=${3:-postgres}
+    PORT=${4:-5432}
+    CONTAINER_NAME="postgres$(date +%s)"
+    echo "POSTGRES INFO"
+    echo "============="
+    echo "User=$POSTGRES_USER"
+    echo "Password=$POSTGRES_PASSWORD"
+    echo "Databse=$POSTGRES_DB"
+    docker run --name $CONTAINER_NAME -e POSTGRES_USER=$POSTGRES_USER -e POSTGRES_PASSWORD=$POSTGRES_PASSWORD -e POSTGRES_DB=$POSTGRES_DB -p $PORT:5432 postgres:16 && docker container rm $CONTAINER_NAME
 }
 docker-redis(){
     docker run --name redis -p 6379:6379 redis && docker container rm redis

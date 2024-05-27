@@ -53,3 +53,5 @@ URxvt.tabbed.tabbar-fg: 6
 URxvt.tabbed.tabbar-bg: 0
 URxvt.tabbed.tab-fg: 0
 URxvt.tabbed.tab-bg: 6
+
+Xft.dpi: 160

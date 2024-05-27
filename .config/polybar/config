@@ -65,11 +65,13 @@ background-alert = ${colors.constant-bright-red}
 [bar/example]
 ;monitor = ${env:MONITOR:HDMI-1}
 width = 100%
-height = 20
+height = 25
 ;offset-x = 1%
-;offset-y = 1%
+;offset-y = 50
 radius = 0.0
 fixed-center = false
+dpi = 150
+
 
 background = ${colors.background}
 foreground = ${colors.foreground}
@@ -208,9 +210,9 @@ label-urgent-padding = ${module/bspwm.label-urgent-padding}
 # https://fontawesome.com/cheatsheet/free/brands
 ws-icon-0 = 1;
 ws-icon-1 = 2;
-ws-icon-2 = 3;
+ws-icon-2 = 3;
 ws-icon-3 = 4;
-ws-icon-4 = 5;5
+ws-icon-4 = 5;
 ws-icon-5 = 6;6
 ws-icon-6 = 7;7
 ws-icon-7 = 8;💬
@@ -347,7 +349,7 @@ bar-volume-empty-foreground = ${colors.foreground}
 
 [module/battery]
 type = internal/battery
-battery = BAT0
+battery = BAT1
 adapter = AC
 full-at = 97
 label-active-font = 7

@@ -59,6 +59,10 @@ Plugin 'jupyter-vim/jupyter-vim'
 
 Plugin 'vim-terraform'
 
+Plugin 'PProvost/vim-ps1'
+
+Plugin 'prabirshrestha/vim-lsp'
+
 call vundle#end()            " required
 
 " My shit
@@ -178,8 +182,10 @@ let g:go_debug_windows = {
 
 "jupyter-vim
 nnoremap <silent> <C-j><C-x> :JupyterSendCell<CR>
+nnoremap <silent> <C-j><C-r> :JupyterRunFile<CR>
 
 " terraform
 autocmd BufNewFile,BufRead *.tf set syntax=terraform
 
 hi CursorLineNr cterm=none ctermfg=11
+let g:ale_linters = {'python': ['pyright']}
