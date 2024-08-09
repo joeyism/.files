@@ -4,11 +4,24 @@ if vim.fn.empty(vim.fn.glob(install_path)) > 0 then
   vim.cmd [[packadd packer.nvim]]
 end
 
-
--- Colorscheme
-vim.cmd('colorscheme dante')
-
+vim.opt.compatible = false
+vim.opt.filetype = off
+vim.cmd('syntax on')
+vim.opt.path:append('**')
+vim.opt.wildmenu = true
+vim.cmd('filetype plugin indent on')
+vim.opt.tabstop = 4
+vim.opt.shiftwidth = 4
+vim.opt.expandtab = true
 vim.opt.number = true
+vim.opt.splitright = true
+vim.opt.splitbelow = true
+vim.opt.showcmd = true
+vim.opt.clipboard = 'unnamed'
+vim.opt.hidden = true
+vim.opt.cursorline = true
+vim.opt.cursorlineopt = 'number'
+
 
 -- Key mappings
 vim.g.mapleader = ' '
@@ -47,5 +60,26 @@ vim.api.nvim_set_keymap('n', '<Leader>ret', ':!ctags --recurse=yes --exclude=.gi
 --- Packages
 require("plugins")
 require("mason").setup()
-require("llm").setup({
+local lspconfig = require("lspconfig")
+lspconfig.pyright.setup{}
+lspconfig.bufls.setup{}
+
+vim.o.updatetime = 250
+vim.api.nvim_create_autocmd({ "CursorHold", "CursorHoldI" }, {
+  group = vim.api.nvim_create_augroup("float_diagnostic", { clear = true }),
+  callback = function ()
+    vim.diagnostic.open_float(nil, {focus=false})
+  end
 })
+--require("llm").setup({
+--})
+local telescope = require('telescope')
+telescope.setup{}
+telescope.load_extension("ag")
+
+
+-- Colorscheme
+vim.cmd('colorscheme dante')
+
+vim.opt.number = true
+

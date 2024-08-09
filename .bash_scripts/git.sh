@@ -171,16 +171,16 @@ _get_git_branches(){
 }
 checkout(){
     _check_no_args_quiet $1
-    if [ $? == 1 ]; then
+    if [ $? = 1 ]; then
         select BRANCH_NAME in $(_get_git_branches);
         do  
             git checkout $BRANCH_NAME
             break
         done
     else
-        if [ $1 == "new" ]; then
+        if [ $1 = "new" ]; then
             _check_no_args_quiet $2
-            if [ $? == 1 ]; then
+            if [ $? = 1 ]; then
                 read -p "New Branch Name: " BRANCH_NAME
                 git checkout -b $BRANCH_NAME
             else

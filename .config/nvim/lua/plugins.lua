@@ -11,4 +11,9 @@ return require('packer').startup(function(use)
     "vim-scripts/dante.vim",
     run = ":MasonUpdate" -- :MasonUpdate updates registry contents
   }
+  use { 
+    "nvim-lua/plenary.nvim",
+    "kelly-lin/telescope-ag",
+    "nvim-telescope/telescope.nvim",
+  }
 end)

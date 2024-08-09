@@ -48,7 +48,7 @@ pw(){
         echo $new_pw | xclip -selection clipboard
         return
     fi
-    if [ $1 == list ]
+    if [ $1 = list ]
     then
         ls ~/.ssh/pw
     else

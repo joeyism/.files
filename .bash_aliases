@@ -60,7 +60,7 @@ alias realias="curl -X GET https://raw.githubusercontent.com/joeyism/.files/mast
 alias diffa="vimdiff <(curl -sL https://raw.githubusercontent.com/joeyism/.files/master/.bash_aliases) ~/.bash_aliases"
 ea(){
     _check_no_args_quiet $1
-    if [ $? == 1 ]; then
+    if [ $? = 1 ]; then
         vim ~/.bash_aliases
     else
         vim ~/.bash_scripts/$1
