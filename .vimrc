@@ -57,11 +57,11 @@ Plugin 'fatih/vim-go'
 
 Plugin 'jupyter-vim/jupyter-vim'
 
+Plugin 'vim-terraform'
+
 Plugin 'PProvost/vim-ps1'
 
 Plugin 'prabirshrestha/vim-lsp'
-
-Plugin 'vim-terraform'
 
 call vundle#end()            " required
 
@@ -97,6 +97,7 @@ function! MergeTabs()
   split
   execute "buffer " . bufferName
 endfunction
+
 
 nmap <C-W>u :call MergeTabs()<CR>
 
@@ -171,6 +172,8 @@ nmap <silent> <C-k> <Plug>(ale_previous_wrap)
 nmap <silent> <C-j> <Plug>(ale_next_wrap)
 let g:airline#extensions#ale#enabled = 1
 let g:ale_python_pylint_options = "--init-hook='import sys; sys.path.append(\".\")'"
+let g:ale_completion_enabled = 1
+autocmd FileType javascript,typescript,python,c,cpp,go,rust ALEEnableBuffer
 
 
 "vim-go
@@ -188,5 +191,3 @@ autocmd BufNewFile,BufRead *.tf set syntax=terraform
 
 hi CursorLineNr cterm=none ctermfg=11
 let g:ale_linters = {'python': ['pyright']}
-let g:ale_completion_enabled = 1
-let g:ale_go_golangci_lint_package = 1

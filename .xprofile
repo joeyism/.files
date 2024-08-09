@@ -1,15 +1,20 @@
 #!/bin/bash
+#xrandr --newmode "2560x1440_60.00"  312.25  2560 2752 3024 3488  1440 1443 1448 1493 -hsync +vsync
 #xrandr --newmode "1600x900_60.00"  118.25  1600 1696 1856 2112  900 903 908 934 -hsync +vsync
 #xrandr --newmode "1920x1080_60.00"  173.00  1920 2048 2248 2576  1080 1083 1088 1120 -hsync +vsync
 #xrandr --newmode "1920x1080-2"  172.80  1920 2040 2248 2576  1080 1081 1084 1118  -HSync +Vsync
 #xrandr --newmode "1920x1011_60.00"  161.00  1920 2040 2240 2560  1011 1014 1024 1049 -hsync +vsync
 #xrandr --newmode $(gtf 1920 1080 40 | sed -n 3p | cut -d " " -f 4-)
+
 #xrandr --addmode eDP-1 1600x900_60.00
 #xrandr --addmode eDP-1 1920x1080_60.00
 #xrandr --addmode eDP-1 1920x1011_60.00
 #xrandr --addmode DP-1 1920x1011_60.00
 #xrandr --addmode DP-1 1920x1080-2
-##xrandr --output eDP-1 --mode 1600x900_60.00
+#xrandr --addmode eDP 2560x1440_60.00
+
+#xrandr --output eDP-1 --mode 1600x900_60.00
 #xrandr --output DP-1 --same-as eDP-1
 #xrandr --output eDP-1 --mode "1366x768"
-xrandr --output eDP --mode 1440x900
+#xrandr --output eDP --mode 1440x900
+#xrandr --output eDP --mode 2560x1440_60.00
