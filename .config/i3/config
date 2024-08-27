@@ -46,7 +46,7 @@ bindsym $mod+Tab exec rofi -show window -theme arthur -dpi 180
 # bindsym $mod+d exec --no-startup-id i3-dmenu-desktop
 
 # screenshot
-bindsym --release $mod+Shift+s exec "/usr/bin/gnome-screenshot -a -c"
+bindsym --release $mod+Shift+s exec "if [ -f '/tmp/screenshot.png' ]; then rm /tmp/screenshot.png; fi && scrot -s /tmp/screenshot.png && xclip -selection clipboard -t image/png -i /tmp/screenshot.png"
 
 # change focus
 bindsym $mod+j focus left
