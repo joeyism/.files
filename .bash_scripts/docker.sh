@@ -72,6 +72,25 @@ docker-postgres(){
     echo "Databse=$POSTGRES_DB"
     docker run --name $CONTAINER_NAME -e POSTGRES_USER=$POSTGRES_USER -e POSTGRES_PASSWORD=$POSTGRES_PASSWORD -e POSTGRES_DB=$POSTGRES_DB -p $PORT:5432 postgres:16 && docker container rm $CONTAINER_NAME
 }
+
+docker-timescale(){
+    echo "Usage:"
+    echo "docker-timescale [username] [password] [database] [port]"
+    echo "Ex."
+    echo "  docker-timescale postgres postgress postgres 5432"
+    
+    POSTGRES_USER=${1:-postgres}
+    POSTGRES_PASSWORD=${2:-postgress}
+    POSTGRES_DB=${3:-postgres}
+    PORT=${4:-5432}
+    CONTAINER_NAME="timescale$(date +%s)"
+    echo "POSTGRES INFO"
+    echo "============="
+    echo "User=$POSTGRES_USER"
+    echo "Password=$POSTGRES_PASSWORD"
+    echo "Databse=$POSTGRES_DB"
+    docker run --name $CONTAINER_NAME -e POSTGRES_USER=$POSTGRES_USER -e POSTGRES_PASSWORD=$POSTGRES_PASSWORD -e POSTGRES_DB=$POSTGRES_DB -p $PORT:5432 timescale/timescaledb:latest-pg16 && docker container rm $CONTAINER_NAME
+}
 docker-redis(){
     docker run --name redis -p 6379:6379 redis && docker container rm redis
 }

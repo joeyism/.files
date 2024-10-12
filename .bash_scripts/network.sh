@@ -21,3 +21,25 @@ ssh-remote-port(){
         echo ssh -L $2:localhost:$3 $1 ${@:4}
     fi
 }
+_ssh-remote-port(){
+    COMPREPLY=($(compgen -W "$(grep '^Host ' ~/.ssh/config | awk '{print $2}' | xargs)" -- "${COMP_WORDS[1]}"))
+}
+complete -F _ssh-remote-port ssh-remote-port
+ssh-tunnel-browsing(){
+    _check_no_args_quiet $@
+    if [ $? != 0 ]
+    then                                                    
+        echo "Please provide the ssh information"
+        echo "example:"
+        echo "    ssh-tunnel-browsing my-ssh-machine"
+        echo "currently:"
+        echo "    ssh-tunnel-browsing $@"
+        return $?
+    fi
+    ssh -D 8080 -C -N -q -f $@
+    google-chrome --proxy-server="socks5://127.0.0.1:8080"
+}
+_ssh-tunnel-browsing(){
+    COMPREPLY=($(compgen -W "$(grep '^Host ' ~/.ssh/config | awk '{print $2}' | xargs)" -- "${COMP_WORDS[1]}"))
+}
+complete -F _ssh-tunnel-browsing ssh-tunnel-browsing

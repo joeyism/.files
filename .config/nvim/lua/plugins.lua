@@ -9,11 +9,15 @@ return require('packer').startup(function(use)
     "vim-airline/vim-airline",
     "vim-airline/vim-airline-themes",
     "vim-scripts/dante.vim",
+    "editorconfig/editorconfig-vim",
     run = ":MasonUpdate" -- :MasonUpdate updates registry contents
   }
   use { 
     "nvim-lua/plenary.nvim",
     "kelly-lin/telescope-ag",
     "nvim-telescope/telescope.nvim",
+  }
+  use {
+    'nvim-treesitter/nvim-treesitter',
   }
 end)

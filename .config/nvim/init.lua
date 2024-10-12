@@ -21,6 +21,7 @@ vim.opt.clipboard = 'unnamed'
 vim.opt.hidden = true
 vim.opt.cursorline = true
 vim.opt.cursorlineopt = 'number'
+vim.o.mouse = ""
 
 
 -- Key mappings
@@ -76,6 +77,8 @@ vim.api.nvim_create_autocmd({ "CursorHold", "CursorHoldI" }, {
 local telescope = require('telescope')
 telescope.setup{}
 telescope.load_extension("ag")
+
+require('nvim-treesitter.configs').setup{highlight={enable=true}}
 
 
 -- Colorscheme
