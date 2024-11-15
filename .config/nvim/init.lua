@@ -56,14 +56,16 @@ vim.api.nvim_set_keymap('n', '<Leader>ip', 'oimport ipdb; ipdb.set_trace()<Esc>:
 vim.api.nvim_set_keymap('n', '<Leader>pd', 'oimport pdb; pdb.set_trace()<Esc>:w<CR>', {noremap = true})
 vim.api.nvim_set_keymap('n', '<Leader>tf', ':Terraform fmt<CR>', {noremap = true})
 vim.api.nvim_set_keymap('n', '<Leader>ret', ':!ctags --recurse=yes --exclude=.git --exclude=BUILD --exclude=.svn --exclude=vendor --exclude=node_modules --exclude=db --exclude=log --exclude=venv<CR>', {noremap = true})
+vim.api.nvim_set_keymap("n", "<C-[>", ":lua vim.lsp.buf.references()<CR>", { noremap = true} )
 
+vim.cmd([[autocmd BufNewFile,BufRead *.sql.j2 set filetype=sql]])
 
 --- Packages
 require("plugins")
 require("mason").setup()
 local lspconfig = require("lspconfig")
 lspconfig.pyright.setup{}
-lspconfig.bufls.setup{}
+lspconfig.buf_ls.setup{}
 
 vim.o.updatetime = 250
 vim.api.nvim_create_autocmd({ "CursorHold", "CursorHoldI" }, {
@@ -72,13 +74,44 @@ vim.api.nvim_create_autocmd({ "CursorHold", "CursorHoldI" }, {
     vim.diagnostic.open_float(nil, {focus=false})
   end
 })
---require("llm").setup({
---})
+
+-- LLM
+require("llm").setup({
+    backend="huggingface",
+    model="bigcode/starcoder",
+    lsp = {
+      bin_path = vim.api.nvim_call_function("stdpath", { "data" }) .. "/mason/bin/llm-ls",
+    },
+    enable_suggestions_on_startup = false,
+    enable_suggestions_on_files = "*",
+})
+vim.keymap.set('i', '<Tab>', function()
+    local llm = require('llm.completion')
+
+    if llm.shown_suggestion ~= nil then
+        llm.complete()
+    else 
+        local keys = vim.api.nvim_replace_termcodes('<Tab>', true, false, true)
+        vim.api.nvim_feedkeys(keys, 'n', false)
+    end
+end, { noremap = true, silent = true })
+_G.trigger_llm_completion = function()
+  -- Trigger LSP completion
+  vim.lsp.buf.completion()
+end
+vim.api.nvim_set_keymap('i', '<C-i>', 'v:lua.trigger_llm_completion()', { noremap = true, expr = true, silent = true })
+
+
+
 local telescope = require('telescope')
 telescope.setup{}
 telescope.load_extension("ag")
+telescope.load_extension("file_browser")
+
+
 
 require('nvim-treesitter.configs').setup{highlight={enable=true}}
+require("typescript-tools").setup{}
 
 
 -- Colorscheme

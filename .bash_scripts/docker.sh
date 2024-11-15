@@ -48,6 +48,24 @@ dbash(){
 };
 _dbash_(){ COMPREPLY=($(compgen -W "$(docker ps --format '{{.Names}}')" -- "${COMP_WORDS[1]}")) ;};
 complete -F _dbash_ dbash
+
+
+dsh(){
+    _check_no_args_quiet $@
+    if [ $? != 0 ]
+    then
+        echo "Usage:"
+        echo "dbash [name of active container]"
+        echo "Ex."
+        echo "  dbash competent_hertz"
+        return $?
+    fi
+    docker exec -it $1 sh ;
+};
+_dbash_(){ COMPREPLY=($(compgen -W "$(docker ps --format '{{.Names}}')" -- "${COMP_WORDS[1]}")) ;};
+complete -F _dbash_ dsh
+
+
 docker-latest-image(){
     docker image ls | head -n 2 | tail -n -1 | awk '{print $3}'
 }

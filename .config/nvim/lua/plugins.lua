@@ -16,8 +16,16 @@ return require('packer').startup(function(use)
     "nvim-lua/plenary.nvim",
     "kelly-lin/telescope-ag",
     "nvim-telescope/telescope.nvim",
+    "nvim-telescope/telescope-file-browser.nvim",
   }
   use {
     'nvim-treesitter/nvim-treesitter',
+  }
+  use {
+    "pmizio/typescript-tools.nvim",
+    requires = { "nvim-lua/plenary.nvim", "neovim/nvim-lspconfig" },
+    config = function()
+      require("typescript-tools").setup {}
+    end,
   }
 end)
