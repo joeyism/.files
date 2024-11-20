@@ -4,7 +4,6 @@ return require('packer').startup(function(use)
     "williamboman/mason.nvim",
     "williamboman/mason-lspconfig.nvim",
     "neovim/nvim-lspconfig",
-    "huggingface/llm.nvim",
     "scrooloose/nerdtree",
     "vim-airline/vim-airline",
     "vim-airline/vim-airline-themes",
@@ -27,5 +26,13 @@ return require('packer').startup(function(use)
     config = function()
       require("typescript-tools").setup {}
     end,
+  }
+  use {
+    'huggingface/llm.nvim',
+    config = function()
+      require('llm').setup({
+        -- Your llm.nvim configuration here
+      })
+    end
   }
 end)
