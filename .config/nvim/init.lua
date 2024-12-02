@@ -78,6 +78,14 @@ vim.api.nvim_create_autocmd({ "CursorHold", "CursorHoldI" }, {
   end
 })
 
+-- fzf
+vim.keymap.set("n", "<C-f><C-f>", require('fzf-lua').grep, { desc = "Find File containing <phrase>" })
+vim.api.nvim_set_keymap("n", "<C-p>", ":lua require('fzf-lua').grep()<CR><CR>", { noremap = true} )
+vim.keymap.set("n", "<C-f><C-r>", require('fzf-lua').grep_last, { desc = "Find file, Reusing last <phrase>" })
+vim.keymap.set("v", "<C-f><C-v>", require('fzf-lua').grep_visual, { desc = "Find Visual-ised words" })
+vim.keymap.set("n", "<C-f><C-t>", require('fzf-lua').buffers, { desc = "Find Buffer name" })
+vim.keymap.set("n", "<C-f><C-l>", require('fzf-lua').lines, { desc = "Find Line in buffer" })
+
 -- LLM
 require("llm").setup({
     backend="huggingface",
