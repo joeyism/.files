@@ -79,7 +79,16 @@ vim.api.nvim_create_autocmd({ "CursorHold", "CursorHoldI" }, {
 })
 
 -- fzf
-vim.keymap.set("n", "<C-f><C-f>", require('fzf-lua').grep, { desc = "Find File containing <phrase>" })
+local actions = require "fzf-lua.actions"
+require'fzf-lua'.setup {
+  files = {
+    find_opts         = [[-type f -not -path '*/\.git/*' -printf '%P\n']],
+    rg_opts           = [[--color=never --files --hidden --follow -g "!.git" -g "!**/node_modules/**" -g "!venv/**"]],
+  }
+}
+vim.keymap.set("n", "<C-f><C-f>",  function()
+    require('fzf-lua').grep({ cmd = "rg -g '!node_modules/*'" })
+end, { desc = "Find File containing <phrase>" })
 vim.api.nvim_set_keymap("n", "<C-p>", ":lua require('fzf-lua').grep()<CR><CR>", { noremap = true} )
 vim.keymap.set("n", "<C-f><C-r>", require('fzf-lua').grep_last, { desc = "Find file, Reusing last <phrase>" })
 vim.keymap.set("v", "<C-f><C-v>", require('fzf-lua').grep_visual, { desc = "Find Visual-ised words" })
