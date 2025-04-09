@@ -321,7 +321,7 @@ label = %date% %time%
 foreground = ${colors.foreground}
 
 [module/alsa]
-type = internal/alsa
+type = internal/pulseaudio
 
 format-volume = <label-volume> <bar-volume>
 label-volume = 

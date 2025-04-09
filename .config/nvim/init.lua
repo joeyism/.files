@@ -22,6 +22,7 @@ vim.opt.hidden = true
 vim.opt.cursorline = true
 vim.opt.cursorlineopt = 'number'
 vim.o.mouse = ""
+vim.opt.termguicolors = true
 
 
 -- Key mappings
@@ -30,9 +31,10 @@ vim.api.nvim_set_keymap('n', '<F2>', ':NERDTreeToggle<CR>', {silent = true})
 vim.api.nvim_set_keymap('n', '<F3>', ':NERDTreeFind<CR>', {silent = true})
 vim.api.nvim_set_keymap('n', '<F4>', ':Tagbar<CR>', {silent = true})
 vim.api.nvim_set_keymap('n', '<F5>', ':TagbarShowTag<CR>', {silent = true})
+vim.env.NVIM_TUI_ENABLE_TRUE_COLOR = 1
 
--- Airline settings
-vim.g['airline#extensions#tabline#enabled'] = 1
+
+
 
 
 vim.opt.omnifunc = 'syntaxcomplete#Complete'
@@ -62,13 +64,8 @@ vim.api.nvim_set_keymap("n", "<C-[>", ":Telescope lsp_references<CR>", { noremap
 
 vim.cmd([[autocmd BufNewFile,BufRead *.sql.j2 set filetype=sql]])
 vim.cmd([[autocmd BufNewFile,BufRead *.py.jinja set filetype=python]])
-
---- Packages
-require("plugins")
-require("mason").setup()
-local lspconfig = require("lspconfig")
-lspconfig.pyright.setup{}
-lspconfig.buf_ls.setup{}
+vim.cmd([[autocmd BufNewFile,BufRead *.tsx.jinja set filetype=typescriptreact]])
+vim.cmd([[autocmd BufNewFile,BufRead *.ts.jinja set filetype=typescript]])
 
 vim.o.updatetime = 250
 vim.api.nvim_create_autocmd({ "CursorHold", "CursorHoldI" }, {
@@ -97,8 +94,7 @@ vim.keymap.set("n", "<C-f><C-l>", require('fzf-lua').lines, { desc = "Find Line 
 
 -- LLM
 require("llm").setup({
-    backend="huggingface",
-    model="bigcode/starcoder",
+    backend="openai",
     auto_generate = false,
     lsp = {
       bin_path = vim.api.nvim_call_function("stdpath", { "data" }) .. "/mason/bin/llm-ls",
@@ -122,6 +118,7 @@ require('nvim-treesitter.configs').setup{highlight={enable=true}}
 require("typescript-tools").setup{}
 vim.treesitter.language.register('typescript', 'tsx')
 vim.treesitter.language.register('typescript', 'ts.jinja')
+vim.treesitter.language.register('typescript', 'tsx.jinja')
 vim.treesitter.language.register('python', 'py.jinja')
 
 
@@ -130,3 +127,58 @@ vim.cmd('colorscheme dante')
 
 vim.opt.number = true
 
+--- Package
+require("plugins")
+require("mason").setup()
+local lspconfig = require("lspconfig")
+lspconfig.pyright.setup{}
+lspconfig.buf_ls.setup{}
+lspconfig.gopls.setup{}
+
+--- lualine
+require('lualine').setup {
+  options = {
+    icons_enabled = true,
+    theme = 'powerline',
+    component_separators = { left = '', right = ''},
+    section_separators = { left = '', right = ''},
+    disabled_filetypes = {
+      statusline = {},
+      winbar = {},
+    },
+    ignore_focus = {},
+    always_divide_middle = true,
+    always_show_tabline = true,
+    globalstatus = false,
+    refresh = {
+      statusline = 100,
+      tabline = 100,
+      winbar = 100,
+    }
+  },
+  sections = {
+    lualine_a = {'mode'},
+    lualine_b = {'branch'},
+    lualine_c = {{'filename', path=1}},
+    lualine_x = {'diff', 'diagnostics', 'lsp_status', 'encoding', 'fileformat', 'filetype'},
+    lualine_y = {'progress'},
+    lualine_z = {'location'}
+  },
+  inactive_sections = {
+    lualine_a = {},
+    lualine_b = {},
+    lualine_c = {'filename'},
+    lualine_d = {'searchcount'},
+    lualine_e = {'selectioncount'},
+    lualine_x = {'location'},
+    lualine_y = {},
+    lualine_z = {}
+  },
+  tabline = {
+    lualine_a = {'buffers'},
+    lualine_z = {'tabs'},
+  },
+  winbar = {},
+  inactive_winbar = {},
+  extensions = {}
+}

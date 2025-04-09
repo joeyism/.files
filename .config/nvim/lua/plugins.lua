@@ -5,11 +5,13 @@ return require('packer').startup(function(use)
     "williamboman/mason-lspconfig.nvim",
     "neovim/nvim-lspconfig",
     "scrooloose/nerdtree",
-    "vim-airline/vim-airline",
-    "vim-airline/vim-airline-themes",
     "vim-scripts/dante.vim",
     "editorconfig/editorconfig-vim",
     run = ":MasonUpdate" -- :MasonUpdate updates registry contents
+  }
+  use {
+    'nvim-lualine/lualine.nvim',
+    requires = { 'nvim-tree/nvim-web-devicons', opt = true }
   }
   use { 
     "nvim-lua/plenary.nvim",
