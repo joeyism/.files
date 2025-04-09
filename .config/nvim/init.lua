@@ -175,7 +175,7 @@ require('lualine').setup {
     lualine_z = {}
   },
   tabline = {
-    lualine_a = {{'buffers', show_filename_only = false, mode = 0}},
+    lualine_a = {{'buffers', show_filename_only = false, mode = 0, symbols = {alternate_file=""}}},
     lualine_z = {'tabs'},
   },
   winbar = {},
