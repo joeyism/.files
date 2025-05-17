@@ -58,6 +58,7 @@ vim.api.nvim_set_keymap('n', '<Leader>ip', 'oimport ipdb; ipdb.set_trace()<Esc>:
 vim.api.nvim_set_keymap('n', '<Leader>pd', 'oimport pdb; pdb.set_trace()<Esc>:w<CR>', {noremap = true})
 vim.api.nvim_set_keymap('n', '<Leader>tf', ':Terraform fmt<CR>', {noremap = true})
 vim.api.nvim_set_keymap('n', '<Leader>ret', ':!ctags --recurse=yes --exclude=.git --exclude=BUILD --exclude=.svn --exclude=vendor --exclude=node_modules --exclude=db --exclude=log --exclude=venv<CR>', {noremap = true})
+vim.api.nvim_set_keymap('n', '<Leader>pyt', ':s/\\//\\./g<CR>0ifrom <Esc>$bdexbhxi import <Esc>:w<CR>', {noremap = true})
 vim.api.nvim_set_keymap("n", "<C-[>", ":Telescope lsp_references<CR>", { noremap = true} )
 --vim.api.nvim_set_keymap("n", "<C-[>", ":lua vim.lsp.buf.references()<CR>", { noremap = true} )
 
