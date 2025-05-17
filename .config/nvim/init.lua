@@ -182,3 +182,32 @@ require('lualine').setup {
   inactive_winbar = {},
   extensions = {}
 }
+
+local cmp = require('cmp')
+cmp.setup {
+  sources = {
+    { name = 'nvim_lsp' },
+    { name = 'buffer' },
+    { name = 'path' },
+    -- Other sources you might want
+  },
+  mapping = cmp.mapping.preset.insert({
+    ['<C-Space>'] = cmp.mapping.complete(),
+    ['<CR>'] = cmp.mapping.confirm({ select = true }),
+    ['<C-y>'] = require('minuet').make_cmp_map(),
+  }),
+}
+
+-- Configure minuet with Claude
+--local minuet = require('minuet')
+require("minuet").setup {
+  provider = 'claude',
+  -- use environment variable ANTHROPIC_API_KEY
+  
+  -- Configure provider options
+  provider_options = {
+    model = 'claude-3-5-sonnet-20240620', -- Use the appropriate Claude model
+    temperature = 0.2, -- Lower temperature for more deterministic code completions
+    max_tokens = 1000,
+  },
+}
