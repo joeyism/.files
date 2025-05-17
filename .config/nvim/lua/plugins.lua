@@ -43,4 +43,20 @@ return require('packer').startup(function(use)
     -- or if using mini.icons/mini.nvim
     -- requires = { "echasnovski/mini.icons" }
   }
+  use {
+    'milanglacier/minuet-ai.nvim',
+    requires = {
+      'nvim-lua/plenary.nvim',
+      'hrsh7th/nvim-cmp'
+    }
+  }
+  -- You'll also need nvim-cmp and its sources for autocompletion
+  use {
+    'hrsh7th/nvim-cmp',
+    requires = {
+      'hrsh7th/cmp-buffer',
+      'hrsh7th/cmp-path',
+      'hrsh7th/cmp-nvim-lsp',
+    }
+  }
 end)
