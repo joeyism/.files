@@ -202,13 +202,12 @@ cmp.setup {
 -- Configure minuet with Claude
 --local minuet = require('minuet')
 require("minuet").setup {
-  provider = 'claude',
-  -- use environment variable ANTHROPIC_API_KEY
-  
-  -- Configure provider options
-  provider_options = {
-    model = 'claude-3-5-sonnet-20240620', -- Use the appropriate Claude model
-    temperature = 0.2, -- Lower temperature for more deterministic code completions
-    max_tokens = 1000,
-  },
+--  provider = 'openai',
+--  
+--  -- Configure provider options
+--  provider_options = {
+--    model = 'gpt-4.1-mini', -- Use the appropriate Claude model
+--    temperature = 0.2, -- Lower temperature for more deterministic code completions
+--    max_tokens = 1000,
+--  },
 }

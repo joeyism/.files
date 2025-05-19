@@ -59,4 +59,25 @@ return require('packer').startup(function(use)
       'hrsh7th/cmp-nvim-lsp',
     }
   }
+  -- avante
+  use 'stevearc/dressing.nvim'
+  use 'MunifTanjim/nui.nvim'
+  use 'MeanderingProgrammer/render-markdown.nvim'
+
+  -- Avante.nvim with build process
+  use {
+    'yetone/avante.nvim',
+    branch = 'main',
+    run = 'make',
+    config = function()
+      require('avante').setup{
+        provider = 'openai',
+        openai = {
+          model = 'gpt-4o', -- or another model like 'gpt-3.5-turbo'
+          temperature = 0.7,
+          -- Add any other OpenAI-specific settings you need
+        }
+      }
+    end
+  }
 end)
