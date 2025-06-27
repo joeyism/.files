@@ -97,7 +97,7 @@ font-4 = NotoEmoji:scale=10;1
 
 
 modules-left = i3
-modules-right = spotify filesystem screen alsa xkeyboard memory cpu wlan eth battery temperature date powermenu
+modules-right = spotify filesystem screen alsa xkeyboard memory cpu wlan eth battery temperature date video-hover powermenu
 
 tray-position = right
 tray-padding = 2
@@ -434,5 +434,16 @@ pseudo-transparency = true
 [global/wm]
 margin-top = 5
 margin-bottom = 5
+
+[module/video-hover]
+type = custom/script
+exec = ~/.config/polybar/scripts/mpv-video-hover.sh
+interval = 0.1
+tail = true
+format = <label>
+label = %output%
+cursor-click = pointer
+click-left = ~/.config/polybar/scripts/mpv-video-hover.sh toggle
+click-right = ~/.config/polybar/scripts/mpv-video-hover.sh stop
 
 ; vim:ft=dosini
