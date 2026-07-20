@@ -29,14 +29,6 @@ return require('packer').startup(function(use)
       require("typescript-tools").setup {}
     end,
   }
-  use {
-    'huggingface/llm.nvim',
-    config = function()
-      require('llm').setup({
-        -- Your llm.nvim configuration here
-      })
-    end
-  }
   use { "ibhagwan/fzf-lua",
     -- optional for icon support
     requires = { "nvim-tree/nvim-web-devicons" }
@@ -59,25 +51,30 @@ return require('packer').startup(function(use)
       'hrsh7th/cmp-nvim-lsp',
     }
   }
-  -- avante
-  use 'stevearc/dressing.nvim'
-  use 'MunifTanjim/nui.nvim'
-  use 'MeanderingProgrammer/render-markdown.nvim'
-
-  -- Avante.nvim with build process
   use {
-    'yetone/avante.nvim',
-    branch = 'main',
-    run = 'make',
+    "milanglacier/yarepl.nvim"
+  }
+  use {
+    "klepp0/nvim-baml-syntax",
+    requires = { "nvim-treesitter/nvim-treesitter" },
     config = function()
-      require('avante').setup{
-        provider = 'openai',
-        openai = {
-          model = 'gpt-4o', -- or another model like 'gpt-3.5-turbo'
-          temperature = 0.7,
-          -- Add any other OpenAI-specific settings you need
-        }
-      }
+      require("baml_syntax").setup()
+    end,
+  }
+  use {
+    "NickvanDyke/opencode.nvim",
+    requires = { "folke/snacks.nvim" },
+    config = function()
+      vim.o.autoread = true
+      vim.keymap.set({ "n", "x" }, "<C-o><C-o>", function() require("opencode").ask("@this: ", { submit = true }) end, { desc = "Ask opencode…" })
+      vim.keymap.set({ "n", "x" }, "<C-o><C-x>", function() require("opencode").select() end,                          { desc = "Execute opencode action…" })
+      vim.keymap.set({ "n", "t" }, "<C-o><C-.>", function() require("opencode").toggle() end,                           { desc = "Toggle opencode" })
+      vim.keymap.set({ "n", "x" }, "<C-o>go",  function() return require("opencode").operator("@this ") end,        { desc = "Add range to opencode", expr = true })
+      vim.keymap.set("n",          "<C-o>goo", function() return require("opencode").operator("@this ") .. "_" end, { desc = "Add line to opencode", expr = true })
     end
+  }
+  use {
+    'j-morano/buffer_manager.nvim',
+    requires = {'nvim-lua/plenary.nvim'},
   }
 end)
