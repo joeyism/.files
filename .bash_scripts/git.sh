@@ -211,3 +211,53 @@ pull-theirs(){
 pull-ours(){
     git pull -s recursive -X ours
 }
+gw() {
+  if [ "$1" = "new" ]; then
+    local branch="$2"
+    local name="${branch##*/}"
+    local root=$(git rev-parse --show-toplevel)
+    local dir="$root/.worktrees/$name"
+    git worktree add "$dir" -b "$branch" && cd "$dir"
+
+  elif [ "$1" = "rm" ]; then
+    local dir=$(git worktree list --porcelain | grep "^worktree" | grep "$2" | head -1 | sed 's/^worktree //')
+    if [ -n "$dir" ]; then
+      git worktree remove --force "$dir" && rm -rf "$dir"
+    else
+      echo "No worktree matching '$2'"
+    fi
+
+  elif [ "$1" = "rm-all" ]; then
+    git worktree list --porcelain \
+      | grep "^worktree" \
+      | sed 's/^worktree //' \
+      | tail -n +2 \
+      | while read -r dir; do
+          git worktree remove --force "$dir" && rm -rf "$dir"
+        done
+    git worktree prune
+
+  else
+    local dir=$(git worktree list --porcelain | grep "^worktree" | grep "$1" | head -1 | sed 's/^worktree //')
+    if [ -n "$dir" ]; then
+      cd "$dir"
+    else
+      echo "No worktree matching '$1'"
+    fi
+  fi
+}
+_gw() {
+  local worktrees
+  worktrees=($(git worktree list --porcelain 2>/dev/null | grep "^worktree" | sed 's/^worktree //' | xargs -I{} basename {}))
+  case "$words[2]" in
+    rm)
+      compadd $worktrees
+      ;;
+    new)
+      ;;
+    *)
+      compadd new rm $worktrees
+      ;;
+  esac
+}
+compdef _gw gw
