@@ -260,4 +260,8 @@ _gw() {
       ;;
   esac
 }
-compdef _gw gw
+if [ -n "$ZSH_VERSION" ]; then
+    compdef _gw gw
+elif [ -n "$BASH_VERSION" ]; then
+    complete -F _gw gw
+fi
